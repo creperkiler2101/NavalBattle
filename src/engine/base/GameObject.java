@@ -5,7 +5,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class GameObject {
+public final class GameObject {
     protected ArrayList<Component> components;
 
     protected Transform transform;
@@ -19,21 +19,27 @@ public class GameObject {
     public GameObject() {
         this.components = new ArrayList<Component>();
         this.transform = new Transform(this);
-
         this.tag = "";
         this.name = "";
     }
 
+    public void update() {
+        for (int i = 0; i < components.size(); i++)
+            components.get(i).update();
+    }
+
     //Если компонент добавлен - true, иначе - false
-    public <T extends Component> boolean addComponent(Class<T> type) {
+    public <T extends Component> T addComponent(Class<T> type) {
         try {
             Component c = (Component)type.getConstructors()[0].newInstance();
+            c.gameObject = this;
             components.add(c);
-            return true;
+            c.start();
+            return (T)c;
         }
         catch (Exception ex) {
             System.out.println("Component of type " + type.getName() + " not added to " + name);
-            return false;
+            return null;
         }
     }
 

@@ -15,7 +15,7 @@ public class Main {
         app.show();
 
         GameObject gm = new GameObject();
-        boolean result = gm.addComponent(TestComponent.class);
+        //boolean result = gm.addComponent(TestComponent.class);
         gm.addComponent(TestComponentA.class);
         gm.addComponent(TestComponentA.class);
         gm.addComponent(TestComponentA.class);
@@ -25,8 +25,8 @@ public class Main {
        // System.out.println(result);
         //gm.removeComponents(TestComponent.class);
 
-        TestComponent comp = gm.getComponents(TestComponent.class)[0];
-        System.out.println(comp.getClass().getName());
+        //TestComponent comp = gm.getComponents(TestComponent.class)[0];
+        //System.out.println(comp.getClass().getName());
         //System.out.println(gm.components.size());
     }
 }

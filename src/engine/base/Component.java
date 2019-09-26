@@ -1,7 +1,12 @@
 package engine.base;
 
 public class Component {
-    public Component() {
-
+    GameObject gameObject;
+    public GameObject getGameObject() {
+        return gameObject;
     }
+
+    protected Component() { }
+    protected void start() { }
+    protected void update() { }
 }

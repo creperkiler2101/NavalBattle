@@ -4,6 +4,8 @@ import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureCoords;
+import engine.base.GameObject;
+import engine.base.components.SpriteRenderer;
 
 import javax.swing.*;
 import java.util.Calendar;
@@ -38,19 +40,24 @@ public class Application {
         setSize(640, 500);
         setPosition(100, 100);
 
+        r = gm.addComponent(SpriteRenderer.class);
+
+
         window.setContext(context);
     }
 
-    float rot = 0;
-    float x =0;
+    GameObject gm = new GameObject();
+    SpriteRenderer r;
 
     protected void update(GLAutoDrawable glad) {
         this.gl2 = glad.getGL().getGL2();
 
-        gl2.glClear (GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT );
+        gl2.glEnable(GL2.GL_BLEND);
+        gl2.glEnable(GL2.GL_TEXTURE_2D);
+        gl2.glEnable(GL2.GL_DEPTH_TEST);
+        gl2.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
 
-        x += 0.2f;
-        float y = 25;
+        gl2.glClear (GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT );
 
         frames++;
         Calendar currentCal = Calendar.getInstance();
@@ -64,54 +71,16 @@ public class Application {
         Time.deltaTime = (current - lastTime) * 0.000000001f;
         lastTime = current;
 
-        /*Texture tex = Resources.getSprite("LeftHand");
+        r.sprite = Resources.getSprite("LeftHand");
+        gm.getTransform().position.x++;
+        //gm.getTransform().position.x = 100;
+        //gm.getTransform().position.y = 200;
+        gm.getTransform().rotation.x++;
+        gm.getTransform().scale.x += 0.01f;
+        gm.getTransform().scale.y += 0.01f;
+        gm.update();
 
-        tex.enable(gl2);
-        tex.bind(gl2);
-
-        gl2.glTexParameteri(GL2.GL_TEXTURE_2D, GL2.GL_TEXTURE_WRAP_S, GL2.GL_CLAMP_TO_EDGE);
-        gl2.glTexParameteri(GL2.GL_TEXTURE_2D, GL2.GL_TEXTURE_WRAP_T,GL2. GL_CLAMP_TO_EDGE);
-
-        gl2.glPushMatrix();
-        gl2.glMatrixMode(GL2.GL_TEXTURE);
-        gl2.glLoadIdentity();
-
-        gl2.glTranslatef(0.5f,0.5f,0.0f);
-        //gl2.glScalef(1f, 1 / 0.5f, 1f);
-        gl2.glRotatef(rot,0.0f,0.0f,1.0f);
-        gl2.glTranslatef(-0.5f,-0.5f,0.0f);
-
-
-
-        gl2.glBegin(GL2.GL_QUADS);
-
-        TextureCoords texcoords = tex.getImageTexCoords();
-
-        gl2.glVertex2f(x, y);
-        gl2.glTexCoord2f(texcoords.left(), texcoords.bottom());
-
-        gl2.glVertex2f(x, y + tex.getImageHeight() * (0.5f));
-        gl2.glTexCoord2f(texcoords.left(), texcoords.top());
-
-        gl2.glVertex2f(x + tex.getImageWidth() * (0.5f), y + tex.getImageHeight() * (0.5f));
-        gl2.glTexCoord2f(texcoords.right(), texcoords.top());
-
-        gl2.glVertex2f(x + tex.getImageWidth() * (0.5f), y);
-        gl2.glTexCoord2f(texcoords.right(), texcoords.bottom());
-
-        gl2.glEnd();
-
-        gl2.glPopMatrix();
-        gl2.glFlush();
-
-        tex.disable(gl2);
-        rot += 16f * Time.deltaTime;
-
-
-        //for (int i =0; i < 10000; i++) {System.out.println(i + " " + Time.getFps());}
-
-        System.out.println(Time.getFps());
-        glad.swapBuffers();*/
+        glad.swapBuffers();
     }
 
     public void loadResources(String path) {

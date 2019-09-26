@@ -10,7 +10,11 @@ class GLContextListener implements GLEventListener {
     public void init(GLAutoDrawable glAutoDrawable) {
         System.out.println("GL Context initializing");
 
+        GL2 gl2 = glAutoDrawable.getGL().getGL2();
         Application.current.gl2 = glAutoDrawable.getGL().getGL2();
+
+        gl2.glEnable(GL2.GL_BLEND);
+        gl2.glClearColor(69f / 255f,138f / 255f, 247f / 255f, 255f / 255f);
 
         System.out.println("OK");
         Application.getCurrent().onGLInitialized();
