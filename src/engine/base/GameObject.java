@@ -5,7 +5,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public final class GameObject {
+public class GameObject {
     protected ArrayList<Component> components;
 
     protected Transform transform;

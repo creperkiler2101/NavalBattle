@@ -4,6 +4,7 @@ import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureCoords;
+import engine.base.Camera;
 import engine.base.GameObject;
 import engine.base.components.SpriteRenderer;
 
@@ -35,14 +36,13 @@ public class Application {
         GLContext context = initializer.InitOpenGL();
 
         window = new Window();
+        Camera.setActiveCamera(new Camera());
 
         setTitle("Hello world!");
         setSize(640, 500);
         setPosition(100, 100);
 
         r = gm.addComponent(SpriteRenderer.class);
-
-
         window.setContext(context);
     }
 
@@ -72,12 +72,13 @@ public class Application {
         lastTime = current;
 
         r.sprite = Resources.getSprite("LeftHand");
-        gm.getTransform().position.x++;
-        //gm.getTransform().position.x = 100;
-        //gm.getTransform().position.y = 200;
-        gm.getTransform().rotation.x++;
-        gm.getTransform().scale.x += 0.01f;
-        gm.getTransform().scale.y += 0.01f;
+        //gm.getTransform().getPosition().x++;
+        gm.getTransform().getPosition().x = 350;
+        gm.getTransform().getPosition().y = 350;
+        Camera.getActiveCamera().getTransform().getPosition().x += 1f;
+        //gm.getTransform().getRotation().x++;
+        //gm.getTransform().scale.x += 0.01f;
+        //gm.getTransform().scale.y += 0.01f;
         gm.update();
 
         glad.swapBuffers();
@@ -105,15 +106,19 @@ public class Application {
         window.setVisible(false);
     }
     public void goFullscreen() {
+        //hide();
+       // window.setUndecorated(true);
         hide();
-        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        window.dispose();
         window.setUndecorated(true);
         show();
+        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     public void goWindowed() {
         hide();
-        window.setExtendedState(JFrame.NORMAL);
+        window.dispose();
         window.setUndecorated(false);
         show();
+        window.setExtendedState(JFrame.NORMAL);
     }
 }

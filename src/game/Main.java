@@ -13,6 +13,7 @@ public class Main {
             }
         };
         app.show();
+        //app.goFullscreen();
 
         GameObject gm = new GameObject();
         //boolean result = gm.addComponent(TestComponent.class);

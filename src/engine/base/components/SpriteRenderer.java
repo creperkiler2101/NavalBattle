@@ -3,6 +3,7 @@ package engine.base.components;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureCoords;
+import engine.base.Camera;
 import engine.base.Component;
 import engine.base.GameObject;
 import engine.base.Transform;
@@ -41,12 +42,20 @@ public class SpriteRenderer extends Component {
         gl2.glMatrixMode(GL2.GL_MODELVIEW);
         gl2.glPushMatrix();
 
-        gl2.glTranslatef(transform.position.x, transform.position.y, transform.position.z);
-        gl2.glScalef(transform.scale.x, transform.scale.y, transform.scale.z);
-        
+        gl2.glTranslatef(transform.getPosition().x, transform.getPosition().y, transform.getPosition().z);
+        gl2.glScalef(transform.getScale().x, transform.getScale().y, transform.getScale().z);
+
         gl2.glTranslatef(sprite.getImageWidth() / 2f, sprite.getImageHeight() / 2f, 0.0f);
-        gl2.glRotatef(transform.rotation.x,transform.rotation.y,transform.rotation.z,1.0f);
+        gl2.glRotatef(transform.getRotation().x,transform.getRotation().y,transform.getRotation().z,1.0f);
         gl2.glTranslatef(-(sprite.getImageWidth() / 2f), -(sprite.getImageHeight() / 2f), 0.0f);
+
+        Transform cameraTransform = Camera.getActiveCamera().getTransform();
+        gl2.glTranslatef(-cameraTransform.getPosition().x, -cameraTransform.getPosition().y, cameraTransform.getPosition().z);
+        gl2.glScalef(cameraTransform.getScale().x, cameraTransform.getScale().y, cameraTransform.getScale().z);
+
+        gl2.glTranslatef(1920 / 2f, 1080 / 2f, 0.0f);
+        gl2.glRotatef(cameraTransform.getRotation().x, cameraTransform.getRotation().y, cameraTransform.getRotation().z, 1.0f);
+        gl2.glTranslatef(-(1920 / 2f), -(1080 / 2f), 0.0f);
 
         gl2.glColor4f(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, color.getAlpha() / 255f);
         gl2.glBegin(GL2.GL_QUADS);
