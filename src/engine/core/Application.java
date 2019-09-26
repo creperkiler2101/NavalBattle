@@ -64,7 +64,7 @@ public class Application {
         Time.deltaTime = (current - lastTime) * 0.000000001f;
         lastTime = current;
 
-        Texture tex = Resources.getSprite("LeftHand");
+        /*Texture tex = Resources.getSprite("LeftHand");
 
         tex.enable(gl2);
         tex.bind(gl2);
@@ -111,7 +111,7 @@ public class Application {
         //for (int i =0; i < 10000; i++) {System.out.println(i + " " + Time.getFps());}
 
         System.out.println(Time.getFps());
-        glad.swapBuffers();
+        glad.swapBuffers();*/
     }
 
     public void loadResources(String path) {
