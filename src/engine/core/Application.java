@@ -5,7 +5,9 @@ import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureCoords;
 import engine.base.Camera;
+import engine.base.Component;
 import engine.base.GameObject;
+import engine.base.Scene;
 import engine.base.components.SpriteRenderer;
 
 import javax.swing.*;
@@ -42,12 +44,8 @@ public class Application {
         setSize(640, 500);
         setPosition(100, 100);
 
-        r = gm.addComponent(SpriteRenderer.class);
         window.setContext(context);
     }
-
-    GameObject gm = new GameObject();
-    SpriteRenderer r;
 
     protected void update(GLAutoDrawable glad) {
         this.gl2 = glad.getGL().getGL2();
@@ -56,7 +54,6 @@ public class Application {
         gl2.glEnable(GL2.GL_TEXTURE_2D);
         gl2.glEnable(GL2.GL_DEPTH_TEST);
         gl2.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
-
         gl2.glClear (GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT );
 
         frames++;
@@ -71,17 +68,28 @@ public class Application {
         Time.deltaTime = (current - lastTime) * 0.000000001f;
         lastTime = current;
 
-        r.sprite = Resources.getSprite("LeftHand");
-        //gm.getTransform().getPosition().x++;
-        gm.getTransform().getPosition().x = 350;
-        gm.getTransform().getPosition().y = 350;
-        Camera.getActiveCamera().getTransform().getPosition().x += 1f;
-        //gm.getTransform().getRotation().x++;
-        //gm.getTransform().scale.x += 0.01f;
-        //gm.getTransform().scale.y += 0.01f;
-        gm.update();
+        if (currentScene != null && currentScene.isReady)
+            currentScene.update();
 
         glad.swapBuffers();
+    }
+
+    protected Scene currentScene;
+    public Scene getCurrentScene() {
+        return currentScene;
+    }
+
+    public <T extends Scene> void setScene(Class<T> type) {
+        try {
+            Scene s = (Scene)type.getConstructors()[0].newInstance();
+            this.currentScene = s;
+            s.init();
+            s.isReady = true;
+        }
+        catch (Exception ex) {
+            System.out.println("Cannot load scene");
+            ex.printStackTrace();
+        }
     }
 
     public void loadResources(String path) {

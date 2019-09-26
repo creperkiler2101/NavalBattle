@@ -16,13 +16,17 @@ public class GameObject {
     public String tag;
     public String name;
 
+    public boolean isEnabled;
+
     public GameObject() {
         this.components = new ArrayList<Component>();
         this.transform = new Transform(this);
         this.tag = "";
         this.name = "";
+        this.isEnabled = true;
     }
 
+    public void init() { }
     public void update() {
         for (int i = 0; i < components.size(); i++)
             components.get(i).update();
