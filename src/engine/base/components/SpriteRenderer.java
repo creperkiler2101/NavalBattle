@@ -34,33 +34,16 @@ public class SpriteRenderer extends Component {
         sprite.bind(gl2);
 
         Transform transform = getGameObject().getTransform();
-
-        float halfW = sprite.getImageWidth() / 2f;
-        float halfH = sprite.getImageHeight() / 2f;
-
-        float left = transform.position.x;
-        float right = transform.position.x + sprite.getImageWidth();
-
-        float bottom = -transform.position.y;
-        float top = -transform.position.y + sprite.getImageHeight();
-
-        //right *= transform.scale.x;
-        //top *= transform.scale.y;
-
-        //gl2.glTexEnvi(GL2.GL_TEXTURE_ENV, GL2.GL_TEXTURE_ENV_MODE, GL2.GL_REPLACE);
-       // gl2.glTexParameteri(GL2.GL_TEXTURE_2D, GL2.GL_TEXTURE_WRAP_S, GL2.GL_CLAMP_TO_EDGE);
-        //gl2.glTexParameteri(GL2.GL_TEXTURE_2D, GL2.GL_TEXTURE_WRAP_T,GL2. GL_CLAMP_TO_EDGE);
+        TextureCoords texCoords = sprite.getImageTexCoords();
 
         gl2.glMatrixMode(GL2.GL_TEXTURE);
         gl2.glLoadIdentity();
         gl2.glMatrixMode(GL2.GL_MODELVIEW);
         gl2.glPushMatrix();
 
-
-        TextureCoords texCoords = sprite.getImageTexCoords();
-
         gl2.glTranslatef(transform.position.x, transform.position.y, transform.position.z);
         gl2.glScalef(transform.scale.x, transform.scale.y, transform.scale.z);
+        
         gl2.glTranslatef(sprite.getImageWidth() / 2f, sprite.getImageHeight() / 2f, 0.0f);
         gl2.glRotatef(transform.rotation.x,transform.rotation.y,transform.rotation.z,1.0f);
         gl2.glTranslatef(-(sprite.getImageWidth() / 2f), -(sprite.getImageHeight() / 2f), 0.0f);

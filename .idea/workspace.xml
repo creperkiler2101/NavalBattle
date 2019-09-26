@@ -3,17 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0f27adb1-c1e1-4441-86f3-a0c6aa6e32a9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/Component.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/Component.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/GameObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/GameObject.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/components/SpriteRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/components/SpriteRenderer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Application.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/base/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/base/Component.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/base/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/base/GameObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/base/components/SpriteRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/base/components/SpriteRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/core/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/core/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/core/GLContextListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/core/GLContextListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
