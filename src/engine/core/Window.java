@@ -1,11 +1,10 @@
 package engine.core;
 
+import engine.base.Vector3;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 
 final class Window extends JFrame {
     protected GLContext context;
@@ -67,5 +66,50 @@ final class Window extends JFrame {
                 Input.onKeyUp(e);
             }
         });
+        MouseAdapter ma = new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                Input.onButtonPress(e);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                Input.onButtonUp(e);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+            }
+
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                super.mouseWheelMoved(e);
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                super.mouseDragged(e);
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                Input.mousePosition = new Vector3(e.getX(), e.getY(), 0);;
+                Application.getCurrent().getCurrentScene().mouseMove();
+            }
+        };
+        context.addMouseListener(ma);
+        context.addMouseMotionListener(ma);
+        context.addMouseWheelListener(ma);
     }
 }

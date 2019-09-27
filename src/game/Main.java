@@ -22,8 +22,10 @@ public class Main {
 
                 setScene(Scene.class);
                 getCurrentScene().instantiate(gm);
+
             }
         };
         app.show();
+        //Application.getCurrent().goFullscreen();
     }
 }

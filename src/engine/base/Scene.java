@@ -1,11 +1,16 @@
 package engine.base;
 
+import engine.base.components.SpriteRenderer;
+import engine.core.Input;
+
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class Scene {
     protected ArrayList<GameObject> gameObjects;
     protected ArrayList<GameObject> toDestroy;
     protected ArrayList<DelayedMethod> delayExecute;
+    protected ArrayList<GameObject> mouseEnterObjects;
 
     public boolean isReady;
 
@@ -14,6 +19,7 @@ public class Scene {
         this.gameObjects = new ArrayList<GameObject>();
         this.toDestroy = new ArrayList<GameObject>();
         this.delayExecute = new ArrayList<DelayedMethod>();
+        this.mouseEnterObjects = new ArrayList<GameObject>();
     }
 
     public void init() { }
@@ -46,9 +52,70 @@ public class Scene {
             }
         }
 
+        if (Input.isButtonDown(MouseEvent.BUTTON1))
+            mouseDown(MouseEvent.BUTTON1);
+        if (Input.isButtonDown(MouseEvent.BUTTON2))
+            mouseDown(MouseEvent.BUTTON2);
+        if (Input.isButtonDown(MouseEvent.BUTTON3))
+            mouseDown(MouseEvent.BUTTON3);
+
+        if (Input.isButtonPress(MouseEvent.BUTTON1))
+            mousePress(MouseEvent.BUTTON1);
+        if (Input.isButtonPress(MouseEvent.BUTTON2))
+            mousePress(MouseEvent.BUTTON2);
+        if (Input.isButtonPress(MouseEvent.BUTTON3))
+            mousePress(MouseEvent.BUTTON3);
+
+        if (Input.isButtonUp(MouseEvent.BUTTON1))
+            mouseUp(MouseEvent.BUTTON1);
+        if (Input.isButtonUp(MouseEvent.BUTTON2))
+            mouseUp(MouseEvent.BUTTON2);
+        if (Input.isButtonUp(MouseEvent.BUTTON3))
+            mouseUp(MouseEvent.BUTTON3);
+
         for (int i = 0; i < gameObjects.size(); i++)
             if (gameObjects.get(i).isEnabled)
                 gameObjects.get(i).update();
+    }
+
+    public void mouseMove() {
+        Vector3 mousePosition = Input.getMousePosition();
+        ArrayList<SpriteRenderer> toCheck = new ArrayList<SpriteRenderer>();
+
+        for (int i = 0; i < gameObjects.size(); i++) {
+            GameObject gm = gameObjects.get(i);
+            Bounds bounds = gm.getBounds();
+            if (bounds != null) {
+                if (bounds.isInBounds(mousePosition)) {
+                    if (!mouseEnterObjects.contains(gm)) {
+                        mouseEnterObjects.add(gm);
+                        gm.mouseEnter();
+                    }
+                    else {
+                        gm.mouseMove();
+                    }
+                }
+                else if (!bounds.isInBounds(mousePosition) && mouseEnterObjects.contains(gm)) {
+                    mouseEnterObjects.remove(gm);
+                    gm.mouseExit();
+                }
+            }
+        }
+    }
+    public void mouseDown(int button) {
+        for (int i = 0; i < mouseEnterObjects.size(); i++) {
+            mouseEnterObjects.get(i).mouseDown(button);
+        }
+    }
+    public void mousePress(int button) {
+        for (int i = 0; i < mouseEnterObjects.size(); i++) {
+            mouseEnterObjects.get(i).mousePress(button);
+        }
+    }
+    public void mouseUp(int button) {
+        for (int i = 0; i < mouseEnterObjects.size(); i++) {
+            mouseEnterObjects.get(i).mouseUp(button);
+        }
     }
 
     public GameObject[] getGameObjectByTag(String tag) {

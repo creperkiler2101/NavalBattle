@@ -1,5 +1,7 @@
 package engine.base;
 
+import engine.base.components.SpriteRenderer;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -17,6 +19,25 @@ public class GameObject {
     public String name;
 
     public boolean isEnabled;
+
+    public Bounds getBounds() {
+        SpriteRenderer[] array = getComponents(SpriteRenderer.class);
+        if (array.length == 0)
+            return null;
+        SpriteRenderer sr = array[0];
+        if (sr.sprite == null)
+            return null;
+
+        Bounds result = new Bounds();
+
+        result.left = getTransform().getPosition().x;
+        result.right = (result.left + sr.sprite.getImageWidth()) * getTransform().getScale().x;
+
+        result.bottom = getTransform().getPosition().y;
+        result.top = (result.bottom + sr.sprite.getImageHeight()) * getTransform().getScale().y;
+
+        return result;
+    }
 
     public GameObject() {
         this.components = new ArrayList<Component>();
@@ -65,5 +86,41 @@ public class GameObject {
         }
         T[] res = (T[]) Array.newInstance(type, result.size());;
         return result.toArray(res);
+    }
+
+    protected void mouseEnter() {
+        for (int i = 0; i < components.size(); i++) {
+            components.get(i).mouseEnter();
+        }
+    }
+
+    protected void mouseExit() {
+        for (int i = 0; i < components.size(); i++) {
+            components.get(i).mouseExit();
+        }
+    }
+
+    protected void mouseDown(int button) {
+        for (int i = 0; i < components.size(); i++) {
+            components.get(i).mouseDown(button);
+        }
+    }
+
+    protected void mousePress(int button) {
+        for (int i = 0; i < components.size(); i++) {
+            components.get(i).mousePress(button);
+        }
+    }
+
+    protected void mouseUp(int button) {
+        for (int i = 0; i < components.size(); i++) {
+            components.get(i).mouseUp(button);
+        }
+    }
+
+    protected void mouseMove() {
+        for (int i = 0; i < components.size(); i++) {
+            components.get(i).mouseMove();
+        }
     }
 }

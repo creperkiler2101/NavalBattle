@@ -100,6 +100,14 @@ public class Application {
 
     public void onGLInitialized() { }
 
+    public float getWindowWidth() {
+        return window.getWidth();
+    }
+
+    public float getWindowHeight() {
+        return window.getHeight();
+    }
+
     public void setSize(int width, int height) {
         window.setSize(width, height);
     }

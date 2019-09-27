@@ -40,7 +40,7 @@ class GLContextListener implements GLEventListener {
 
         // coordinate system origin at lower left with width and height same as the window
         GLU glu = new GLU();
-        glu.gluOrtho2D( 0.0f, 1920, 0.0f, 1080 );
+        glu.gluOrtho2D( 0.0f, width, 0.0f, height );
 
         gl2.glMatrixMode( GL2.GL_MODELVIEW );
         gl2.glLoadIdentity();

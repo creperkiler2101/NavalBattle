@@ -48,4 +48,12 @@ public class Component {
     protected Component() { }
     protected void start() { }
     protected void update() { }
+
+    protected void mouseEnter() { }
+    protected void mouseMove() { }
+    protected void mouseExit() { }
+
+    protected void mouseDown(int button) { }
+    protected void mousePress(int button) { }
+    protected void mouseUp(int button) { }
 }
