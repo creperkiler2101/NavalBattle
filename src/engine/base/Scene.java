@@ -24,58 +24,58 @@ public class Scene {
 
     public void init() { }
     public void update() {
-        for (int i = 0; i < toDestroy.size(); i++) {
-            for (int _i = 0; _i < gameObjects.size(); _i++)
-            {
-                if (gameObjects.get(_i) == toDestroy.get(i))
-                {
-                    gameObjects.remove(i);
-                    break;
+        try {
+            for (int i = 0; i < toDestroy.size(); i++) {
+                GameObject gm_1 = toDestroy.get(i);
+                for (int _i = 0; _i < gameObjects.size(); _i++) {
+                    GameObject gm_2 = gameObjects.get(_i);
+                    if (gm_1 == gm_2) {
+                        gameObjects.remove(gm_1);
+                        break;
+                    }
+                }
+                for (int _i = 0; _i < delayExecute.size(); _i++) {
+                    if (delayExecute.get(_i).gameObject == toDestroy.get(i)) {
+                        delayExecute.remove(_i);
+                    }
                 }
             }
-            for (int _i = 0; _i < delayExecute.size(); _i++)
-            {
-                if (delayExecute.get(_i).gameObject == toDestroy.get(i))
-                {
-                    delayExecute.remove(_i);
+
+            for (int i = 0; i < delayExecute.size(); i++) {
+                DelayedMethod dm = delayExecute.get(i);
+                boolean result = dm.tryExecute();
+                if (result) {
+                    delayExecute.remove(i);
+                    i--;
                 }
             }
+
+            if (Input.isButtonDown(MouseEvent.BUTTON1))
+                mouseDown(MouseEvent.BUTTON1);
+            if (Input.isButtonDown(MouseEvent.BUTTON2))
+                mouseDown(MouseEvent.BUTTON2);
+            if (Input.isButtonDown(MouseEvent.BUTTON3))
+                mouseDown(MouseEvent.BUTTON3);
+
+            if (Input.isButtonPress(MouseEvent.BUTTON1))
+                mousePress(MouseEvent.BUTTON1);
+            if (Input.isButtonPress(MouseEvent.BUTTON2))
+                mousePress(MouseEvent.BUTTON2);
+            if (Input.isButtonPress(MouseEvent.BUTTON3))
+                mousePress(MouseEvent.BUTTON3);
+
+            if (Input.isButtonUp(MouseEvent.BUTTON1))
+                mouseUp(MouseEvent.BUTTON1);
+            if (Input.isButtonUp(MouseEvent.BUTTON2))
+                mouseUp(MouseEvent.BUTTON2);
+            if (Input.isButtonUp(MouseEvent.BUTTON3))
+                mouseUp(MouseEvent.BUTTON3);
+
+            for (int i = 0; i < gameObjects.size(); i++)
+                if (gameObjects.get(i).isEnabled)
+                    gameObjects.get(i).update();
         }
-
-        for (int i = 0; i < delayExecute.size(); i++) {
-            DelayedMethod dm = delayExecute.get(i);
-            boolean result = dm.tryExecute();
-            if (result)
-            {
-                delayExecute.remove(i);
-                i--;
-            }
-        }
-
-        if (Input.isButtonDown(MouseEvent.BUTTON1))
-            mouseDown(MouseEvent.BUTTON1);
-        if (Input.isButtonDown(MouseEvent.BUTTON2))
-            mouseDown(MouseEvent.BUTTON2);
-        if (Input.isButtonDown(MouseEvent.BUTTON3))
-            mouseDown(MouseEvent.BUTTON3);
-
-        if (Input.isButtonPress(MouseEvent.BUTTON1))
-            mousePress(MouseEvent.BUTTON1);
-        if (Input.isButtonPress(MouseEvent.BUTTON2))
-            mousePress(MouseEvent.BUTTON2);
-        if (Input.isButtonPress(MouseEvent.BUTTON3))
-            mousePress(MouseEvent.BUTTON3);
-
-        if (Input.isButtonUp(MouseEvent.BUTTON1))
-            mouseUp(MouseEvent.BUTTON1);
-        if (Input.isButtonUp(MouseEvent.BUTTON2))
-            mouseUp(MouseEvent.BUTTON2);
-        if (Input.isButtonUp(MouseEvent.BUTTON3))
-            mouseUp(MouseEvent.BUTTON3);
-
-        for (int i = 0; i < gameObjects.size(); i++)
-            if (gameObjects.get(i).isEnabled)
-                gameObjects.get(i).update();
+        catch (Exception ex) { }
     }
 
     public void mouseMove() {

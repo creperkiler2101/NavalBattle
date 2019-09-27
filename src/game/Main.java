@@ -2,6 +2,8 @@ package game;
 
 import engine.base.GameObject;
 import engine.base.Scene;
+import engine.base.Vector3;
+import engine.base.components.ParticleSystem;
 import engine.base.components.SpriteRenderer;
 import engine.core.Application;
 import engine.core.Resources;
@@ -19,10 +21,10 @@ public class Main {
                         addComponent(TestComponent.class);
                     }
                 };
+                gm.getTransform().setPosition(new Vector3(100, 100, 0));
 
                 setScene(Scene.class);
                 getCurrentScene().instantiate(gm);
-
             }
         };
         app.show();

@@ -35,7 +35,7 @@ public final class Transform {
     }
     public Vector3 getScale() {
         if (parent != null)
-            return new Vector3(parent.getTransform().getScale().x + scale.x, parent.getTransform().getScale().y + scale.y, parent.getTransform().getScale().z + scale.z);
+            return new Vector3(parent.getTransform().getScale().x * scale.x, parent.getTransform().getScale().y * scale.y, parent.getTransform().getScale().z * scale.z);
         return scale;
     }
 

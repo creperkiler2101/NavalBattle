@@ -18,7 +18,6 @@ public final class Input {
 
     protected static Vector3 mousePosition = new Vector3();
     public static Vector3 getMousePosition() {
-        //System.out.println(Camera.getActiveCamera().getTransform().getPosition().y + " " + -(mousePosition.y - Application.getCurrent().getWindowHeight() + 40));
         return new Vector3(Camera.getActiveCamera().getTransform().getPosition().x + mousePosition.x, Camera.getActiveCamera().getTransform().getPosition().y + (-(mousePosition.y - Application.getCurrent().getWindowHeight() + 40)));
     }
 

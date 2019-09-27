@@ -3,6 +3,7 @@ package game;
 import engine.base.Camera;
 import engine.base.Component;
 import engine.base.Vector3;
+import engine.base.components.ParticleSystem;
 import engine.core.Input;
 import engine.base.components.SpriteRenderer;
 import engine.core.Resources;
@@ -19,6 +20,15 @@ public class TestComponent extends Component {
         sr = getGameObject().addComponent(SpriteRenderer.class);
         sr.sprite = Resources.getSprite("LeftHand");
         delayedExecute(this::goTop, 5 + Time.startupDelay);
+
+        ParticleSystem ps = getGameObject().addComponent(ParticleSystem.class);
+        ps.spawnDelay = 0f;
+        ps.sprites.add(Resources.getSprite("blast1"));
+        ps.sprites.add(Resources.getSprite("blast2"));
+        ps.minStartSpeed = new Vector3(-50, -50, 0);
+        ps.maxStartSpeed = new Vector3(50,50, 0);
+        ps.minEndSpeed = new Vector3();
+        ps.maxEndSpeed = new Vector3();
     }
 
     @Override

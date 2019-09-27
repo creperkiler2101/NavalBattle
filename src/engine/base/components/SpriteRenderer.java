@@ -30,6 +30,11 @@ public class SpriteRenderer extends Component {
         gl2.glDisable(GL2.GL_LIGHTING);
         gl2.glEnable(GL2.GL_TEXTURE_2D);
         gl2.glEnable(GL2.GL_POINT_SMOOTH);
+        gl2.glEnable(GL2.GL_COLOR_MATERIAL);
+
+        gl2.glDepthMask(false);
+        gl2.glEnable(GL2.GL_BLEND);
+        gl2.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
 
         sprite.enable(gl2);
         sprite.bind(gl2);
@@ -58,6 +63,7 @@ public class SpriteRenderer extends Component {
         gl2.glTranslatef(-(1920 / 2f), -(1080 / 2f), 0.0f);
 
         gl2.glColor4f(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, color.getAlpha() / 255f);
+
         gl2.glBegin(GL2.GL_QUADS);
 
         gl2.glVertex2f(0, 0);
@@ -76,6 +82,8 @@ public class SpriteRenderer extends Component {
 
         gl2.glPopMatrix();
         gl2.glFlush();
+
+        gl2.glDisable(GL2.GL_BLEND);
 
         sprite.disable(gl2);
     }

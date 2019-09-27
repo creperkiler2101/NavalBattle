@@ -2,6 +2,7 @@ package engine.core;
 
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.util.texture.Texture;
+import com.jogamp.opengl.util.texture.TextureData;
 import com.jogamp.opengl.util.texture.TextureIO;
 
 import java.io.File;
@@ -46,7 +47,17 @@ public final class Resources {
             String expr = split[split.length - 1];
             try {
                 if (isImage(expr)) {
-                    Texture t = TextureIO.newTexture(new URL("file:///" + file.getPath()), false, "." + expr);
+                    TextureData td = TextureIO.newTextureData(gl2.getGLProfile(), new URL("file:///" + file.getPath()), false, "." + expr);
+                    td.setPixelFormat(GL2.GL_RGBA);
+                    Texture t = TextureIO.newTexture(td);
+                    gl2.glTexParameteri(t.getTextureObject(), GL2.GL_IMAGE_PIXEL_FORMAT, GL2.GL_RGBA);
+                    t.setTexParameteri(gl2, GL2.GL_IMAGE_PIXEL_FORMAT, GL2.GL_RGBA16);
+                    t.setTexParameteri(gl2, GL2.GL_TEXTURE_MAG_FILTER, GL2.GL_LINEAR);
+                    t.setTexParameteri(gl2, GL2.GL_TEXTURE_MIN_FILTER, GL2.GL_LINEAR);
+                    t.setTexParameteri(gl2, GL2.GL_TEXTURE_WRAP_S, GL2.GL_CLAMP_TO_EDGE);
+                    t.setTexParameteri(gl2, GL2.GL_TEXTURE_WRAP_T, GL2.GL_CLAMP_TO_EDGE);
+
+
                     resources.put(accessName, t);
                 }
             }
