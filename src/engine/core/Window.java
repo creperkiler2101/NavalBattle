@@ -2,6 +2,8 @@ package engine.core;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -47,6 +49,22 @@ final class Window extends JFrame {
             @Override
             public void windowDeactivated(WindowEvent e) {
 
+            }
+        });
+        this.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                //super.keyTyped(e);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                Input.onKeyPress(e);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                Input.onKeyUp(e);
             }
         });
     }

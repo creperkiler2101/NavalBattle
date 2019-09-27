@@ -71,6 +71,8 @@ public class Application {
         if (currentScene != null && currentScene.isReady)
             currentScene.update();
 
+        Input.update();
+
         glad.swapBuffers();
     }
 

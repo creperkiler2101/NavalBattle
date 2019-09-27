@@ -1,9 +1,12 @@
 package game;
 
 import engine.base.Component;
+import engine.core.Input;
 import engine.base.components.SpriteRenderer;
 import engine.core.Resources;
 import engine.core.Time;
+
+import java.awt.event.KeyEvent;
 
 public class TestComponent extends Component {
     SpriteRenderer sr;
@@ -17,6 +20,12 @@ public class TestComponent extends Component {
 
     @Override
     public void update() {
+        if (Input.isKeyDown(KeyEvent.VK_E))
+            System.out.println("down");
+        if (Input.isKeyPress(KeyEvent.VK_E))
+            System.out.println("press");
+        if (Input.isKeyUp(KeyEvent.VK_E))
+            System.out.println("up");
         getGameObject().getTransform().getLocalPosition().x += 1 * Time.getDeltaTime();
     }
 
