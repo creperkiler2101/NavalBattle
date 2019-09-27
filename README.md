@@ -25,4 +25,4 @@
 
 ## UML Схема проекта
 
- ![alt text](https://github.com/creperkiler2101/NavalBattle/blob/master/UML.png)
+ ![alt text](https://github.com/creperkiler2101/NavalBattle/blob/master/Blank%20Diagram%20(1).png)
