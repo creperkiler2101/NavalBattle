@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f27adb1-c1e1-4441-86f3-a0c6aa6e32a9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/engine/base/components/Particle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/resources/blast1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/resources/blast2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/engine/ui/Button.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/engine/ui/Entry.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/engine/ui/Label.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/engine/ui/UI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/base/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/base/Scene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/base/Transform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/base/Transform.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/base/components/ParticleSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/base/components/ParticleSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/base/components/SpriteRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/base/components/SpriteRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/core/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/core/Input.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/core/Resources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/core/Resources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/TestComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/TestComponent.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
