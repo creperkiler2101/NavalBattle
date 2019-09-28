@@ -8,6 +8,8 @@ import engine.core.Input;
 import engine.base.components.SpriteRenderer;
 import engine.core.Resources;
 import engine.core.Time;
+import engine.ui.Label;
+import engine.ui.UI;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -20,7 +22,7 @@ public class TestComponent extends Component {
         sr = getGameObject().addComponent(SpriteRenderer.class);
         sr.sprite = Resources.getSprite("LeftHand");
         delayedExecute(this::goTop, 5 + Time.startupDelay);
-
+/*
         ParticleSystem ps = getGameObject().addComponent(ParticleSystem.class);
         ps.spawnDelay = 0f;
         ps.sprites.add(Resources.getSprite("blast1"));
@@ -29,6 +31,9 @@ public class TestComponent extends Component {
         ps.maxStartSpeed = new Vector3(50,50, 0);
         ps.minEndSpeed = new Vector3();
         ps.maxEndSpeed = new Vector3();
+        */
+        Label ui = getGameObject().addComponent(Label.class);
+        ui.setText("kek");
     }
 
     @Override
@@ -39,7 +44,16 @@ public class TestComponent extends Component {
             System.out.println("press");
         if (Input.isKeyUp(KeyEvent.VK_E))
             System.out.println("up");
-        Vector3 mp = Input.getMousePosition();
+        //Vector3 mp = Input.getMousePosition();
+
+        if (Input.isKeyPress(KeyEvent.VK_W))
+            Camera.getActiveCamera().getTransform().getLocalPosition().y += 200 * Time.getDeltaTime();
+        if (Input.isKeyPress(KeyEvent.VK_A))
+            Camera.getActiveCamera().getTransform().getLocalPosition().x -= 200 * Time.getDeltaTime();
+        if (Input.isKeyPress(KeyEvent.VK_D))
+            Camera.getActiveCamera().getTransform().getLocalPosition().x += 200 * Time.getDeltaTime();
+        if (Input.isKeyPress(KeyEvent.VK_S))
+            Camera.getActiveCamera().getTransform().getLocalPosition().y -= 200 * Time.getDeltaTime();
         //System.out.println(mp.x + " " + mp.y);
         //Camera.getActiveCamera().getTransform().getPosition().x--;
         //Camera.getActiveCamera().getTransform().getPosition().y--;

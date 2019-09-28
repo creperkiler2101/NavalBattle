@@ -1,4 +1,5 @@
 package engine.ui;
 
-public class Label {
+public class Label extends UI {
+
 }

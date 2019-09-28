@@ -2,11 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f27adb1-c1e1-4441-86f3-a0c6aa6e32a9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/engine/ui/Button.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/engine/ui/Entry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/engine/ui/Label.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/engine/ui/UI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/engine/ui/Align.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/Transform.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/Transform.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/components/SpriteRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/components/SpriteRenderer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/TestComponent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/TestComponent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/base/Transform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/base/Transform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/base/components/SpriteRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/base/components/SpriteRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/ui/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/ui/Button.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/ui/Entry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/ui/Entry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/ui/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/ui/Label.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/ui/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/ui/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/TestComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/TestComponent.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,6 +25,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>

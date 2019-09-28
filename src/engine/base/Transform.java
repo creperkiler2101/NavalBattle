@@ -26,17 +26,17 @@ public final class Transform {
     public Vector3 getPosition() {
         if (parent != null)
             return new Vector3(parent.getTransform().getPosition().x + position.x, parent.getTransform().getPosition().y + position.y, parent.getTransform().getPosition().z + position.z);
-        return position;
+        return new Vector3(position.x, position.y, position.z);
     }
     public Vector3 getRotation() {
         if (parent != null)
             return new Vector3(parent.getTransform().getRotation().x + rotation.x, parent.getTransform().getRotation().y + rotation.y, parent.getTransform().getRotation().z + rotation.z);
-        return rotation;
+        return new Vector3(rotation.x, rotation.y, rotation.z);
     }
     public Vector3 getScale() {
         if (parent != null)
             return new Vector3(parent.getTransform().getScale().x * scale.x, parent.getTransform().getScale().y * scale.y, parent.getTransform().getScale().z * scale.z);
-        return scale;
+        return new Vector3(scale.x, scale.y, scale.z);
     }
 
     public void setPosition(Vector3 position) {

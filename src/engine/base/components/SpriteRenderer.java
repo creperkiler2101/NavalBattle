@@ -58,9 +58,9 @@ public class SpriteRenderer extends Component {
         gl2.glTranslatef(-cameraTransform.getPosition().x, -cameraTransform.getPosition().y, cameraTransform.getPosition().z);
         gl2.glScalef(cameraTransform.getScale().x, cameraTransform.getScale().y, cameraTransform.getScale().z);
 
-        gl2.glTranslatef(1920 / 2f, 1080 / 2f, 0.0f);
+        gl2.glTranslatef(Application.getCurrent().getWindowWidth() / 2f, Application.getCurrent().getWindowHeight() / 2f, 0.0f);
         gl2.glRotatef(cameraTransform.getRotation().x, cameraTransform.getRotation().y, cameraTransform.getRotation().z, 1.0f);
-        gl2.glTranslatef(-(1920 / 2f), -(1080 / 2f), 0.0f);
+        gl2.glTranslatef(-(Application.getCurrent().getWindowWidth() / 2f), -(Application.getCurrent().getWindowHeight() / 2f), 0.0f);
 
         gl2.glColor4f(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, color.getAlpha() / 255f);
 
@@ -83,6 +83,7 @@ public class SpriteRenderer extends Component {
         gl2.glPopMatrix();
         gl2.glFlush();
 
+        gl2.glDepthMask(true);
         gl2.glDisable(GL2.GL_BLEND);
 
         sprite.disable(gl2);

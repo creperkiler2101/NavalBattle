@@ -1,4 +1,4 @@
 package engine.ui;
 
-public class Entry {
+public class Entry extends UI {
 }
