@@ -21,7 +21,7 @@ public class Main {
                         addComponent(TestComponent.class);
                     }
                 };
-                gm.getTransform().setPosition(new Vector3(100, 100, 0));
+                gm.getTransform().setPosition(new Vector3(0, 0, 0));
 
                 setScene(Scene.class);
                 getCurrentScene().instantiate(gm);

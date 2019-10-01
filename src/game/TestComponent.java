@@ -8,6 +8,7 @@ import engine.core.Input;
 import engine.base.components.SpriteRenderer;
 import engine.core.Resources;
 import engine.core.Time;
+import engine.ui.Align;
 import engine.ui.Label;
 import engine.ui.UI;
 
@@ -33,7 +34,53 @@ public class TestComponent extends Component {
         ps.maxEndSpeed = new Vector3();
         */
         Label ui = getGameObject().addComponent(Label.class);
+        ui.sprite = Resources.getSprite("square");
+        ui.alignType = Align.BOTTOM;
         ui.setText("kek");
+
+        ui = getGameObject().addComponent(Label.class);
+        ui.sprite = Resources.getSprite("square");
+        ui.alignType = Align.TOP;
+        ui.setText("kek");
+
+        ui = getGameObject().addComponent(Label.class);
+        ui.sprite = Resources.getSprite("square");
+        ui.alignType = Align.LEFT;
+        ui.setText("kek");
+
+        ui = getGameObject().addComponent(Label.class);
+        ui.sprite = Resources.getSprite("square");
+        ui.alignType = Align.LEFT_BOTTOM;
+        ui.setText("kek");
+
+        ui = getGameObject().addComponent(Label.class);
+        ui.sprite = Resources.getSprite("square");
+        ui.alignType = Align.LEFT_TOP;
+        ui.left = 100;
+        ui.top = -5;
+        ui.setText("kek");
+
+        ui = getGameObject().addComponent(Label.class);
+        ui.sprite = Resources.getSprite("square");
+        ui.alignType = Align.RIGHT;
+        ui.setText("kek");
+
+        ui = getGameObject().addComponent(Label.class);
+        ui.sprite = Resources.getSprite("square");
+        ui.alignType = Align.RIGHT_BOTTOM;
+        ui.setText("kek");
+
+        ui = getGameObject().addComponent(Label.class);
+        ui.sprite = Resources.getSprite("square");
+        ui.alignType = Align.RIGHT_TOP;
+        ui.setText("kek");
+
+        ui = getGameObject().addComponent(Label.class);
+        ui.sprite = Resources.getSprite("square");
+        ui.alignType = Align.CENTER;
+        ui.setText("kek");
+
+        Camera.getActiveCamera().getTransform().getLocalPosition().x = -0;
     }
 
     @Override
@@ -45,6 +92,8 @@ public class TestComponent extends Component {
         if (Input.isKeyUp(KeyEvent.VK_E))
             System.out.println("up");
         //Vector3 mp = Input.getMousePosition();
+
+
 
         if (Input.isKeyPress(KeyEvent.VK_W))
             Camera.getActiveCamera().getTransform().getLocalPosition().y += 200 * Time.getDeltaTime();
