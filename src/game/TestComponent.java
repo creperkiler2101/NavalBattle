@@ -36,49 +36,40 @@ public class TestComponent extends Component {
         Label ui = getGameObject().addComponent(Label.class);
         ui.sprite = Resources.getSprite("square");
         ui.alignType = Align.BOTTOM;
-        ui.setText("kek");
 
         ui = getGameObject().addComponent(Label.class);
         ui.sprite = Resources.getSprite("square");
         ui.alignType = Align.TOP;
-        ui.setText("kek");
 
         ui = getGameObject().addComponent(Label.class);
         ui.sprite = Resources.getSprite("square");
         ui.alignType = Align.LEFT;
-        ui.setText("kek");
 
         ui = getGameObject().addComponent(Label.class);
         ui.sprite = Resources.getSprite("square");
         ui.alignType = Align.LEFT_BOTTOM;
-        ui.setText("kek");
 
         ui = getGameObject().addComponent(Label.class);
         ui.sprite = Resources.getSprite("square");
         ui.alignType = Align.LEFT_TOP;
         ui.left = 100;
         ui.top = -5;
-        ui.setText("kek");
 
         ui = getGameObject().addComponent(Label.class);
         ui.sprite = Resources.getSprite("square");
         ui.alignType = Align.RIGHT;
-        ui.setText("kek");
 
         ui = getGameObject().addComponent(Label.class);
         ui.sprite = Resources.getSprite("square");
         ui.alignType = Align.RIGHT_BOTTOM;
-        ui.setText("kek");
 
         ui = getGameObject().addComponent(Label.class);
         ui.sprite = Resources.getSprite("square");
         ui.alignType = Align.RIGHT_TOP;
-        ui.setText("kek");
 
         ui = getGameObject().addComponent(Label.class);
         ui.sprite = Resources.getSprite("square");
         ui.alignType = Align.CENTER;
-        ui.setText("kek");
 
         Camera.getActiveCamera().getTransform().getLocalPosition().x = -0;
     }
