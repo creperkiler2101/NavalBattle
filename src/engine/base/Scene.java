@@ -118,6 +118,13 @@ public class Scene {
         }
     }
 
+    public void keyPress(int keyCode) {
+
+    }
+    public void keyUp(int keyCode) {
+
+    }
+
     public GameObject[] getGameObjectByTag(String tag) {
         ArrayList<GameObject> items = new ArrayList<GameObject>();
         for (int i = 0; i < gameObjects.size(); i++) {

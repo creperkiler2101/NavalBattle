@@ -58,11 +58,15 @@ final class Window extends JFrame {
 
             @Override
             public void keyPressed(KeyEvent e) {
+                if (Application.getCurrent().getCurrentScene() != null)
+                    Application.getCurrent().getCurrentScene().keyPress(e.getKeyCode());
                 Input.onKeyPress(e);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
+                if (Application.getCurrent().getCurrentScene() != null)
+                    Application.getCurrent().getCurrentScene().keyUp(e.getKeyCode());
                 Input.onKeyUp(e);
             }
         });
@@ -105,7 +109,8 @@ final class Window extends JFrame {
             @Override
             public void mouseMoved(MouseEvent e) {
                 Input.mousePosition = new Vector3(e.getX(), e.getY(), 0);;
-                Application.getCurrent().getCurrentScene().mouseMove();
+                if (Application.getCurrent().getCurrentScene() != null)
+                    Application.getCurrent().getCurrentScene().mouseMove();
             }
         };
         context.addMouseListener(ma);

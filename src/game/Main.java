@@ -7,6 +7,7 @@ import engine.base.components.ParticleSystem;
 import engine.base.components.SpriteRenderer;
 import engine.core.Application;
 import engine.core.Resources;
+import engine.core.font.FontLoader;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,6 +15,7 @@ public class Main {
             @Override
             public void onGLInitialized() {
                 this.loadResources(Main.class.getResource("resources").toString());
+                FontLoader.LoadFont(Main.class.getResource("Font.png").toString().replace("%20", " ").replace("/", "\\").substring(6), "default");
 
                 GameObject gm = new GameObject() {
                     @Override

@@ -1,29 +1,30 @@
 package engine.ui;
 
 import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.util.awt.TextRenderer;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureCoords;
 import engine.base.*;
 import engine.base.Component;
-import engine.base.components.SpriteRenderer;
 import engine.core.Application;
 import engine.core.Input;
+import engine.core.font.*;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 
 public class UI extends Component {
-    private TextRenderer textRenderer;
-
     public Texture sprite;
 
     private boolean hover = false;
+    private boolean pressed = false;
+    private boolean selected = false;
+
     public boolean isHovered() {
         return hover;
     }
+    public boolean isPressed() { return pressed; }
+    public boolean isSelected() { return selected; }
 
-    private boolean selected = false;
 
     private String text = "";
     public String getText() {
@@ -47,27 +48,19 @@ public class UI extends Component {
 
     public Align alignType = Align.CENTER;
     public float top, bottom, left, right;
+
     public Color color = new Color(255,255,255,255);
-
-
-    public Font font = new Font("TimesRoman", Font.PLAIN, 24);
+    public Font font;
+    public Vector3 fontScale = new Vector3(1,1,1);
     public Color textColor = new Color(0, 0, 0);
 
     private void renderText(Vector3 pos) {
         if (font == null)
-            font = new Font("TimesRoman", Font.PLAIN, 24);
+            return;
         if (textColor == null)
             textColor = new Color(0, 0, 0);
 
-        textRenderer = new TextRenderer(font);
-        textRenderer.beginRendering((int)Application.getCurrent().getWindowWidth(), 1080);
-        textRenderer.setColor(textColor);
-
-        pos.x += textOffset.x;
-        pos.y += textOffset.y;
-        System.out.println((Application.getCurrent().getWindowWidth() - 17) / 1920);
-        textRenderer.draw(text, (int)(pos.x * ((Application.getCurrent().getWindowWidth() - 17) / 1920 )), (int)pos.y);
-        textRenderer.endRendering();
+        font.drawString(text, pos, fontScale, textColor);
     }
 
     private Vector3 render() {
@@ -220,11 +213,16 @@ public class UI extends Component {
 
     @Override
     protected void mouseDown(int button) {
-        if (button == MouseEvent.BUTTON1)
+        if (button == MouseEvent.BUTTON1) {
             selected = true;
+            pressed = true;
+        }
     }
     @Override
     protected void mousePress(int button) { }
     @Override
-    protected void mouseUp(int button) { }
+    protected void mouseUp(int button) {
+        if (button == MouseEvent.BUTTON1)
+            pressed = true;
+    }
 }

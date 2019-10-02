@@ -56,4 +56,7 @@ public class Component {
     protected void mouseDown(int button) { }
     protected void mousePress(int button) { }
     protected void mouseUp(int button) { }
+
+    protected void keyPress(int keyCode) { }
+    protected void keyUp(int keyCode) { }
 }

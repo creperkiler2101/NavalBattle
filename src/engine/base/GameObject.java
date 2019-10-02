@@ -93,34 +93,40 @@ public class GameObject {
             components.get(i).mouseEnter();
         }
     }
-
     protected void mouseExit() {
         for (int i = 0; i < components.size(); i++) {
             components.get(i).mouseExit();
         }
     }
-
     protected void mouseDown(int button) {
         for (int i = 0; i < components.size(); i++) {
             components.get(i).mouseDown(button);
         }
     }
-
     protected void mousePress(int button) {
         for (int i = 0; i < components.size(); i++) {
             components.get(i).mousePress(button);
         }
     }
-
     protected void mouseUp(int button) {
         for (int i = 0; i < components.size(); i++) {
             components.get(i).mouseUp(button);
         }
     }
-
     protected void mouseMove() {
         for (int i = 0; i < components.size(); i++) {
             components.get(i).mouseMove();
+        }
+    }
+
+    protected void keyPress(int keyCode) {
+        for (int i = 0; i < components.size(); i++) {
+            components.get(i).keyPress(keyCode);
+        }
+    }
+    protected void keyUp(int keyCode) {
+        for (int i = 0; i < components.size(); i++) {
+            components.get(i).keyUp(keyCode);
         }
     }
 }
