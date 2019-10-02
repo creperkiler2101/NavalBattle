@@ -53,6 +53,7 @@ public class UI extends Component {
     public Font font;
     public Vector3 fontScale = new Vector3(1,1,1);
     public Color textColor = new Color(0, 0, 0);
+    public float fontSpacing = 5;
 
     private void renderText(Vector3 pos) {
         if (font == null)
@@ -60,7 +61,7 @@ public class UI extends Component {
         if (textColor == null)
             textColor = new Color(0, 0, 0);
 
-        font.drawString(text, pos, fontScale, textColor);
+        font.drawString(text, pos, fontScale, textColor, fontSpacing);
     }
 
     private Vector3 render() {

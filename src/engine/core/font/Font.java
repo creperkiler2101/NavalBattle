@@ -41,8 +41,8 @@ public class Font {
     };
     public static final int rows = 15;
     public static final int columns = 15;
-    public static final int size = 15;
-    public static final int separatorSize = 1;
+    public static final int size = 16 * 8;
+    public static final int separatorSize = 1 * 8;
 
     public Map<Character, Texture> characters = new HashMap<Character, Texture>();
 
@@ -59,11 +59,44 @@ public class Font {
             BufferedImage img = ImageIO.read(new File(filePath));
             for (int y = 0; y < rows; y++) {
                 for (int x = 0; x < columns; x++) {
-                    BufferedImage char_ = img.getSubimage(x + size * x + separatorSize * x, y + size * y + separatorSize * y, size, size);
+                    BufferedImage char_ = img.getSubimage(x + (size - 1) * x + separatorSize * x, y + (size - 1) * y + separatorSize * y, size, size);
                     if (x + y * columns < chars.length) {
                         //System.out.println(chars[x + y * columns]);
                         ByteArrayOutputStream os = new ByteArrayOutputStream();
-                        ImageIO.write(char_, "png", os);
+                        int leftOffset = 0;
+                        int rightOffset = 0;
+
+                        boolean isEmptyLeft = true;
+                        for (int x_ = 0; x_ < size; x_++) {
+                            if (isEmptyLeft) {
+                                for (int y_ = 0; y_ < size; y_++) {
+                                    Color c = new Color(char_.getRGB(x_, y_), true);
+                                    //System.out.println(x_ + " " + y_ + " " + c.getAlpha());
+                                    if (c.getAlpha() > 0) {
+                                        isEmptyLeft = false;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (isEmptyLeft)
+                                leftOffset++;
+                        }
+
+                        boolean isEmptyRight = true;
+                        for (int x_ = size - 1; x_ >= 0; x_--) {
+                            for (int y_ = 0; y_ < size; y_++) {
+                                Color c = new Color(char_.getRGB(x_, y_), true);
+                                if (c.getAlpha() > 0) {
+                                    isEmptyRight = false;
+                                    break;
+                                }
+                            }
+                            if (isEmptyRight)
+                                rightOffset++;
+                        }
+                        //rightOffset++;
+                        BufferedImage toLoad = char_.getSubimage(leftOffset, 0, size - rightOffset - leftOffset, size);
+                        ImageIO.write(toLoad, "png", os);
                         InputStream is = new ByteArrayInputStream(os.toByteArray());
                         characters.put(chars[x + y * columns], TextureIO.newTexture(is, false, ".png"));
                     }
@@ -75,7 +108,7 @@ public class Font {
         }
     }
 
-    public void drawString(String text, Vector3 position, Vector3 scale, Color color) {
+    public void drawString(String text, Vector3 position, Vector3 scale, Color color, float spacing) {
         float xOffset = 0;
 
         for (char sym : text.toCharArray()) {
@@ -93,6 +126,11 @@ public class Font {
             Texture texture = characters.get(sym);
             if (texture == null)
                 return;
+
+            if (sym == ' ') {
+                xOffset += spacing * 4 * scale.x + spacing;
+                continue;
+            }
 
             GL2 gl2 = Application.getCurrent().getGL2();
 
@@ -125,13 +163,13 @@ public class Font {
             gl2.glVertex2f(0, 0);
             gl2.glTexCoord2f(texCoords.right(), texCoords.bottom());
 
-            gl2.glVertex2f(texture.getImageHeight(), 0);
+            gl2.glVertex2f(texture.getImageWidth(), 0);
             gl2.glTexCoord2f(texCoords.right(), texCoords.top());
 
-            gl2.glVertex2f(texture.getImageHeight(), texture.getImageWidth());
+            gl2.glVertex2f(texture.getImageWidth(), texture.getImageHeight());
             gl2.glTexCoord2f(texCoords.left(), texCoords.top());
 
-            gl2.glVertex2f(0, texture.getImageWidth());
+            gl2.glVertex2f(0, texture.getImageHeight());
             gl2.glTexCoord2f(texCoords.left(), texCoords.bottom());
 
             gl2.glEnd();
@@ -144,7 +182,7 @@ public class Font {
 
             texture.disable(gl2);
 
-            xOffset += size * scale.x + 5;
+            xOffset += texture.getImageWidth() * scale.x + spacing;
         }
     }
 }

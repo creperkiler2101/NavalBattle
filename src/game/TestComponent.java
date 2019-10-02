@@ -108,7 +108,7 @@ public class TestComponent extends Component {
             Camera.getActiveCamera().getTransform().getLocalPosition().y -= 200 * Time.getDeltaTime();
 
         Font font = FontLoader.getFont("default");
-        font.drawString("Priv zZ mir Kudrjavtsev Lavrov Jfremov", new Vector3(100, 100), new Vector3(10,5,10), Color.YELLOW);
+        font.drawString("Typo:da", new Vector3(100, 100), new Vector3(3,3,3), Color.YELLOW, 10);
         //System.out.println(mp.x + " " + mp.y);
         //Camera.getActiveCamera().getTransform().getPosition().x--;
         //Camera.getActiveCamera().getTransform().getPosition().y--;
