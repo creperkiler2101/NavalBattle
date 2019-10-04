@@ -1,6 +1,9 @@
 package engine.base;
 
 import engine.core.Application;
+import engine.ui.UIBase;
+
+import java.awt.event.KeyEvent;
 
 public class Component {
     GameObject gameObject;
@@ -45,6 +48,10 @@ public class Component {
         Application.getCurrent().getCurrentScene().instantiate(gameObject);
     }
 
+    public void addGUI(UIBase element) {
+        Application.getCurrent().getCurrentScene().addGUI(element);
+    }
+
     protected Component() { }
     protected void start() { }
     protected void update() { }
@@ -57,6 +64,6 @@ public class Component {
     protected void mousePress(int button) { }
     protected void mouseUp(int button) { }
 
-    protected void keyPress(int keyCode) { }
-    protected void keyUp(int keyCode) { }
+    protected void keyPress(KeyEvent event) { }
+    protected void keyUp(KeyEvent event) { }
 }

@@ -52,13 +52,13 @@ public final class Transform {
             this.scale = scale;
     }
 
-    protected Transform() {
+    public Transform() {
         this.position = new Vector3(0, 0, 0);
         this.rotation = new Vector3(0, 0, 0);
         this.scale = new Vector3(1, 1,1);
     }
 
-    protected Transform(GameObject gameObject) {
+    public Transform(GameObject gameObject) {
         this.position = new Vector3(0, 0, 0);
         this.rotation = new Vector3(0, 0, 0);
         this.scale = new Vector3(1, 1,1);

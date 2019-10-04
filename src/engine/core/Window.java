@@ -50,7 +50,7 @@ final class Window extends JFrame {
 
             }
         });
-        this.addKeyListener(new KeyAdapter() {
+        context.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 //super.keyTyped(e);
@@ -59,14 +59,14 @@ final class Window extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (Application.getCurrent().getCurrentScene() != null)
-                    Application.getCurrent().getCurrentScene().keyPress(e.getKeyCode());
+                    Application.getCurrent().getCurrentScene().keyPress(e);
                 Input.onKeyPress(e);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
                 if (Application.getCurrent().getCurrentScene() != null)
-                    Application.getCurrent().getCurrentScene().keyUp(e.getKeyCode());
+                    Application.getCurrent().getCurrentScene().keyUp(e);
                 Input.onKeyUp(e);
             }
         });

@@ -1,11 +1,11 @@
 package engine.base;
 
 import engine.base.components.SpriteRenderer;
+import engine.ui.UIBase;
 
+import java.awt.event.KeyEvent;
 import java.lang.reflect.Array;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GameObject {
     protected ArrayList<Component> components;
@@ -30,6 +30,7 @@ public class GameObject {
 
         Bounds result = new Bounds();
 
+        //MB errors here
         result.left = getTransform().getPosition().x;
         result.right = (result.left + sr.sprite.getImageWidth()) * getTransform().getScale().x;
 
@@ -119,14 +120,14 @@ public class GameObject {
         }
     }
 
-    protected void keyPress(int keyCode) {
+    protected void keyPress(KeyEvent event) {
         for (int i = 0; i < components.size(); i++) {
-            components.get(i).keyPress(keyCode);
+            components.get(i).keyPress(event);
         }
     }
-    protected void keyUp(int keyCode) {
+    protected void keyUp(KeyEvent event) {
         for (int i = 0; i < components.size(); i++) {
-            components.get(i).keyUp(keyCode);
+            components.get(i).keyUp(event);
         }
     }
 }

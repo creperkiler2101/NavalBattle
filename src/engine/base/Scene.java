@@ -2,7 +2,9 @@ package engine.base;
 
 import engine.base.components.SpriteRenderer;
 import engine.core.Input;
+import engine.ui.UIBase;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
@@ -12,6 +14,10 @@ public class Scene {
     protected ArrayList<DelayedMethod> delayExecute;
     protected ArrayList<GameObject> mouseEnterObjects;
 
+    protected ArrayList<UIBase> GUI;
+    protected ArrayList<UIBase> toDestoryGUI;
+    protected ArrayList<UIBase> mouseEnterGUI;
+
     public boolean isReady;
 
     public Scene() {
@@ -20,6 +26,9 @@ public class Scene {
         this.toDestroy = new ArrayList<GameObject>();
         this.delayExecute = new ArrayList<DelayedMethod>();
         this.mouseEnterObjects = new ArrayList<GameObject>();
+        this.GUI = new ArrayList<UIBase>();
+        this.toDestoryGUI = new ArrayList<UIBase>();
+        this.mouseEnterGUI = new ArrayList<UIBase>();
     }
 
     public void init() { }
@@ -40,6 +49,20 @@ public class Scene {
                     }
                 }
             }
+
+            for (int i = 0; i < toDestoryGUI.size(); i++) {
+                UIBase gm_1 = toDestoryGUI.get(i);
+                for (int _i = 0; _i < GUI.size(); _i++) {
+                    UIBase gm_2 = GUI.get(_i);
+                    if (gm_1 == gm_2) {
+                        GUI.remove(gm_1);
+                        break;
+                    }
+                }
+            }
+
+            toDestroy.clear();
+            toDestoryGUI.clear();
 
             for (int i = 0; i < delayExecute.size(); i++) {
                 DelayedMethod dm = delayExecute.get(i);
@@ -74,13 +97,24 @@ public class Scene {
             for (int i = 0; i < gameObjects.size(); i++)
                 if (gameObjects.get(i).isEnabled)
                     gameObjects.get(i).update();
+
+            for (int i = 0; i < GUI.size(); i++)
+                GUI.get(i).update();
         }
         catch (Exception ex) { }
     }
 
+    public void addGUI(UIBase element) {
+        GUI.add(element);
+        element.start();
+    }
+
+    public void destoryGUI(UIBase element) {
+        toDestoryGUI.add(element);
+    }
+
     public void mouseMove() {
         Vector3 mousePosition = Input.getMousePosition();
-        ArrayList<SpriteRenderer> toCheck = new ArrayList<SpriteRenderer>();
 
         for (int i = 0; i < gameObjects.size(); i++) {
             GameObject gm = gameObjects.get(i);
@@ -101,28 +135,74 @@ public class Scene {
                 }
             }
         }
+
+        for (int i = 0; i < GUI.size(); i++) {
+            UIBase gm = GUI.get(i);
+            Bounds bounds = gm.getBounds();
+            if (bounds != null) {
+                if (bounds.isInBounds(mousePosition)) {
+                    if (!mouseEnterGUI.contains(gm)) {
+                        mouseEnterGUI.add(gm);
+                        gm.mouseEnter();
+                    }
+                    else {
+                        gm.mouseMove();
+                    }
+                }
+                else if (!bounds.isInBounds(mousePosition) && mouseEnterGUI.contains(gm)) {
+                    mouseEnterGUI.remove(gm);
+                    gm.mouseExit();
+                }
+            }
+        }
     }
+
     public void mouseDown(int button) {
         for (int i = 0; i < mouseEnterObjects.size(); i++) {
             mouseEnterObjects.get(i).mouseDown(button);
+        }
+
+        for (int i = 0; i < mouseEnterGUI.size(); i++) {
+            mouseEnterGUI.get(i).mouseDown(button);
         }
     }
     public void mousePress(int button) {
         for (int i = 0; i < mouseEnterObjects.size(); i++) {
             mouseEnterObjects.get(i).mousePress(button);
         }
+
+        for (int i = 0; i < mouseEnterGUI.size(); i++) {
+            mouseEnterGUI.get(i).mousePress(button);
+        }
     }
     public void mouseUp(int button) {
         for (int i = 0; i < mouseEnterObjects.size(); i++) {
             mouseEnterObjects.get(i).mouseUp(button);
         }
+
+        for (int i = 0; i < mouseEnterGUI.size(); i++) {
+            mouseEnterGUI.get(i).mouseUp(button);
+        }
     }
 
-    public void keyPress(int keyCode) {
+    public void keyPress(KeyEvent event) {
+        for (int i = 0; i < gameObjects.size(); i++) {
+            gameObjects.get(i).keyPress(event);
+        }
 
+        for (int i = 0; i < GUI.size(); i++) {
+            GUI.get(i).keyPress(event);
+        }
     }
-    public void keyUp(int keyCode) {
 
+    public void keyUp(KeyEvent event) {
+        for (int i = 0; i < gameObjects.size(); i++) {
+            gameObjects.get(i).keyUp(event);
+        }
+
+        for (int i = 0; i < GUI.size(); i++) {
+            GUI.get(i).keyUp(event);
+        }
     }
 
     public GameObject[] getGameObjectByTag(String tag) {

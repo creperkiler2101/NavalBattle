@@ -2,8 +2,8 @@ package game;
 
 import engine.base.Camera;
 import engine.base.Component;
+import engine.base.GameObject;
 import engine.base.Vector3;
-import engine.base.components.ParticleSystem;
 import engine.core.Input;
 import engine.base.components.SpriteRenderer;
 import engine.core.Resources;
@@ -11,15 +11,15 @@ import engine.core.Time;
 import engine.core.font.Font;
 import engine.core.font.FontLoader;
 import engine.ui.Align;
+import engine.ui.Entry;
 import engine.ui.Label;
-import engine.ui.UI;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
 public class TestComponent extends Component {
     SpriteRenderer sr;
+    Entry entry;
 
     @Override
     public void start() {
@@ -36,54 +36,18 @@ public class TestComponent extends Component {
         ps.minEndSpeed = new Vector3();
         ps.maxEndSpeed = new Vector3();
         */
-        Label ui = getGameObject().addComponent(Label.class);
-        ui.sprite = Resources.getSprite("square");
-        ui.alignType = Align.BOTTOM;
-        ui.setText("hello");
-        ui.font = FontLoader.getFont("default");
-        ui = getGameObject().addComponent(Label.class);
-        ui.sprite = Resources.getSprite("square");
-        ui.alignType = Align.TOP;
-        ui.setText("hello");
-        ui.font = FontLoader.getFont("default");
-        ui = getGameObject().addComponent(Label.class);
-        ui.sprite = Resources.getSprite("square");
-        ui.alignType = Align.LEFT;
-        ui.setText("hello");
-        ui.font = FontLoader.getFont("default");
-        ui = getGameObject().addComponent(Label.class);
-        ui.sprite = Resources.getSprite("square");
-        ui.alignType = Align.LEFT_BOTTOM;
-        ui.setText("hello");
-        ui.font = FontLoader.getFont("default");
-        ui = getGameObject().addComponent(Label.class);
-        ui.sprite = Resources.getSprite("square");
-        ui.alignType = Align.LEFT_TOP;
-        ui.left = 100;
-        ui.top = -5;
-        ui.setText("hello");
-        ui.font = FontLoader.getFont("default");
-        ui = getGameObject().addComponent(Label.class);
-        ui.sprite = Resources.getSprite("square");
-        ui.alignType = Align.RIGHT;
-        ui.setText("hello");
-        ui.font = FontLoader.getFont("default");
-        ui = getGameObject().addComponent(Label.class);
-        ui.sprite = Resources.getSprite("square");
-        ui.alignType = Align.RIGHT_BOTTOM;
-        ui.setText("hello");
-        ui.font = FontLoader.getFont("default");
-        ui = getGameObject().addComponent(Label.class);
-        ui.sprite = Resources.getSprite("square");
-        ui.alignType = Align.RIGHT_TOP;
-        ui.setText("hello");
-        ui.font = FontLoader.getFont("default");
-        ui = getGameObject().addComponent(Label.class);
-        ui.sprite = Resources.getSprite("square");
-        ui.alignType = Align.CENTER;
-        ui.setText("hello");
-        ui.font = FontLoader.getFont("default");
-        Camera.getActiveCamera().getTransform().getLocalPosition().x = -0;
+
+        GameObject gm = new GameObject();
+        gm.getTransform().setPosition(new Vector3(250, 250));
+        gm.getTransform().setScale(new Vector3(4, 4));
+        instantiate(gm);
+        entry = new Entry();
+        entry.sprite = Resources.getSprite("square");
+        entry.font = FontLoader.getFont("default");
+        entry.getTransform().setScale(new Vector3(5,5,5));
+        addGUI(entry);
+
+        getGameObject().getTransform().setScale(new Vector3(5,5,5));
     }
 
     @Override
@@ -106,6 +70,9 @@ public class TestComponent extends Component {
             Camera.getActiveCamera().getTransform().getLocalPosition().x += 200 * Time.getDeltaTime();
         if (Input.isKeyPress(KeyEvent.VK_S))
             Camera.getActiveCamera().getTransform().getLocalPosition().y -= 200 * Time.getDeltaTime();
+
+        Vector3 mouse = Input.getMousePosition();
+        System.out.println(mouse.x + " " + mouse.y);
 
         Font font = FontLoader.getFont("default");
         font.drawString("Typo:da", new Vector3(100, 100), new Vector3(3,3,3), Color.YELLOW, 10);
@@ -132,7 +99,8 @@ public class TestComponent extends Component {
     }
     @Override
     protected void mouseMove() {
-        System.out.println("move");
+
+        //System.out.println("move");
     }
     @Override
     protected void mouseExit() {

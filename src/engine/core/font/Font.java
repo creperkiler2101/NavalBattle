@@ -61,7 +61,6 @@ public class Font {
                 for (int x = 0; x < columns; x++) {
                     BufferedImage char_ = img.getSubimage(x + (size - 1) * x + separatorSize * x, y + (size - 1) * y + separatorSize * y, size, size);
                     if (x + y * columns < chars.length) {
-                        //System.out.println(chars[x + y * columns]);
                         ByteArrayOutputStream os = new ByteArrayOutputStream();
                         int leftOffset = 0;
                         int rightOffset = 0;
@@ -94,7 +93,7 @@ public class Font {
                             if (isEmptyRight)
                                 rightOffset++;
                         }
-                        //rightOffset++;
+
                         BufferedImage toLoad = char_.getSubimage(leftOffset, 0, size - rightOffset - leftOffset, size);
                         ImageIO.write(toLoad, "png", os);
                         InputStream is = new ByteArrayInputStream(os.toByteArray());
@@ -119,7 +118,7 @@ public class Font {
                     break;
                 }
             }
-          //  System.out.println(contains);
+
             if (!contains)
                 continue;
 

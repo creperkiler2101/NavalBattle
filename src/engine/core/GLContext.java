@@ -12,6 +12,7 @@ class GLContext extends GLCanvas {
         this.setAutoSwapBufferMode(false);
         this.addGLEventListener(new GLContextListener());
 
+
         animator = new FPSAnimator(60);
         animator.add(this);
         animator.start();
