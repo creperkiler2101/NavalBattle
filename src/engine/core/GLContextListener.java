@@ -4,8 +4,12 @@ import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.glu.GLU;
+import com.jogamp.opengl.util.Animator;
+import com.jogamp.opengl.util.FPSAnimator;
 
 class GLContextListener implements GLEventListener {
+    private FPSAnimator animator;
+
     @Override
     public void init(GLAutoDrawable glAutoDrawable) {
         System.out.println("GL Context initializing");
@@ -17,17 +21,26 @@ class GLContextListener implements GLEventListener {
         gl2.glClearColor(69f / 255f,138f / 255f, 247f / 255f, 255f / 255f);
 
         System.out.println("OK");
+
+        animator = new FPSAnimator(60);
+        animator.add(GLContext.current);
+        animator.start();
+
         Application.getCurrent().onGLInitialized();
     }
 
     @Override
     public void dispose(GLAutoDrawable glAutoDrawable) {
+        animator.remove(GLContext.current);
         System.out.print("GL Context disposed");
     }
 
     @Override
     public void display(GLAutoDrawable glAutoDrawable) {
-        Application.getCurrent().update(glAutoDrawable);
+        try {
+            Application.getCurrent().update(glAutoDrawable);
+        }
+        catch (Exception ex) { }
         //display(glAutoDrawable);
     }
 

@@ -31,6 +31,8 @@ public class Application {
 
     protected Window window;
 
+    public boolean isFullscreen = false;
+
     public Application() {
         current = this;
 
@@ -124,19 +126,20 @@ public class Application {
         window.setVisible(false);
     }
     public void goFullscreen() {
-        //hide();
-       // window.setUndecorated(true);
         hide();
         window.dispose();
         window.setUndecorated(true);
-        show();
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        show();
+        isFullscreen = true;
     }
     public void goWindowed() {
         hide();
         window.dispose();
         window.setUndecorated(false);
-        show();
         window.setExtendedState(JFrame.NORMAL);
+        window.setSize(1920 / 2,1080 / 2);
+        show();
+        isFullscreen = false;
     }
 }

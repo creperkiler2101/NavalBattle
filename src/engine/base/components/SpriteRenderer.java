@@ -69,13 +69,13 @@ public class SpriteRenderer extends Component {
         gl2.glVertex2f(0, 0);
         gl2.glTexCoord2f(texCoords.right(), texCoords.bottom());
 
-        gl2.glVertex2f(sprite.getImageHeight(), 0);
+        gl2.glVertex2f(sprite.getImageWidth(), 0);
         gl2.glTexCoord2f(texCoords.right(), texCoords.top());
 
-        gl2.glVertex2f(sprite.getImageHeight(), sprite.getImageWidth());
+        gl2.glVertex2f(sprite.getImageWidth(), sprite.getImageHeight());
         gl2.glTexCoord2f(texCoords.left(), texCoords.top());
 
-        gl2.glVertex2f(0, sprite.getImageWidth());
+        gl2.glVertex2f(0, sprite.getImageHeight());
         gl2.glTexCoord2f(texCoords.left(), texCoords.bottom());
 
         gl2.glEnd();

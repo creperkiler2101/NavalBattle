@@ -22,6 +22,7 @@ public class Main {
             }
         };
         app.show();
+        app.setTitle("Naval Battle");
         //Application.getCurrent().goFullscreen();
     }
 }

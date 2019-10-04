@@ -18,7 +18,6 @@ public class Entry extends UIBase {
 
     @Override
     public void keyPress(KeyEvent event) {
-        System.out.println(this.isSelected());
         if (!this.isSelected())
             return;
 

@@ -32,6 +32,10 @@ public class UIBase {
     public void setText(String text) {
         if (text == null)
             text = "";
+
+        if (text.length() > maxTextLength)
+            return;
+
         this.text = text;
     }
 
@@ -53,6 +57,9 @@ public class UIBase {
     public float fontSpacing = 5;
     public Vector3 fontScale = new Vector3(1,1,1);
     public Color fontColor = new Color(0, 0, 0);
+
+    public boolean isPassword = false;
+    public int maxTextLength = 256;
 
     private Transform transform;
     public Transform getTransform() {
@@ -161,7 +168,11 @@ public class UIBase {
 
         Vector3 fullPosition = new Vector3(textOffset.x + pos.x, textOffset.y + pos.y);
 
-        font.drawString(text, fullPosition, fontScale, fontColor, fontSpacing);
+        String toDraw = text;
+        if (isPassword)
+            toDraw = "*".repeat(text.length());
+
+        font.drawString(toDraw, fullPosition, fontScale, fontColor, fontSpacing);
     }
 
     private Vector3 render() {
@@ -207,13 +218,13 @@ public class UIBase {
         gl2.glVertex2f(0, 0);
         gl2.glTexCoord2f(texCoords.right(), texCoords.bottom());
 
-        gl2.glVertex2f(sprite.getImageHeight(), 0);
+        gl2.glVertex2f(sprite.getImageWidth(), 0);
         gl2.glTexCoord2f(texCoords.right(), texCoords.top());
 
-        gl2.glVertex2f(sprite.getImageHeight(), sprite.getImageWidth());
+        gl2.glVertex2f(sprite.getImageWidth(), sprite.getImageHeight());
         gl2.glTexCoord2f(texCoords.left(), texCoords.top());
 
-        gl2.glVertex2f(0, sprite.getImageWidth());
+        gl2.glVertex2f(0, sprite.getImageHeight());
         gl2.glTexCoord2f(texCoords.left(), texCoords.bottom());
 
         gl2.glEnd();
@@ -247,6 +258,7 @@ public class UIBase {
 
     public void mouseExit() {
         hover = false;
+        pressed = false;
     }
 
     public void mouseDown(int button) {
@@ -260,9 +272,9 @@ public class UIBase {
 
     public void mouseUp(int button) {
         if (button == MouseEvent.BUTTON1)
-            pressed = true;
+            pressed = false;
     }
 
-    public void keyPress(KeyEvent event) { System.out.println(event.getKeyChar());}
+    public void keyPress(KeyEvent event) { }
     public void keyUp(KeyEvent event) { }
 }

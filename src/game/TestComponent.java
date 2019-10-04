@@ -37,16 +37,6 @@ public class TestComponent extends Component {
         ps.maxEndSpeed = new Vector3();
         */
 
-        GameObject gm = new GameObject();
-        gm.getTransform().setPosition(new Vector3(250, 250));
-        gm.getTransform().setScale(new Vector3(4, 4));
-        instantiate(gm);
-        entry = new Entry();
-        entry.sprite = Resources.getSprite("square");
-        entry.font = FontLoader.getFont("default");
-        entry.getTransform().setScale(new Vector3(5,5,5));
-        addGUI(entry);
-
         getGameObject().getTransform().setScale(new Vector3(5,5,5));
     }
 

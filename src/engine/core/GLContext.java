@@ -5,16 +5,13 @@ import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
 
 class GLContext extends GLCanvas {
-    protected FPSAnimator animator;
+    protected static GLContext current;
 
     public GLContext(GLCapabilities capabilities) {
         super(capabilities);
+        current = this;
+
         this.setAutoSwapBufferMode(false);
         this.addGLEventListener(new GLContextListener());
-
-
-        animator = new FPSAnimator(60);
-        animator.add(this);
-        animator.start();
     }
 }

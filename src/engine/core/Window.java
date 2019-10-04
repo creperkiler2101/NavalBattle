@@ -103,7 +103,9 @@ final class Window extends JFrame {
 
             @Override
             public void mouseDragged(MouseEvent e) {
-                super.mouseDragged(e);
+                Input.mousePosition = new Vector3(e.getX(), e.getY(), 0);;
+                if (Application.getCurrent().getCurrentScene() != null)
+                    Application.getCurrent().getCurrentScene().mouseMove();
             }
 
             @Override

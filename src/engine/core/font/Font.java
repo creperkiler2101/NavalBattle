@@ -55,6 +55,8 @@ public class Font {
 
     private void parseFile() {
         try {
+
+            GL2 gl2 = Application.getCurrent().getGL2();
             //System.out.println(filePath);
             BufferedImage img = ImageIO.read(new File(filePath));
             for (int y = 0; y < rows; y++) {
@@ -97,7 +99,15 @@ public class Font {
                         BufferedImage toLoad = char_.getSubimage(leftOffset, 0, size - rightOffset - leftOffset, size);
                         ImageIO.write(toLoad, "png", os);
                         InputStream is = new ByteArrayInputStream(os.toByteArray());
-                        characters.put(chars[x + y * columns], TextureIO.newTexture(is, false, ".png"));
+                        Texture t = TextureIO.newTexture(is, false, ".png");
+
+                        t.setTexParameteri(gl2, GL2.GL_IMAGE_PIXEL_FORMAT, GL2.GL_RGBA16);
+                        t.setTexParameteri(gl2, GL2.GL_TEXTURE_MAG_FILTER, GL2.GL_NEAREST);
+                        t.setTexParameteri(gl2, GL2.GL_TEXTURE_MIN_FILTER, GL2.GL_NEAREST);
+                        t.setTexParameteri(gl2, GL2.GL_TEXTURE_WRAP_S, GL2.GL_CLAMP_TO_EDGE);
+                        t.setTexParameteri(gl2, GL2.GL_TEXTURE_WRAP_T, GL2.GL_CLAMP_TO_EDGE);
+
+                        characters.put(chars[x + y * columns], t);
                     }
                 }
             }
