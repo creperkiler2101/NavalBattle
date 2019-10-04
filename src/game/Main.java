@@ -8,6 +8,7 @@ import engine.base.components.SpriteRenderer;
 import engine.core.Application;
 import engine.core.Resources;
 import engine.core.font.FontLoader;
+import game.scenes.LoginScene;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,16 +18,7 @@ public class Main {
                 this.loadResources(Main.class.getResource("resources").toString());
                 FontLoader.LoadFont(Main.class.getResource("Font.png").toString().replace("%20", " ").replace("/", "\\").substring(6), "default");
 
-                GameObject gm = new GameObject() {
-                    @Override
-                    public void init() {
-                        addComponent(TestComponent.class);
-                    }
-                };
-                gm.getTransform().setPosition(new Vector3(0, 0, 0));
-
-                setScene(Scene.class);
-                getCurrentScene().instantiate(gm);
+                setScene(LoginScene.class);
             }
         };
         app.show();

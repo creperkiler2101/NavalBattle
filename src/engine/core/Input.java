@@ -18,7 +18,11 @@ public final class Input {
 
     protected static Vector3 mousePosition = new Vector3();
     public static Vector3 getMousePosition() {
-        return new Vector3((mousePosition.x / ((Application.getCurrent().getWindowWidth() - 17) / 1920)) + Camera.getActiveCamera().getTransform().getPosition().x, -((mousePosition.y - Application.getCurrent().getWindowHeight()) + 40) / ((Application.getCurrent().getWindowHeight() - 40) / 1080) + Camera.getActiveCamera().getTransform().getPosition().y);
+        Vector3 mousePosScreen = new Vector3();
+        mousePosScreen.x = (mousePosition.x / ((Application.getCurrent().getWindowWidth() - 17) / 1920));
+        mousePosScreen.y = -((mousePosition.y - Application.getCurrent().getWindowHeight()) + 40) / ((Application.getCurrent().getWindowHeight() - 40) / 1080);
+
+        return new Vector3(mousePosScreen.x + Camera.getActiveCamera().getTransform().getPosition().x * 5, mousePosScreen.y + Camera.getActiveCamera().getTransform().getPosition().y * 5);
     }
 
     public static boolean isKeyDown(int keyCode) {

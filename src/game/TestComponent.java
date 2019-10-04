@@ -72,7 +72,7 @@ public class TestComponent extends Component {
             Camera.getActiveCamera().getTransform().getLocalPosition().y -= 200 * Time.getDeltaTime();
 
         Vector3 mouse = Input.getMousePosition();
-        System.out.println(mouse.x + " " + mouse.y);
+        //System.out.println(mouse.x + " " + mouse.y);
 
         Font font = FontLoader.getFont("default");
         font.drawString("Typo:da", new Vector3(100, 100), new Vector3(3,3,3), Color.YELLOW, 10);
@@ -99,7 +99,6 @@ public class TestComponent extends Component {
     }
     @Override
     protected void mouseMove() {
-
         //System.out.println("move");
     }
     @Override

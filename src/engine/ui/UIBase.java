@@ -65,6 +65,7 @@ public class UIBase {
         }
 
         Vector3 position = transform.getPosition();
+        Vector3 scale = transform.getScale();
         float winWidth = 1920;
         float winHeight = 1080;
         float sWidth = sprite.getImageWidth();
@@ -74,11 +75,11 @@ public class UIBase {
             case CENTER:
                 position.x = winWidth / 2;
                 position.y = winHeight / 2;
-                position.x += left - sWidth / 2;
-                position.y += bottom - sHeight / 2;
+                position.x += left - sWidth * scale.x / 2;
+                position.y += bottom - sHeight * scale.y / 2;
                 break;
             case LEFT:
-                position.y = winHeight / 2 - sHeight / 2;
+                position.y = winHeight / 2 - sHeight * scale.y / 2;
                 position.x = left;
                 position.y += bottom;
                 break;
@@ -92,38 +93,41 @@ public class UIBase {
                 position.x = 0;
                 position.y = winHeight;
                 position.x += left;
-                position.y -= top + sHeight;
+                position.y -= top + sHeight * scale.y;
                 break;
             case RIGHT:
-                position.y = winHeight / 2 - sHeight / 2;
-                position.x = winWidth - right - sWidth;
+                position.y = winHeight / 2 - sHeight * scale.y / 2;
+                position.x = winWidth - right - sWidth * scale.x;
                 position.y += bottom;
                 break;
             case RIGHT_BOTTOM:
-                position.x = winWidth - sWidth;
+                position.x = winWidth - sWidth * scale.x;
                 position.y = 0;
                 position.x -= right;
                 position.y += bottom;
                 break;
             case RIGHT_TOP:
-                position.x = winWidth - sWidth;
+                position.x = winWidth - sWidth * scale.x;
                 position.y = winHeight;
                 position.x -= right;
-                position.y -= top + sHeight;
+                position.y -= top + sHeight * scale.y;
                 break;
             case TOP:
                 position.x = winWidth / 2;
                 position.y = winHeight;
-                position.x += left - sWidth / 2;
-                position.y -= top + sHeight;
+                position.x += left - sWidth * scale.x / 2;
+                position.y -= top + sHeight * scale.y;
                 break;
             case BOTTOM:
                 position.x = winWidth / 2;
                 position.y = 0;
-                position.x += left - sWidth / 2;
+                position.x += left - sWidth * scale.x / 2;
                 position.y -= bottom;
                 break;
         }
+
+        position.x += Camera.getActiveCamera().getTransform().getPosition().x * 5;
+        position.y += Camera.getActiveCamera().getTransform().getPosition().y * 5;
 
         return position;
     }
@@ -137,8 +141,10 @@ public class UIBase {
 
         result.bottom = pos.y;
         result.left = pos.x;
-        result.top = (pos.y + sprite.getImageHeight()) * getTransform().getScale().y;
-        result.right = (pos.x + sprite.getImageWidth()) * getTransform().getScale().x;
+        result.top = pos.y + sprite.getImageHeight() * getTransform().getScale().y;
+        result.right = pos.x + sprite.getImageWidth() * getTransform().getScale().x;
+
+        //System.out.println(pos.x + " " + pos.y);
 
         return result;
     }
@@ -153,73 +159,18 @@ public class UIBase {
         if (fontColor == null)
             fontColor = new Color(0, 0, 0);
 
-        font.drawString(text, pos, fontScale, fontColor, fontSpacing);
+        Vector3 fullPosition = new Vector3(textOffset.x + pos.x, textOffset.y + pos.y);
+
+        font.drawString(text, fullPosition, fontScale, fontColor, fontSpacing);
     }
 
     private Vector3 render() {
         if (sprite == null)
             return new Vector3(left, bottom);
 
-        Vector3 position = new Vector3();
-        float winWidth = 1920;
-        float winHeight = 1080;
-        float sWidth = sprite.getImageWidth();
-        float sHeight = sprite.getImageHeight();
-
-        switch(alignType) {
-            case CENTER:
-                position.x = winWidth / 2;
-                position.y = winHeight / 2;
-                position.x += left - sWidth / 2;
-                position.y += bottom - sHeight / 2;
-                break;
-            case LEFT:
-                position.y = winHeight / 2 - sHeight / 2;
-                position.x = left;
-                position.y += bottom;
-                break;
-            case LEFT_BOTTOM:
-                position.x = 0;
-                position.y = 0;
-                position.x += left;
-                position.y += bottom;
-                break;
-            case LEFT_TOP:
-                position.x = 0;
-                position.y = winHeight;
-                position.x += left;
-                position.y -= top + sHeight;
-                break;
-            case RIGHT:
-                position.y = winHeight / 2 - sHeight / 2;
-                position.x = winWidth - right - sWidth;
-                position.y += bottom;
-                break;
-            case RIGHT_BOTTOM:
-                position.x = winWidth - sWidth;
-                position.y = 0;
-                position.x -= right;
-                position.y += bottom;
-                break;
-            case RIGHT_TOP:
-                position.x = winWidth - sWidth;
-                position.y = winHeight;
-                position.x -= right;
-                position.y -= top + sHeight;
-                break;
-            case TOP:
-                position.x = winWidth / 2;
-                position.y = winHeight;
-                position.x += left - sWidth / 2;
-                position.y -= top + sHeight;
-                break;
-            case BOTTOM:
-                position.x = winWidth / 2;
-                position.y = 0;
-                position.x += left - sWidth / 2;
-                position.y -= bottom;
-                break;
-        }
+        Vector3 position = getPosition();
+        position.x -= Camera.getActiveCamera().getTransform().getPosition().x * 5;
+        position.y -= Camera.getActiveCamera().getTransform().getPosition().y * 5;
 
         GL2 gl2 = Application.getCurrent().getGL2();
 
@@ -299,12 +250,9 @@ public class UIBase {
     }
 
     public void mouseDown(int button) {
-        System.out.println(button);
         if (button == MouseEvent.BUTTON1) {
             selected = true;
             pressed = true;
-
-            System.out.println(selected + " " + pressed);
         }
     }
 
