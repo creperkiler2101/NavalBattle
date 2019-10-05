@@ -15,10 +15,13 @@ public class Main {
         Application app = new Application() {
             @Override
             public void onGLInitialized() {
+                setScene(LoginScene.class);
+            }
+
+            @Override
+            public void resourceLoad() {
                 this.loadResources(Main.class.getResource("resources").toString());
                 FontLoader.LoadFont(Main.class.getResource("Font.png").toString().replace("%20", " ").replace("/", "\\").substring(6), "default");
-
-                setScene(LoginScene.class);
             }
         };
         app.show();

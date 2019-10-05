@@ -101,6 +101,7 @@ public class Application {
     }
 
     public void onGLInitialized() { }
+    public void resourceLoad() { }
 
     public float getWindowWidth() {
         return window.getWidth();

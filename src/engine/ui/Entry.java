@@ -1,9 +1,13 @@
 package engine.ui;
 
+import engine.base.Vector3;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Entry extends UIBase {
+    public String placeholder = "";
+
     @Override
     public void start() {
         super.start();
@@ -14,6 +18,25 @@ public class Entry extends UIBase {
         super.update();
 
         //System.out.println(isSelected());
+    }
+
+    @Override
+    protected void renderText(Vector3 pos) {
+        if (font == null)
+            return;
+        if (fontColor == null)
+            fontColor = new Color(0, 0, 0);
+
+        Vector3 fullPosition = new Vector3(getTextOffset().x + pos.x, getTextOffset().y + pos.y);
+
+        String toDraw = getText();
+        if (isPassword)
+            toDraw = "*".repeat(getText().length());
+
+        if (toDraw.length() > 0)
+            font.drawString(toDraw, fullPosition, fontScale, fontColor, fontSpacing);
+        else
+            font.drawString(placeholder, fullPosition, fontScale, fontColor, fontSpacing);
     }
 
     @Override

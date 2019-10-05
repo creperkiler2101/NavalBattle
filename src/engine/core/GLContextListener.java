@@ -9,6 +9,7 @@ import com.jogamp.opengl.util.FPSAnimator;
 
 class GLContextListener implements GLEventListener {
     private FPSAnimator animator;
+    private boolean initalized = false;
 
     @Override
     public void init(GLAutoDrawable glAutoDrawable) {
@@ -26,7 +27,10 @@ class GLContextListener implements GLEventListener {
         animator.add(GLContext.current);
         animator.start();
 
-        Application.getCurrent().onGLInitialized();
+        Application.getCurrent().resourceLoad();
+        if (!initalized)
+            Application.getCurrent().onGLInitialized();
+        initalized = true;
     }
 
     @Override

@@ -2,53 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f27adb1-c1e1-4441-86f3-a0c6aa6e32a9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/game/objects/login/GlobalController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/objects/ui/MyButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/resources/buttonHover.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/resources/buttonNormal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/resources/buttonPress.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/resources/loginPanel.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/resources/seaBackground.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/resources/seaBackground1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/objects/login/RegistrationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/resources/entry.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/resources/panel1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/scenes/RegistrationScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/components/SpriteRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/components/SpriteRenderer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Application.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/GLContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/GLContext.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/GLContextListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/GLContextListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Input.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Input.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Resources.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Resources.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Window$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Window$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Window.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Window.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/font/Font.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/font/Font.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/Button.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/Button.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/Entry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/Entry.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/UIBase$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/UIBase$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/UIBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/UIBase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Font.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Font.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Main$1$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Main$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/TestComponent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/TestComponent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/Gun.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/blast1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/blast2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/base/components/SpriteRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/base/components/SpriteRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/LoginController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/LoginController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/LoginController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/LoginController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/LoginController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/LoginController$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/LoginController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/core/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/core/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/core/GLContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/core/GLContext.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/core/GLContextListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/core/GLContextListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/core/Resources.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/core/Resources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/core/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/core/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/core/font/Font.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/core/font/Font.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/ui/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/ui/Button.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/ui/Entry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/ui/Entry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/ui/UIBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/ui/UIBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/TestComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/TestComponent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/objects/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/login/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/resources/Gun.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/resources/blast1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/resources/blast2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/scenes/LoginScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/scenes/LoginScene.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,12 +50,12 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\ruslan\IdeaProjects\GameEngineV2.0\src\game\resources" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ruslan\IdeaProjects\GameEngineV2.0\src\game\resources" />
       <recent name="C:\Users\ruslan\IdeaProjects\GameEngineV2.0\src\game" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ruslan\IdeaProjects\GameEngineV2.0\src\game\resources" />
     </key>
   </component>
   <component name="RunDashboard">

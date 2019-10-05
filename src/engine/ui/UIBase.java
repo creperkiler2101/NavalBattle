@@ -160,7 +160,7 @@ public class UIBase {
         transform = new Transform();
     }
 
-    private void renderText(Vector3 pos) {
+    protected void renderText(Vector3 pos) {
         if (font == null)
             return;
         if (fontColor == null)
@@ -211,7 +211,7 @@ public class UIBase {
         gl2.glRotatef(transform.getRotation().x,transform.getRotation().y,transform.getRotation().z,1.0f);
         gl2.glTranslatef(-(sprite.getImageWidth() / 2f), -(sprite.getImageHeight() / 2f), 0.0f);
 
-        gl2.glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+        gl2.glColor4f(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, color.getAlpha() / 255f);
 
         gl2.glBegin(GL2.GL_QUADS);
 
