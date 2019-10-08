@@ -156,8 +156,18 @@ public class RegistrationController extends Component {
         String password = passwordEntry.getText();
         String rePassword = rePasswordEntry.getText();
 
+        if (password.isBlank() || nickname.isBlank()) {
+            showMessage("Error!", new Vector3(200, 160), new Vector3(0.8f, 0.8f));
+            return;
+        }
+
         if (!password.equals(rePassword)) {
             showMessage("Error!", new Vector3(200, 160), new Vector3(0.8f, 0.8f));
+            return;
+        }
+
+        if (Database.isPlayerExists(nickname)) {
+            showMessage("In use!", new Vector3(170, 160), new Vector3(0.8f, 0.8f));
             return;
         }
 
