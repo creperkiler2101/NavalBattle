@@ -132,8 +132,6 @@ public class LoginController extends Component {
     public void login() {
         String nickname = loginEntry.getText();
         String password = passwordEntry.getText();
-
-
     }
 
     public void showRegistration() {

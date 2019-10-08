@@ -8,10 +8,16 @@ import engine.base.components.SpriteRenderer;
 import engine.core.Application;
 import engine.core.Resources;
 import engine.core.font.FontLoader;
+import game.database.Database;
 import game.scenes.LoginScene;
+
+import javax.xml.crypto.Data;
 
 public class Main {
     public static void main(String[] args) {
+        Database.getSession();
+        System.out.println(Database.isPlayerExists("123"));
+        System.out.println(Database.isPlayerExists("abc"));
         Application app = new Application() {
             @Override
             public void onGLInitialized() {

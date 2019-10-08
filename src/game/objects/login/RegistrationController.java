@@ -10,8 +10,11 @@ import engine.core.font.FontLoader;
 import engine.ui.Align;
 import engine.ui.Entry;
 import engine.ui.Label;
+import game.database.Database;
+import game.database.models.Player;
 import game.objects.ui.MyButton;
 import game.scenes.LoginScene;
+import org.hibernate.Session;
 
 import java.awt.*;
 
@@ -153,8 +156,30 @@ public class RegistrationController extends Component {
         String password = passwordEntry.getText();
         String rePassword = rePasswordEntry.getText();
 
+        if (!password.equals(rePassword)) {
+            showMessage("Error!", new Vector3(200, 160), new Vector3(0.8f, 0.8f));
+            return;
+        }
+
+        try (Session session = Database.getSession()) {
+            session.beginTransaction();
+
+            Player p = new Player();
+            p.setNickname(nickname);
+            p.setPassword(password);
+            p.setGameCount(0);
+            p.setWins(0);
+            p.setLoses(0);
+            p.setExperience(0);
+
+            session.save(p);
+            session.getTransaction().commit();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         showMessage("Success!", new Vector3(130, 160), new Vector3(0.8f, 0.8f));
-        //showMessage("Error!", new Vector3(200, 160), new Vector3(0.8f, 0.8f));
     }
 
     public void back() {
