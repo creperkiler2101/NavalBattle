@@ -1,7 +1,6 @@
-package game.objects.login;
+package game.objects.controllers;
 
 import engine.base.Component;
-import engine.base.Scene;
 import engine.base.Vector3;
 import engine.base.components.SpriteRenderer;
 import engine.core.Application;

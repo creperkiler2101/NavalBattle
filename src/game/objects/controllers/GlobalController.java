@@ -1,6 +1,5 @@
-package game.objects.login;
+package game.objects.controllers;
 
-import engine.base.Camera;
 import engine.base.Component;
 import engine.core.Application;
 import engine.core.Input;

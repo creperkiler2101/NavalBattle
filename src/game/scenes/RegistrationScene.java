@@ -2,9 +2,8 @@ package game.scenes;
 
 import engine.base.GameObject;
 import engine.base.Scene;
-import game.objects.login.GlobalController;
-import game.objects.login.LoginController;
-import game.objects.login.RegistrationController;
+import game.objects.controllers.GlobalController;
+import game.objects.controllers.RegistrationController;
 
 import java.awt.event.KeyEvent;
 

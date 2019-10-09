@@ -8,12 +8,14 @@ import engine.base.components.SpriteRenderer;
 import engine.core.Application;
 import engine.core.Resources;
 import engine.core.font.FontLoader;
+import game.connection.Client;
 import game.database.Database;
 import game.scenes.LoginScene;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import javax.xml.crypto.Data;
+import java.net.InetAddress;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,25 +1,28 @@
-package game.objects.login;
+package game.objects.controllers;
 
-import engine.base.Camera;
 import engine.base.Component;
-import engine.base.GameObject;
 import engine.base.Vector3;
 import engine.base.components.SpriteRenderer;
 import engine.core.Application;
-import engine.core.Input;
 import engine.core.Resources;
 import engine.core.font.FontLoader;
 import engine.ui.Align;
-import engine.ui.Button;
 import engine.ui.Entry;
 import engine.ui.Label;
+import game.connection.Client;
+import game.database.Database;
 import game.objects.ui.MyButton;
+import game.scenes.MainScene;
 import game.scenes.RegistrationScene;
 
 import java.awt.*;
+import java.net.InetAddress;
 
 public class LoginController extends Component {
-    private Label loginPanel;
+    private static final String ip = "192.168.0.150"; //85.253.128.24
+    private static final int port = 25566;
+
+    private Label loginPanel, messagePanel;
 
     private Entry loginEntry, passwordEntry;
     private MyButton loginButton, registrationButton, exitButton;
@@ -112,6 +115,15 @@ public class LoginController extends Component {
         exitButton.setTextOffset(new Vector3(90, 22));
         exitButton.fontScale = new Vector3(0.8f, 0.8f);
 
+        messagePanel = new Label();
+        messagePanel.sprite = Resources.getSprite("loginPanel");
+        messagePanel.alignType = Align.CENTER;
+        messagePanel.getTransform().setScale(new Vector3(1f, 1f));
+        messagePanel.font = FontLoader.getFont("default");
+        messagePanel.fontColor = new Color(0, 0, 0, 0);
+        messagePanel.color = new Color(0,0,0,0);
+        messagePanel.getTransform().setScale(new Vector3(1.5f, 1.5f));
+
         SpriteRenderer sr = getGameObject().addComponent(SpriteRenderer.class);
         sr.sprite = Resources.getSprite("seaBackground1");
         getGameObject().getTransform().setScale(new Vector3(2.6f,2.6f));
@@ -122,6 +134,7 @@ public class LoginController extends Component {
         addGUI(loginButton);
         addGUI(loginEntry);
         addGUI(passwordEntry);
+        addGUI(messagePanel);
     }
 
     @Override
@@ -129,9 +142,54 @@ public class LoginController extends Component {
 
     }
 
+    public void showMessage(String text, Vector3 textOffset, Vector3 fontScale, boolean dontFade) {
+        messagePanel.setText(text);
+        messagePanel.setTextOffset(textOffset);
+        messagePanel.fontScale = fontScale;
+        messagePanel.fontColor = new Color(0, 0, 0, 255);
+        messagePanel.color = new Color(200,200,200,255);
+        if (!dontFade)
+            delayedExecute(this::fade, 1.5f);
+    }
+
+    public void fade() {
+        try {
+            messagePanel.fontColor = new Color(0, 0, 0, messagePanel.fontColor.getAlpha() - 5);
+            messagePanel.color = new Color(200, 200, 200, messagePanel.color.getAlpha() - 5);
+            if (messagePanel.fontColor.getAlpha() > 1)
+                delayedExecute(this::fade, 0.03f);
+        }
+        catch (Exception ex) { }
+    }
+
     public void login() {
         String nickname = loginEntry.getText();
         String password = passwordEntry.getText();
+
+        if (!Database.logIn(nickname, password)) {
+            showMessage("Error!", new Vector3(200, 160), new Vector3(0.8f, 0.8f), false);
+            return;
+        }
+
+        try {
+            showMessage("Connecting...", new Vector3(130, 160), new Vector3(0.6f, 0.6f), true);
+            Client client = new Client(InetAddress.getByName(ip), port) {
+                @Override
+                public void onNotConnected() {
+                    showMessage("Error!", new Vector3(130, 160), new Vector3(0.6f, 0.6f), false);
+                }
+
+                @Override
+                public void onConnected() {
+                    Application.getCurrent().setScene(MainScene.class);
+                }
+            };
+            client.connect(nickname);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     public void showRegistration() {

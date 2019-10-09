@@ -2,28 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f27adb1-c1e1-4441-86f3-a0c6aa6e32a9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Hibernate.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/coordinator/Game.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/coordinator/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/coordinator/Server.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/coordinator/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/connection/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/objects/ConnectionStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/objects/controllers/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/scenes/MainScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameEngineV2.0.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GameEngineV2.0.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ST4-4.0.8.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/antlr-runtime-3.5.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/antlr4-4.7.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/antlr4-runtime-4.7.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/byte-buddy-1.9.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/hibernate-core-6.0.0.Alpha2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/hibernate-tools-4.0.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/icu4j-58.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javax.json-1.0.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/org.abego.treelayout.core-1.0.3.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Main$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/RegistrationController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/RegistrationController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/RegistrationController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/RegistrationController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/RegistrationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/RegistrationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/Database.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/GlobalController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/LoginController$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/LoginController$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/LoginController$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/LoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/RegistrationController$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/RegistrationController$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/login/RegistrationController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/LoginScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/LoginScene$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/LoginScene$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/LoginScene$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/LoginScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/LoginScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/RegistrationScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/RegistrationScene$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/RegistrationScene$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/RegistrationScene$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/RegistrationScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/RegistrationScene.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/database/models/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/database/models/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/objects/login/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/login/RegistrationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/database/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/objects/login/GlobalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/controllers/GlobalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/objects/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/objects/login/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/controllers/RegistrationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/LoginScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/scenes/LoginScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/RegistrationScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/scenes/RegistrationScene.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -71,22 +82,38 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
+  <component name="RunManager" selected="Compound.Main">
+    <configuration name="Game" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="game.Main" />
       <module name="GameEngineV2.0" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="coordinator.Main" />
+      <module name="GameEngineV2.0" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="CompoundRunConfigurationType">
+      <toRun name="Game" type="Application" />
+      <toRun name="Server" type="Application" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="CompoundRunConfigurationType">
+      <toRun name="Game" type="Application" />
+      <toRun name="Server" type="Application" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Application.Game" />
+      <item itemvalue="Compound.Main" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />

@@ -47,4 +47,26 @@ public class Database {
             return p != null;
         }
     }
+
+    public static boolean logIn(String nickname, String password) {
+        try (Session session = getSession()) {
+            session.beginTransaction();
+
+            Query query = session.createQuery("FROM player");
+            List<Player> list = (List<Player>)query.list();
+
+            Player p = null;
+            for (int i = 0; i < list.size(); i++) {
+                Player p_ = list.get(i);
+                if (p_.getNickname().equals(nickname)) {
+                    if (p_.getPassword().equals(password)) {
+                        p = p_;
+                        break;
+                    }
+                }
+            }
+
+            return p != null;
+        }
+    }
 }
