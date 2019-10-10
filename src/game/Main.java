@@ -32,6 +32,16 @@ public class Main {
                 this.loadResources(Main.class.getResource("resources").toString());
                 FontLoader.LoadFont(Main.class.getResource("Font.png").toString().replace("%20", " ").replace("/", "\\").substring(6), "default");
             }
+
+            @Override
+            public void onClose() {
+                if (Client.current != null) {
+                    if (Client.current.isConnected) {
+                        Client.current.sendMessage("disconnect");
+                        Client.current.isConnected = false;
+                    }
+                }
+            }
         };
         app.show();
         app.setTitle("Naval Battle");

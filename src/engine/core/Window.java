@@ -22,6 +22,7 @@ final class Window extends JFrame {
 
             @Override
             public void windowClosing(WindowEvent e) {
+                Application.getCurrent().onClose();
                 System.exit(0);
             }
 

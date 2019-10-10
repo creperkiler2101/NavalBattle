@@ -143,4 +143,6 @@ public class Application {
         show();
         isFullscreen = false;
     }
+
+    public void onClose() { }
 }

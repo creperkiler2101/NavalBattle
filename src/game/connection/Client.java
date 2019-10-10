@@ -1,5 +1,7 @@
 package game.connection;
 
+import game.objects.Game;
+
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -16,6 +18,8 @@ public class Client {
     private Thread workingThread;
 
     public static Client current;
+
+    public Runnable gameFounded;
 
     public Client(InetAddress ip, int port) {
         this.ip = ip;
@@ -65,6 +69,16 @@ public class Client {
                     isConnected = false;
                     onNotConnected();
                 }
+
+                if (args[0].equals("founded")) {
+                    onGameFounded(args[1]);
+                    Game g = new Game();
+                    g.player = loggedAs;
+                    g.opponent = args[1];
+
+                    if (gameFounded != null)
+                        gameFounded.run();
+                }
             }
             catch (Exception ex) {
                 System.out.println("Error on listening >>>");
@@ -88,5 +102,5 @@ public class Client {
 
     public void onNotConnected() { }
     public void onConnected() { }
-    public void onGameFinded() { }
+    public void onGameFounded(String enemy) { }
 }

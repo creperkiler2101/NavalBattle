@@ -35,8 +35,74 @@ public class Server {
         }
     }
 
+    private Game getGame(String nick_1, String nick_2) {
+        return null;
+    }
+
+    private void gameNotStarted(Game game) {
+
+    }
+
+    private void gameEnd(Game game) {
+
+    }
+
+    private void gameReady(Game game) {
+
+    }
+
+    private void gameSearch() {
+        while (true) {
+            try {
+                if (connections.size() < 2)
+                    continue;
+
+                User user_1 = null;
+                User user_2 = null;
+
+                for (int i = 0; i < connections.size(); i++) {
+                    User buffer = connections.get(i);
+                    if (!buffer.isInSearch)
+                        continue;
+
+                    if (user_1 == null) {
+                        user_1 = buffer;
+                        continue;
+                    }
+
+                    if (user_2 == null) {
+                        user_2 = buffer;
+                        continue;
+                    }
+
+                    if (user_1 != null && user_2 != null)
+                        break;
+                }
+
+                if (user_1 != null && user_2 != null) {
+                    user_1.isInSearch = false;
+                    user_2.isInSearch = false;
+                    user_1.isInGame = true;
+                    user_2.isInGame = true;
+
+                    sendMessage(user_1, "founded;" + user_2.nickname);
+                    sendMessage(user_2, "founded;" + user_1.nickname);
+                }
+            }
+            catch (Exception ignored) { }
+        }
+    }
+
     private void listen() {
         System.out.println("Started");
+        Thread searchThread = new Thread() {
+            @Override
+            public void run() {
+                gameSearch();
+            }
+        };
+        searchThread.start();
+
         while(true) {
             try {
                 byte[] data = new byte[1024];
@@ -72,6 +138,17 @@ public class Server {
 
                 if (args[0].equals("disconnect")) {
                     connections.remove(user);
+                    print(user.nickname + " disconnected");
+                }
+
+                if (args[0].equals("search")) {
+                    user.isInSearch = true;
+                    print(user.nickname + " start search");
+                }
+
+                if (args[0].equals("stop")) {
+                    user.isInSearch = false;
+                    print(user.nickname + " stop search");
                 }
             }
             catch (Exception ex) {
@@ -79,6 +156,10 @@ public class Server {
                 ex.printStackTrace();
             }
         }
+    }
+
+    private void print(String msg) {
+        System.out.println(msg);
     }
 
     private void sendToAll(String message) {
