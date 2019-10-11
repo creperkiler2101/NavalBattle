@@ -19,7 +19,7 @@ public class Client {
 
     public static Client current;
 
-    public Runnable gameFounded;
+    public Runnable gameFounded, gameStart, gameNotStarted;
 
     public Client(InetAddress ip, int port) {
         this.ip = ip;
@@ -78,6 +78,17 @@ public class Client {
 
                     if (gameFounded != null)
                         gameFounded.run();
+                }
+
+                if (args[0].equals("gameStart")) {
+                    if (gameStart != null)
+                        gameStart.run();
+                }
+
+                if (args[0].equals("notStarted")) {
+                    Game.current = null;
+                    if (gameNotStarted != null)
+                        gameNotStarted.run();
                 }
             }
             catch (Exception ex) {

@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class MyButton extends Button {
+    public boolean isActive = true;
 
     @Override
     public void start() { }

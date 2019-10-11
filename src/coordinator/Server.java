@@ -9,12 +9,14 @@ public class Server {
     private DatagramSocket server;
 
     public ArrayList<User> connections;
+    public ArrayList<Game> games;
 
     private int port;
     private InetAddress ip;
 
     public Server(int port) {
         this.connections = new ArrayList<>();
+        this.games = new ArrayList<>();
         this.port = port;
 
         try {
@@ -36,11 +38,19 @@ public class Server {
     }
 
     private Game getGame(String nick_1, String nick_2) {
+        for (int i = 0; i < games.size(); i++) {
+            Game game = games.get(i);
+            if (game.playerOne.nickname.equals(nick_1) && game.playerTwo.nickname.equals(nick_2))
+                return game;
+            if (game.playerOne.nickname.equals(nick_2) && game.playerTwo.nickname.equals(nick_1))
+                return game;
+        }
         return null;
     }
 
     private void gameNotStarted(Game game) {
-
+        sendMessage(game.playerOne, "notStarted");
+        sendMessage(game.playerTwo, "notStarted");
     }
 
     private void gameEnd(Game game) {
@@ -48,15 +58,13 @@ public class Server {
     }
 
     private void gameReady(Game game) {
-
+        sendMessage(game.playerOne, "ready");
+        sendMessage(game.playerTwo, "ready");
     }
 
     private void gameSearch() {
         while (true) {
             try {
-                if (connections.size() < 2)
-                    continue;
-
                 User user_1 = null;
                 User user_2 = null;
 
@@ -79,6 +87,7 @@ public class Server {
                         break;
                 }
 
+                Thread.sleep(10);
                 if (user_1 != null && user_2 != null) {
                     user_1.isInSearch = false;
                     user_2.isInSearch = false;
@@ -87,9 +96,12 @@ public class Server {
 
                     sendMessage(user_1, "founded;" + user_2.nickname);
                     sendMessage(user_2, "founded;" + user_1.nickname);
+
+                    print("game founded " + user_1.nickname + "; " + user_2.nickname);
+                    games.add(new Game(user_1, user_2));
                 }
             }
-            catch (Exception ignored) { }
+            catch (Exception ignored) { ignored.printStackTrace(); }
         }
     }
 
@@ -149,6 +161,30 @@ public class Server {
                 if (args[0].equals("stop")) {
                     user.isInSearch = false;
                     print(user.nickname + " stop search");
+                }
+
+                if (args[0].equals("accept")) {
+                    Game game = getGame(user.nickname, args[1]);
+                    if (game == null)
+                        continue;
+                    user.isReady = true;
+                    print(user.nickname + " accept the game");
+
+                    if (game.playerOne.isReady && game.playerTwo.isReady) {
+                        sendMessage(game.playerOne, "gameStart");
+                        sendMessage(game.playerTwo, "gameStart");
+                    }
+                }
+
+                if (args[0].equals("decline")) {
+                    Game game = getGame(user.nickname, args[1]);
+                    sendMessage(game.playerOne, "notStarted");
+                    sendMessage(game.playerTwo, "notStarted");
+                    game.playerOne.isReady = false;
+                    game.playerTwo.isReady = false;
+                    games.remove(game);
+
+                    print(user.nickname + " decline the game");
                 }
             }
             catch (Exception ex) {

@@ -11,6 +11,7 @@ import engine.ui.Align;
 import engine.ui.Button;
 import engine.ui.Label;
 import game.connection.Client;
+import game.objects.Game;
 import game.objects.ui.MyButton;
 import game.scenes.LoginScene;
 
@@ -18,14 +19,19 @@ import java.awt.*;
 
 public class MainController extends Component {
     private Label mainPanel, profilePanel, profileFrame, profileImage, expBar, expBarFill, searchTimeLabel;
-    private Button searchButton, exitButton, exitToWindowsButton;
+    private MyButton searchButton, exitButton, exitToWindowsButton;
+
+    private Label readyPanel;
+    private MyButton acceptButton, declineButton;
 
     public float searchTime;
     public boolean isInSearch;
 
     @Override
     protected void start() {
-        Client.current.gameFounded = this::gameStart;
+        Client.current.gameFounded = this::gameReady;
+        Client.current.gameStart = this::gameStart;
+        Client.current.gameNotStarted = this::gameNotStarted;
 
         mainPanel = new Label();
         mainPanel.sprite = Resources.getSprite("panel1");
@@ -39,7 +45,7 @@ public class MainController extends Component {
             @Override
             public void mouseUp(int button) {
                 super.mouseUp(button);
-                if (button == 1) {
+                if (button == 1 && isActive) {
                     exit();
                 }
             }
@@ -57,7 +63,7 @@ public class MainController extends Component {
             @Override
             public void mouseUp(int button) {
                 super.mouseUp(button);
-                if (button == 1) {
+                if (button == 1 && isActive) {
                     if (isInSearch)
                         endSearch();
                     else
@@ -78,7 +84,7 @@ public class MainController extends Component {
             @Override
             public void mouseUp(int button) {
                 super.mouseUp(button);
-                if (button == 1) {
+                if (button == 1 && isActive) {
                     exitToWindows();
                 }
             }
@@ -93,21 +99,69 @@ public class MainController extends Component {
         exitToWindowsButton.fontScale = new Vector3(0.6f, 0.6f);
 
         searchTimeLabel = new Label();
+        searchTimeLabel.left = -100;
+        searchTimeLabel.bottom = 242;
         searchTimeLabel.color = new Color(255, 255 ,255, 0);
         searchTimeLabel.fontColor = new Color(0, 0 ,0, 0);
         searchTimeLabel.fontScale = new Vector3(0.8f, 0.8f);
         searchTimeLabel.sprite = Resources.getSprite("loginPanel");
         searchTimeLabel.alignType = Align.CENTER;
-        searchTimeLabel.left = -100;
-        searchTimeLabel.bottom = 242;
         searchTimeLabel.setTextOffset(new Vector3(100, 100));
         searchTimeLabel.font = FontLoader.getFont("default");
+
+        acceptButton = new MyButton() {
+            @Override
+            public void mouseUp(int button) {
+                super.mouseUp(button);
+                if (button == 1 && isActive) {
+                    accept();
+                }
+            }
+        };
+        acceptButton.alignType = Align.CENTER;
+        acceptButton.bottom -= 100;
+        acceptButton.left = 200;
+        acceptButton.getTransform().setScale(new Vector3(1.5f,1.5f));
+        acceptButton.setText("accept");
+        acceptButton.font = FontLoader.getFont("default");
+        acceptButton.setTextOffset(new Vector3(30, 20));
+        acceptButton.fontScale = new Vector3(0.6f, 0.6f);
+
+        declineButton = new MyButton() {
+            @Override
+            public void mouseUp(int button) {
+                super.mouseUp(button);
+                if (button == 1 && isActive) {
+                    decline();
+                }
+            }
+        };
+        declineButton.alignType = Align.CENTER;
+        declineButton.bottom -= 100;
+        declineButton.left = -200;
+        declineButton.getTransform().setScale(new Vector3(1.5f, 1.5f));
+        declineButton.setText("decline");
+        declineButton.font = FontLoader.getFont("default");
+        declineButton.setTextOffset(new Vector3(30, 20));
+        declineButton.fontScale = new Vector3(0.6f, 0.6f);
+
+        readyPanel = new Label();
+        readyPanel.sprite = Resources.getSprite("loginPanel");
+        readyPanel.alignType = Align.CENTER;
+        readyPanel.getTransform().setScale(new Vector3(1f, 1f));
+        readyPanel.font = FontLoader.getFont("default");
+        readyPanel.setText("game ready!");
+        readyPanel.getTransform().setScale(new Vector3(1.5f, 1.5f));
+        hideReady();
 
         addGUI(mainPanel);
         addGUI(exitButton);
         addGUI(exitToWindowsButton);
         addGUI(searchButton);
         addGUI(searchTimeLabel);
+        addGUI(readyPanel);
+        addGUI(acceptButton);
+        addGUI(declineButton);
 
         SpriteRenderer sr = getGameObject().addComponent(SpriteRenderer.class);
         sr.sprite = Resources.getSprite("seaBackground1");
@@ -122,8 +176,63 @@ public class MainController extends Component {
         }
     }
 
-    public void gameStart() {
+    private void showReady() {
+        readyPanel.fontColor = new Color(0, 0, 0, 255);
+        readyPanel.color = new Color(255,255,255, 255);
+        acceptButton.fontColor = new Color(0, 0, 0, 255);
+        acceptButton.color = new Color(255, 255, 255, 255);
+        declineButton.fontColor = new Color(0, 0, 0, 255);
+        declineButton.color = new Color(255, 255, 255, 255);
+        acceptButton.isActive = true;
+        declineButton.isActive = true;
+    }
 
+    private void hideReady() {
+        readyPanel.fontColor = new Color(0, 0, 0, 0);
+        readyPanel.color = new Color(255, 255, 255, 0);
+        acceptButton.fontColor = new Color(0, 0, 0, 0);
+        acceptButton.color = new Color(255, 255, 255, 0);
+        declineButton.fontColor = new Color(0, 0, 0, 0);
+        declineButton.color = new Color(255, 255, 255, 0);
+        acceptButton.isActive = false;
+        declineButton.isActive = false;
+    }
+
+    private void setActive() {
+        exitToWindowsButton.isActive = true;
+        exitButton.isActive = true;
+        searchButton.isActive = true;
+    }
+
+    private void setNotActive() {
+        exitToWindowsButton.isActive = false;
+        exitButton.isActive = false;
+        searchButton.isActive = false;
+    }
+
+    public void gameReady() {
+        setNotActive();
+        showReady();
+        endSearch();
+    }
+
+    public void accept() {
+        send("accept;" + Game.current.opponent);
+        hideReady();
+    }
+
+    public void decline() {
+        send("decline;" + Game.current.opponent);
+        hideReady();
+    }
+
+    public void gameNotStarted() {
+        setActive();
+        hideReady();
+    }
+
+    public void gameStart() {
+        System.out.println("Game started!");
     }
 
     private String toTimeString(int seconds) {
