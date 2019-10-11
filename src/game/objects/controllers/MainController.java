@@ -13,6 +13,7 @@ import engine.ui.Label;
 import game.connection.Client;
 import game.objects.Game;
 import game.objects.ui.MyButton;
+import game.scenes.GameScene;
 import game.scenes.LoginScene;
 
 import java.awt.*;
@@ -233,6 +234,7 @@ public class MainController extends Component {
 
     public void gameStart() {
         System.out.println("Game started!");
+        Application.getCurrent().setScene(GameScene.class);
     }
 
     private String toTimeString(int seconds) {
