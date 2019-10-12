@@ -1,59 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="0f27adb1-c1e1-4441-86f3-a0c6aa6e32a9" name="Default Changelist" comment="" />
-=======
-    <list default="true" id="0f27adb1-c1e1-4441-86f3-a0c6aa6e32a9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/game/objects/FieldElement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/scenes/GameScene.java" afterDir="false" />
+    <list default="true" id="44843f42-e70e-484b-925b-9658016d5200" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/coordinator/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/coordinator/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/coordinator/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/coordinator/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/coordinator/Server$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/coordinator/Server$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/coordinator/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/coordinator/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/coordinator/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/coordinator/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/Bounds.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/Bounds.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/Camera.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/Camera.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/Component.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/Component.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/DelayedMethod.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/DelayedMethod.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/GameObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/GameObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/Scene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/Scene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/Transform.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/Transform.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/Vector3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/Vector3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/components/Particle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/components/Particle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/components/ParticleSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/components/ParticleSystem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/components/SpriteRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/base/components/SpriteRenderer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Application.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/EngineInitializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/EngineInitializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/GLContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/GLContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/GLContextListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/GLContextListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Input.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Input.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Resources.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Resources.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Time.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Time.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Window$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Window$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Window$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Window$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Window$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Window$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Window.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/Window.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/font/Font.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/font/Font.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/font/FontLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/core/font/FontLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/Align.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/Align.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/Button.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/Button.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/Entry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/Entry.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/Label.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/Label.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/UIBase$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/UIBase$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/UIBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/engine/ui/UIBase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/TestComponent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/TestComponent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/connection/Client$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/connection/Client$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/connection/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/connection/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/Database.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/models/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/models/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/models/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/models/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/models/Rank.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/models/Rank.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/ConnectionStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/ConnectionStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/FieldElement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/FieldElement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/Game.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GlobalController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GlobalController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/LoginController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/LoginController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/LoginController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/LoginController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/LoginController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/LoginController$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/LoginController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/LoginController$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/LoginController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/RegistrationController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/RegistrationController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/RegistrationController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/RegistrationController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/RegistrationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/RegistrationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/ui/MyButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/ui/MyButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/GameScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/GameScene$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/GameScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/GameScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/LoginScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/LoginScene$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/LoginScene$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/LoginScene$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/LoginScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/LoginScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/MainScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/MainScene$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/MainScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/MainScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/RegistrationScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/RegistrationScene$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/RegistrationScene$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/RegistrationScene$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/RegistrationScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/scenes/RegistrationScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sea.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/resources/sea.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/coordinator/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/coordinator/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/coordinator/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/coordinator/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/coordinator/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/coordinator/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/connection/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/connection/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/objects/FieldElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/FieldElement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/objects/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/controllers/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/objects/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/controllers/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/scenes/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/scenes/GameScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/white.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/resources/white.png" afterDir="false" />
     </list>
->>>>>>> 469270824eb9c1b660ad91875fe7c01e89a79515
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Enum" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1RKgahkpDBhEs0ic3ltjumBCEXO" />
+  <component name="ProjectId" id="1S6abSpeUPof45pnanbtVq3UPjK" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/txw2-2.3.1.jar!/" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\ruslan\IdeaProjects\GameEngineV2.0\src\game\resources" />
-      <recent name="C:\Users\ruslan\IdeaProjects\GameEngineV2.0\src\game" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ruslan\IdeaProjects\GameEngineV2.0\src\game\resources" />
     </key>
   </component>
@@ -69,37 +122,51 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Compound.Main">
-    <configuration name="Game" type="Application" factoryName="Application">
+  <component name="RunManager" selected="Compound.Test">
+    <configuration name="Game_1" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="game.Main" />
       <module name="GameEngineV2.0" />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Game_2" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="game.Main" />
+      <module name="GameEngineV2.0" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Server" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="coordinator.Main" />
       <module name="GameEngineV2.0" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="CompoundRunConfigurationType">
-      <toRun name="Game" type="Application" />
+    <configuration name="Test" type="CompoundRunConfigurationType">
+      <toRun name="Game_2" type="Application" />
+      <toRun name="Game_1" type="Application" />
       <toRun name="Server" type="Application" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="CompoundRunConfigurationType">
-      <toRun name="Game" type="Application" />
+      <toRun name="Game_2" type="Application" />
+      <toRun name="Game_1" type="Application" />
       <toRun name="Server" type="Application" />
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.Game_1" />
+      <item itemvalue="Application.Game_2" />
       <item itemvalue="Application.Server" />
-      <item itemvalue="Application.Game" />
-      <item itemvalue="Compound.Main" />
+      <item itemvalue="Compound.Test" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -107,11 +174,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0f27adb1-c1e1-4441-86f3-a0c6aa6e32a9" name="Default Changelist" comment="" />
-      <created>1569421266131</created>
+      <changelist id="44843f42-e70e-484b-925b-9658016d5200" name="Default Changelist" comment="" />
+      <created>1570886571721</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1569421266131</updated>
+      <updated>1570886571721</updated>
     </task>
     <servers />
   </component>
@@ -120,15 +187,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/GameEngineV2_0$Game.ic" NAME="Game Coverage Results" MODIFIED="1570740805578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/GameEngineV2_0$Game_2.ic" NAME="Game_2 Coverage Results" MODIFIED="1570897877806" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

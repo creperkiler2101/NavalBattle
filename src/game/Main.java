@@ -37,7 +37,7 @@ public class Main {
             public void onClose() {
                 if (Client.current != null) {
                     if (Client.current.isConnected) {
-                        Client.current.sendMessage("disconnect");
+                        Client.current.sendMessage("disconnect;" + Client.current.loggedAs);
                         Client.current.isConnected = false;
                     }
                 }

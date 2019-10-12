@@ -20,6 +20,13 @@ public class Game {
 
         fieldOne = new int[10][10];
         fieldTwo = new int[10][10];
+
+        for (int y = 0; y < 10; y++) {
+            for (int x = 0; x < 10; x++) {
+                fieldOne[x][y] = 1;
+                fieldTwo[x][y] = 1;
+            }
+        }
     }
 
     public void setShip(int x, int y, int id, int rot, User user) {

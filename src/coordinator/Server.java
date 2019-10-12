@@ -48,6 +48,17 @@ public class Server {
         return null;
     }
 
+    private Game getGame(String nick_1) {
+        for (int i = 0; i < games.size(); i++) {
+            Game game = games.get(i);
+            if (game.playerOne.nickname.equals(nick_1))
+                return game;
+            if (game.playerTwo.nickname.equals(nick_1))
+                return game;
+        }
+        return null;
+    }
+
     private void gameNotStarted(Game game) {
         sendMessage(game.playerOne, "notStarted");
         sendMessage(game.playerTwo, "notStarted");
@@ -101,7 +112,7 @@ public class Server {
                     games.add(new Game(user_1, user_2));
                 }
             }
-            catch (Exception ignored) { ignored.printStackTrace(); }
+            catch (Exception ex) { ex.printStackTrace(); }
         }
     }
 
@@ -130,10 +141,10 @@ public class Server {
 
                 System.out.println("recieved message: " + msg + "; from " + senderIp.getHostAddress());
 
-                User user = getUser(senderIp);
-
                 if (args.length == 0)
                     continue;
+
+                User user = getUser(args[1]);
 
                 if (args[0].equals("connect")) {
                     if (isInOnline(args[1])) {
@@ -150,6 +161,12 @@ public class Server {
 
                 if (args[0].equals("disconnect")) {
                     connections.remove(user);
+                    Game g = getGame(user.nickname);
+                    if (!user.nickname.equals(g.playerOne.nickname))
+                        sendMessage(g.playerOne, "playerLeave");
+                    else
+                        sendMessage(g.playerTwo, "playerLeave");
+                    games.remove(g);
                     print(user.nickname + " disconnected");
                 }
 
@@ -164,7 +181,7 @@ public class Server {
                 }
 
                 if (args[0].equals("accept")) {
-                    Game game = getGame(user.nickname, args[1]);
+                    Game game = getGame(user.nickname, args[2]);
                     if (game == null)
                         continue;
                     user.isReady = true;
@@ -177,7 +194,7 @@ public class Server {
                 }
 
                 if (args[0].equals("decline")) {
-                    Game game = getGame(user.nickname, args[1]);
+                    Game game = getGame(user.nickname, args[2]);
                     sendMessage(game.playerOne, "notStarted");
                     sendMessage(game.playerTwo, "notStarted");
                     game.playerOne.isReady = false;
@@ -185,6 +202,41 @@ public class Server {
                     games.remove(game);
 
                     print(user.nickname + " decline the game");
+                }
+
+                if (args[0].equals("go")) {
+                    Game g = getGame(args[1]);
+                    user.isLoaded = true;
+
+                    print(args[1] + " loaded");
+                    if (g.playerOne.isLoaded && g.playerTwo.isLoaded) {
+                        int i = (int)Math.round(Math.random());
+                        if (i == 0)
+                            sendMessage(g.playerOne, "turn");
+                        else
+                            sendMessage(g.playerTwo, "turn");
+                        print(i + " turn");
+                    }
+                }
+
+                if (args[0].equals("shot")) {
+                    int x = Integer.parseInt(args[2]);
+                    int y = Integer.parseInt(args[3]);
+
+                    Game g = getGame(user.nickname);
+                    int state = -1;
+                    if (user.nickname.equals(g.playerOne.nickname)) {
+                        state = g.fieldTwo[x][y];
+                        sendMessage(g.playerTwo, "turn");
+                    }
+                    else {
+                        state = g.fieldOne[x][y];
+                        sendMessage(g.playerOne, "turn");
+                    }
+
+                    sendMessage(g.playerOne, "result;" + x + ";" + y + ";" + state + ";" + user.nickname);
+                    sendMessage(g.playerTwo, "result;" + x + ";" + y + ";" + state + ";" + user.nickname);
+                    print(user.nickname + " shot at " + x + " " + y + " state " + state);
                 }
             }
             catch (Exception ex) {
@@ -220,6 +272,20 @@ public class Server {
 
         for (int i = 0; i < connections.size(); i++) {
             if (connections.get(i).ip.getHostAddress().equals(ip.getHostAddress()))
+            {
+                result = connections.get(i);
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    private User getUser(String nick) {
+        User result = null;
+
+        for (int i = 0; i < connections.size(); i++) {
+            if (connections.get(i).nickname.equals(nick))
             {
                 result = connections.get(i);
                 break;

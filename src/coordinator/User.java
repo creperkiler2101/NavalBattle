@@ -11,6 +11,7 @@ public class User {
     public boolean isInGame = false;
     public boolean isInSearch = false;
     public boolean isReady = false;
+    public boolean isLoaded = false;
 
     public User(InetAddress ip, int port) {
         this.ip = ip;

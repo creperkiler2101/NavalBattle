@@ -218,12 +218,12 @@ public class MainController extends Component {
     }
 
     public void accept() {
-        send("accept;" + Game.current.opponent);
+        send("accept;" + Game.current.player + ";" + Game.current.opponent);
         hideReady();
     }
 
     public void decline() {
-        send("decline;" + Game.current.opponent);
+        send("decline;" + Game.current.player + ";" + Game.current.opponent);
         hideReady();
     }
 
@@ -233,7 +233,6 @@ public class MainController extends Component {
     }
 
     public void gameStart() {
-        System.out.println("Game started!");
         Application.getCurrent().setScene(GameScene.class);
     }
 
@@ -255,13 +254,13 @@ public class MainController extends Component {
     }
 
     public void exit() {
-        Client.current.sendMessage("disconnect");
+        Client.current.sendMessage("disconnect;" + Client.current.loggedAs);
         Client.current.isConnected = false;
         Application.getCurrent().setScene(LoginScene.class);
     }
 
     public void exitToWindows() {
-        Client.current.sendMessage("disconnect");
+        Client.current.sendMessage("disconnect;" + Client.current.loggedAs);
         Client.current.isConnected = false;
         System.exit(0);
     }
@@ -272,7 +271,7 @@ public class MainController extends Component {
         searchTimeLabel.color = new Color(255, 255 ,255, 255);
         searchTimeLabel.fontColor = new Color(0, 0 ,0, 255);
         //Send to server what we are start search
-        send("search");
+        send("search;" + Client.current.loggedAs);
     }
 
     public void endSearch() {
@@ -280,7 +279,7 @@ public class MainController extends Component {
         searchTimeLabel.color = new Color(255, 255 ,255, 0);
         searchTimeLabel.fontColor = new Color(0, 0 ,0, 0);
         //Send to server what we stop search
-        send("stop");
+        send("stop;" + Client.current.loggedAs);
     }
 
     private void send(String msg) {

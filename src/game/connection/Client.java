@@ -1,6 +1,9 @@
 package game.connection;
 
+import engine.core.Application;
 import game.objects.Game;
+import game.objects.controllers.GameController;
+import game.scenes.MainScene;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -19,7 +22,7 @@ public class Client {
 
     public static Client current;
 
-    public Runnable gameFounded, gameStart, gameNotStarted;
+    public Runnable gameFounded, gameStart, gameNotStarted, setTurn;
 
     public Client(InetAddress ip, int port) {
         this.ip = ip;
@@ -89,6 +92,30 @@ public class Client {
                     Game.current = null;
                     if (gameNotStarted != null)
                         gameNotStarted.run();
+                }
+
+                if (args[0].equals("turn")) {
+                    if (setTurn != null)
+                        setTurn.run();
+                }
+
+                if (args[0].equals("result")) {
+                    String nick = args[4];
+                    int x = Integer.parseInt(args[1]);
+                    int y = Integer.parseInt(args[2]);
+                    int state = Integer.parseInt(args[3]);
+
+                    if (nick.equals(loggedAs)) {
+                        GameController.current.opponentField[x][y].state = state;
+                    }
+                    else {
+                        GameController.current.thisField[x][y].state = state;
+                    }
+                }
+
+                if (args[0].equals("playerLeave")) {
+                    Game.current = null;
+                    Application.getCurrent().setScene(MainScene.class);
                 }
             }
             catch (Exception ex) {
