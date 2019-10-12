@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="0f27adb1-c1e1-4441-86f3-a0c6aa6e32a9" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="0f27adb1-c1e1-4441-86f3-a0c6aa6e32a9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/game/objects/FieldElement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/game/scenes/GameScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/coordinator/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/coordinator/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/coordinator/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/coordinator/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/connection/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/connection/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/coordinator/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/coordinator/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/objects/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/controllers/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/objects/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/controllers/MainController.java" afterDir="false" />
+    </list>
+>>>>>>> 469270824eb9c1b660ad91875fe7c01e89a79515
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +44,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/txw2-2.3.1.jar!/" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>

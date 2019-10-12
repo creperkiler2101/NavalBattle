@@ -19,7 +19,7 @@ import java.awt.*;
 import java.net.InetAddress;
 
 public class LoginController extends Component {
-    private static final String ip = "192.168.0.150"; //85.253.128.24
+    private static final String ip = "localhost"; //85.253.128.24
     private static final int port = 25566;
 
     private Label loginPanel, messagePanel;
