@@ -5,6 +5,7 @@ import engine.base.Component;
 import engine.base.GameObject;
 import engine.base.Vector3;
 import engine.base.components.SpriteRenderer;
+import engine.core.Input;
 import engine.core.Resources;
 import engine.core.Time;
 import engine.core.font.FontLoader;
@@ -12,9 +13,11 @@ import engine.ui.Align;
 import engine.ui.Label;
 import game.connection.Client;
 import game.objects.FieldElement;
+import game.objects.Ship;
 import game.objects.ui.MyButton;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class GameController extends Component {
     public FieldElement[][] thisField = new FieldElement[10][10];
@@ -32,6 +35,11 @@ public class GameController extends Component {
     private float thisTimer = 15;
     private float enemyTimer = 15;
 
+    public Ship[] ships = new Ship[10];
+    public Ship selectedShip;
+
+    public boolean isAllShipsReady = false;
+
     @Override
     protected void start() {
         current = this;
@@ -41,6 +49,39 @@ public class GameController extends Component {
         GameObject seaBG_2 = new GameObject();
         instantiate(seaBG_1, new Vector3(100, 1080 - 100 - 640));
         instantiate(seaBG_2, new Vector3(1920 - 100 - 640, 1080 - 100 - 640));
+
+        for (int i = 0; i < 4; i++) {
+            GameObject ship = new GameObject();
+            instantiate(ship, new Vector3(10 + 74 * i, 10));
+            SpriteRenderer sr = ship.addComponent(SpriteRenderer.class);
+            sr.sprite = Resources.getSprite("smallShip");
+            Ship comp = ship.addComponent(Ship.class);
+            comp.size = 1;
+            comp.startPos =  new Vector3(10 + 74 * i, 10);
+            ships[i] = comp;
+        }
+
+        for (int i = 0; i < 3; i++) {
+            GameObject ship = new GameObject();
+            instantiate(ship, new Vector3(10 + 138 * i, 20 + 64));
+            SpriteRenderer sr = ship.addComponent(SpriteRenderer.class);
+            sr.sprite = Resources.getSprite("mediumShip");
+            Ship comp = ship.addComponent(Ship.class);
+            comp.size = 2;
+            comp.startPos = new Vector3(10 + 138 * i, 20 + 64);
+            ships[i + 4] = comp;
+        }
+
+        for (int i = 0; i < 2; i++) {
+            GameObject ship = new GameObject();
+            instantiate(ship, new Vector3(400 + 202 * i, 20 + 64));
+            SpriteRenderer sr = ship.addComponent(SpriteRenderer.class);
+            sr.sprite = Resources.getSprite("largeShip");
+            Ship comp = ship.addComponent(Ship.class);
+            comp.size = 3;
+            comp.startPos = new Vector3(400 + 202 * i, 20 + 64);
+            ships[i + 7] = comp;
+        }
 
         SpriteRenderer sr_1 = seaBG_1.addComponent(SpriteRenderer.class);
         sr_1.sprite = Resources.getSprite("sea");
@@ -107,6 +148,13 @@ public class GameController extends Component {
 
     @Override
     protected void update() {
+        if (selectedShip != null && !isReady && Input.isKeyDown(KeyEvent.VK_R)) {
+            if (selectedShip.rot == 0)
+                selectedShip.rot = 1;
+            else
+                selectedShip.rot = 0;
+        }
+
         if (!isReady)
             return;
 
