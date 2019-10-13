@@ -227,16 +227,56 @@ public class Server {
                     int state = -1;
                     if (user.nickname.equals(g.playerOne.nickname)) {
                         state = g.fieldTwo[x][y];
+                        if (state == 3)
+                            g.fieldOne[x][y] = 6;
                         sendMessage(g.playerTwo, "turn");
                     }
                     else {
                         state = g.fieldOne[x][y];
+                        if (state == 3)
+                            g.fieldOne[x][y] = 6;
                         sendMessage(g.playerOne, "turn");
+                    }
+
+                    if (state == 3)
+                        state = 2;
+                    else
+                        state = 1;
+
+                    if (g.isAllDestroyed(g.playerOne.nickname))
+                    {
+                        sendMessage(g.playerOne, "end;" + g.playerTwo.nickname);
+                        sendMessage(g.playerTwo, "end;" + g.playerTwo.nickname);
+                    }
+                    else if (g.isAllDestroyed(g.playerTwo.nickname))
+                    {
+                        sendMessage(g.playerOne, "end;" + g.playerOne.nickname);
+                        sendMessage(g.playerTwo, "end;" + g.playerOne.nickname);
                     }
 
                     sendMessage(g.playerOne, "result;" + x + ";" + y + ";" + state + ";" + user.nickname);
                     sendMessage(g.playerTwo, "result;" + x + ";" + y + ";" + state + ";" + user.nickname);
                     print(user.nickname + " shot at " + x + " " + y + " state " + state);
+                }
+
+                if (args[0].equals("field")) {
+                    Game g = getGame(user.nickname);
+                    int offset = 2;
+                    int[][] field = new int[10][10];
+
+                    for (int y = 0; y < 10; y++) {
+                        for (int x = 0; x < 10; x++) {
+                            String s = args[offset + x + y * 10];
+                            field[x][y] = Integer.parseInt(s);
+                        }
+                    }
+
+                    if (user.nickname.equals(g.playerOne.nickname)) {
+                        g.fieldOne = field;
+                    }
+                    else if (user.nickname.equals(g.playerTwo.nickname)) {
+                        g.fieldTwo = field;
+                    }
                 }
             }
             catch (Exception ex) {

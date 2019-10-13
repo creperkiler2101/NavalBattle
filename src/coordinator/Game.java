@@ -1,5 +1,7 @@
 package coordinator;
 
+import engine.base.Vector3;
+
 import java.util.ArrayList;
 
 public class Game {
@@ -14,7 +16,10 @@ public class Game {
     public int[][] fieldOne;
     public int[][] fieldTwo;
 
+    public ArrayList<Vector3> turns;
+
     public Game(User _1, User _2) {
+        turns = new ArrayList<>();
         playerOne = _1;
         playerTwo = _2;
 
@@ -29,30 +34,21 @@ public class Game {
         }
     }
 
-    public void setShip(int x, int y, int id, int rot, User user) {
-        if (user.nickname.equals(playerOne.nickname)) {
-            if (rot == 0) {
-                for (int i = 0; i < id; i++) {
-                    fieldOne[x + i][y] = id;
-                }
-            }
-            else {
-                for (int i = 0; i < id; i++) {
-                    fieldOne[x][y + i] = id;
-                }
-            }
-        }
-        else if (user.nickname.equals(playerTwo.nickname)) {
-            if (rot == 0) {
-                for (int i = 0; i < id; i++) {
-                    fieldTwo[x + i][y] = id;
-                }
-            }
-            else {
-                for (int i = 0; i < id; i++) {
-                    fieldTwo[x][y + i] = id;
-                }
+    public boolean isAllDestroyed(String nick) {
+        int[][] field = null;
+        if (nick.equals(playerOne.nickname))
+            field = fieldOne;
+        else
+            field = fieldTwo;
+
+        int count = 0;
+        for (int y = 0; y < 10; y++) {
+            for (int x = 0; x < 10; x++) {
+                if (field[x][y] == 6)
+                    count++;
             }
         }
+
+        return count == 20;
     }
 }

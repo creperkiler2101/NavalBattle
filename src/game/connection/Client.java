@@ -22,7 +22,7 @@ public class Client {
 
     public static Client current;
 
-    public Runnable gameFounded, gameStart, gameNotStarted, setTurn;
+    public Runnable gameFounded, gameStart, gameNotStarted, setTurn, win;
 
     public Client(InetAddress ip, int port) {
         this.ip = ip;
@@ -116,6 +116,13 @@ public class Client {
                 if (args[0].equals("playerLeave")) {
                     Game.current = null;
                     Application.getCurrent().setScene(MainScene.class);
+                }
+
+                if (args[0].equals("win")) {
+                    if (win != null) {
+                        GameController.current.winner = args[1];
+                        win.run();
+                    }
                 }
             }
             catch (Exception ex) {

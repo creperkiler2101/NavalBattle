@@ -13,6 +13,7 @@ import engine.ui.Align;
 import engine.ui.Label;
 import game.connection.Client;
 import game.objects.FieldElement;
+import game.objects.Game;
 import game.objects.Ship;
 import game.objects.ui.MyButton;
 
@@ -24,6 +25,10 @@ public class GameController extends Component {
     public FieldElement[][] opponentField = new FieldElement[10][10];
     public boolean turn = false;
     public boolean isReady = false;
+    public boolean isPressReady = false;
+    public boolean isGameEnd = false;
+
+    public String winner = null;
 
     public static GameController current;
 
@@ -44,6 +49,7 @@ public class GameController extends Component {
     protected void start() {
         current = this;
         Client.current.setTurn = this::setTurn;
+        Client.current.win = this::end;
 
         GameObject seaBG_1 = new GameObject();
         GameObject seaBG_2 = new GameObject();
@@ -83,6 +89,15 @@ public class GameController extends Component {
             ships[i + 7] = comp;
         }
 
+        GameObject ship = new GameObject();
+        instantiate(ship, new Vector3(400, 10));
+        SpriteRenderer sr = ship.addComponent(SpriteRenderer.class);
+        sr.sprite = Resources.getSprite("largestShip");
+        Ship comp = ship.addComponent(Ship.class);
+        comp.size = 4;
+        comp.startPos = new Vector3(400, 10);
+        ships[9] = comp;
+
         SpriteRenderer sr_1 = seaBG_1.addComponent(SpriteRenderer.class);
         sr_1.sprite = Resources.getSprite("sea");
 
@@ -103,6 +118,8 @@ public class GameController extends Component {
         goButton.font = FontLoader.getFont("default");
         goButton.setTextOffset(new Vector3(100, 20));
         goButton.fontScale = new Vector3(0.6f, 0.6f);
+        goButton.fontColor = new Color(0, 0, 0, 0);
+        goButton.color = new Color(255, 255, 255, 0);
 
         addGUI(goButton);
 
@@ -143,16 +160,40 @@ public class GameController extends Component {
     protected void ready() {
         goButton.fontColor = new Color(0, 0, 0, 0);
         goButton.color = new Color(0, 0, 0, 0);
+        isPressReady = true;
+        String fieldString = "";
+        for (int y = 0; y < 10; y++) {
+            for (int x = 0; x < 10; x++) {
+                fieldString += thisField[x][y].state + ";";
+            }
+        }
+
+        send("field;" + Client.current.loggedAs + ";" + fieldString);
         send("go;" + Client.current.loggedAs);
     }
 
     @Override
     protected void update() {
+        if (isGameEnd)
+            return;
+
         if (selectedShip != null && !isReady && Input.isKeyDown(KeyEvent.VK_R)) {
             if (selectedShip.rot == 0)
                 selectedShip.rot = 1;
             else
                 selectedShip.rot = 0;
+        }
+
+        boolean allReady = true;
+        for (int i = 0; i < ships.length; i++) {
+            Ship ship = ships[i];
+            if (!ship.isSetup)
+                allReady = false;
+        }
+
+        if (allReady && !isPressReady) {
+            goButton.fontColor = new Color(0, 0, 0, 255);
+            goButton.color = new Color(255, 255, 255, 255);
         }
 
         if (!isReady)
@@ -176,13 +217,17 @@ public class GameController extends Component {
     }
 
     public void setupShips() {
-
+        isGameEnd = true;
     }
 
     public void setTurn() {
         turn = true;
         thisTimer = 15;
         enemyTimer = 15;
+    }
+
+    public void end() {
+        isGameEnd = true;
     }
 
     private void send(String msg) {

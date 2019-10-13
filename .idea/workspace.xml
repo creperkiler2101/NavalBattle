@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="44843f42-e70e-484b-925b-9658016d5200" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/game/objects/Ship.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/resources/largeShip.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/resources/largestShip.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/resources/mediumShip.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/game/resources/smallShip.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/coordinator/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/coordinator/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/FieldElement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/FieldElement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/coordinator/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/coordinator/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/coordinator/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/coordinator/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/connection/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/connection/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/objects/FieldElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/FieldElement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/objects/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/controllers/GameController.java" afterDir="false" />
     </list>
@@ -18,6 +18,12 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myFlattenPackages" value="true" />
+    <option name="myAutoScrollToSource" value="true" />
+    <option name="myAutoScrollFromSource" value="true" />
+    <option name="myElementSize" value="241" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -125,6 +131,8 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/GameEngineV2_0$Game_2.ic" NAME="Game_2 Coverage Results" MODIFIED="1570897877806" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/GameEngineV2_0$Game_1.ic" NAME="Game_1 Coverage Results" MODIFIED="1571005320654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/GameEngineV2_0$Server.ic" NAME="Server Coverage Results" MODIFIED="1571005334096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/GameEngineV2_0$Game_2.ic" NAME="Game_2 Coverage Results" MODIFIED="1571005314979" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

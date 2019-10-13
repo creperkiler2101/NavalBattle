@@ -169,7 +169,7 @@ public class FieldElement extends Component {
 
     @Override
     protected void mouseUp(int button) {
-        if (state == 0 && button == 1 && !isCurrent && game.turn) {
+        if (state == 0 && button == 1 && !isCurrent && game.turn && !game.isGameEnd) {
             state = 1;
             //Send server about shot
             game.turn = false;
@@ -191,7 +191,7 @@ public class FieldElement extends Component {
                 if (x + x_ >= 10)
                     continue;
 
-                ArrayList<FieldElement> nearby = getNearby(x + x_, y);
+                ArrayList<FieldElement> nearby = getNearby(x + x_ - ship.xOffset, y - ship.yOffset);
                 for (int i = 0; i < nearby.size(); i++) {
                     FieldElement el = nearby.get(i);
 
@@ -204,7 +204,7 @@ public class FieldElement extends Component {
                 if (y + y_ >= 10)
                     continue;
 
-                ArrayList<FieldElement> nearby = getNearby(x, y + y_);
+                ArrayList<FieldElement> nearby = getNearby(x - ship.xOffset, y + y_ - ship.yOffset);
                 for (int i = 0; i < nearby.size(); i++) {
                     FieldElement el = nearby.get(i);
 
