@@ -227,17 +227,25 @@ public class Server {
                     int state = -1;
                     if (user.nickname.equals(g.playerOne.nickname)) {
                         state = g.fieldTwo[x][y];
-                        if (state == 3)
-                            g.fieldOne[x][y] = 6;
-                        sendMessage(g.playerTwo, "turn");
+                        //print(Integer.toString(g.fieldTwo[x][y]));
+                        if (state == 3) {
+                            g.fieldTwo[x][y] = 6;
+                            sendMessage(g.playerOne, "turn");
+                        }
+                        else
+                            sendMessage(g.playerTwo, "turn");
                     }
                     else {
                         state = g.fieldOne[x][y];
-                        if (state == 3)
+                        //print(Integer.toString(g.fieldOne[x][y]));
+                        if (state == 3) {
                             g.fieldOne[x][y] = 6;
-                        sendMessage(g.playerOne, "turn");
+                            sendMessage(g.playerTwo, "turn");
+                        }
+                        else
+                            sendMessage(g.playerOne, "turn");
                     }
-
+                    //print(Integer.toString(state));
                     if (state == 3)
                         state = 2;
                     else
@@ -264,12 +272,16 @@ public class Server {
                     int offset = 2;
                     int[][] field = new int[10][10];
 
+                    String fieldS = "";
                     for (int y = 0; y < 10; y++) {
                         for (int x = 0; x < 10; x++) {
                             String s = args[offset + x + y * 10];
                             field[x][y] = Integer.parseInt(s);
+                            fieldS += s;
                         }
+                        fieldS += "\n";
                     }
+                    print(fieldS);
 
                     if (user.nickname.equals(g.playerOne.nickname)) {
                         g.fieldOne = field;
