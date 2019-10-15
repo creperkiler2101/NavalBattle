@@ -56,8 +56,8 @@ public class GameController extends Component {
 
         GameObject seaBG_1 = new GameObject();
         GameObject seaBG_2 = new GameObject();
-        instantiate(seaBG_1, new Vector3(100, 1080 - 100 - 640));
-        instantiate(seaBG_2, new Vector3(1920 - 100 - 640, 1080 - 100 - 640));
+        instantiate(seaBG_1, new Vector3(100, 1080 - 250 - 640));
+        instantiate(seaBG_2, new Vector3(1920 - 100 - 640, 1080 - 250 - 640));
 
         for (int i = 0; i < 4; i++) {
             GameObject ship = new GameObject();
@@ -103,9 +103,24 @@ public class GameController extends Component {
 
         SpriteRenderer sr_1 = seaBG_1.addComponent(SpriteRenderer.class);
         sr_1.sprite = Resources.getSprite("sea");
-
         SpriteRenderer sr_2 = seaBG_2.addComponent(SpriteRenderer.class);
         sr_2.sprite = Resources.getSprite("sea");
+
+        GameObject seaBorder_1 = new GameObject();
+        GameObject seaBorder_2 = new GameObject();
+        GameObject seaBorder_3 = new GameObject();
+        instantiate(seaBorder_1, new Vector3(-10000, -10000));
+        instantiate(seaBorder_3, new Vector3(100 - 8, 1080 - 250 - 640 - 8, 1));
+        instantiate(seaBorder_2, new Vector3(1920 - 100 - 640 - 8, 1080 - 250 - 640 - 8, 1));
+
+        //Не читать тут ничего нет вобще да вам кажется да нет да
+        sr_1 = seaBorder_1.addComponent(SpriteRenderer.class);
+        sr_1.sprite = Resources.getSprite("fieldBorder");
+        //Дальше все есть
+        sr_1 = seaBorder_2.addComponent(SpriteRenderer.class);
+        sr_1.sprite = Resources.getSprite("fieldBorder");
+        sr_2 = seaBorder_3.addComponent(SpriteRenderer.class);
+        sr_2.sprite = Resources.getSprite("fieldBorder");
 
         goButton = new MyButton() {
             @Override
@@ -126,31 +141,55 @@ public class GameController extends Component {
 
         turnTimeLabel = new Label();
         turnTimeLabel.alignType = Align.LEFT_TOP;
-        turnTimeLabel.getTransform().setScale(new Vector3(1.5f, 1.5f));
+        turnTimeLabel.getTransform().setScale(new Vector3(0.8f, 0.8f));
         turnTimeLabel.font = FontLoader.getFont("default");
         turnTimeLabel.sprite = Resources.getSprite("loginPanel");
         turnTimeLabel.setTextOffset(new Vector3(100, 50));
         turnTimeLabel.fontScale = new Vector3(0.6f, 0.6f);
         turnTimeLabel.left = 100;
-        turnTimeLabel.top = 20;
+        turnTimeLabel.top = 10;
 
         enemyTurnTimeLabel = new Label();
         enemyTurnTimeLabel.alignType = Align.RIGHT_TOP;
-        enemyTurnTimeLabel.getTransform().setScale(new Vector3(1.5f, 1.5f));
+        enemyTurnTimeLabel.getTransform().setScale(new Vector3(0.8f, 0.8f));
         enemyTurnTimeLabel.font = FontLoader.getFont("default");
         enemyTurnTimeLabel.sprite = Resources.getSprite("loginPanel");
         enemyTurnTimeLabel.setTextOffset(new Vector3(100, 50));
         enemyTurnTimeLabel.fontScale = new Vector3(0.6f, 0.6f);
         enemyTurnTimeLabel.right = 100;
-        enemyTurnTimeLabel.top = 20;
+        enemyTurnTimeLabel.top = 10;
+
+        thisNickLabel = new Label();
+        thisNickLabel.alignType = Align.LEFT_TOP;
+        thisNickLabel.getTransform().setScale(new Vector3(0.8f, 0.8f));
+        thisNickLabel.font = FontLoader.getFont("default");
+        thisNickLabel.sprite = Resources.getSprite("loginPanel");
+        thisNickLabel.setTextOffset(new Vector3(100, 50));
+        thisNickLabel.fontScale = new Vector3(0.6f, 0.6f);
+        thisNickLabel.left = 54;
+        thisNickLabel.top = 50;
+        thisNickLabel.setText(Client.current.loggedAs);
+
+        enemyNickLabel = new Label();
+        enemyNickLabel.alignType = Align.RIGHT_TOP;
+        enemyNickLabel.getTransform().setScale(new Vector3(0.8f, 0.8f));
+        enemyNickLabel.font = FontLoader.getFont("default");
+        enemyNickLabel.sprite = Resources.getSprite("loginPanel");
+        enemyNickLabel.setTextOffset(new Vector3(100, 50));
+        enemyNickLabel.fontScale = new Vector3(0.6f, 0.6f);
+        enemyNickLabel.right = 54;
+        enemyNickLabel.top = 50;
+        enemyNickLabel.setText(Game.current.opponent);
 
         addGUI(goButton);
         addGUI(turnTimeLabel);
         addGUI(enemyTurnTimeLabel);
+        addGUI(thisNickLabel);
+        addGUI(enemyNickLabel);
 
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
-                Vector3 offset = new Vector3(100 + square.getImageWidth() * x, 1080 - 100 - 64 - square.getImageHeight() * y);
+                Vector3 offset = new Vector3(100 + square.getImageWidth() * x, 1080 - 250 - 64 - square.getImageHeight() * y);
 
                 GameObject gm = new GameObject();
                 instantiate(gm, offset);
@@ -166,7 +205,7 @@ public class GameController extends Component {
         }
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
-                Vector3 offset = new Vector3(1920 - 100 - 640 + square.getImageWidth() * x, 1080 - 100 - 64 - square.getImageHeight() * y);
+                Vector3 offset = new Vector3(1920 - 100 - 640 + square.getImageWidth() * x, 1080 - 250 - 64 - square.getImageHeight() * y);
 
                 GameObject gm = new GameObject();
                 instantiate(gm, offset);
@@ -238,7 +277,7 @@ public class GameController extends Component {
             enemyTimer -= 1 * Time.getDeltaTime();
         }
 
-        if (thisTimer == 0) {
+        if (thisTimer < 0) {
             next();
         }
     }

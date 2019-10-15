@@ -42,6 +42,10 @@ public class Ship extends Component {
                 getGameObject().getTransform().setRotation(new Vector3(-90, 0, 0));
             }
         }
+        else {
+            SpriteRenderer sr = getGameObject().getComponents(SpriteRenderer.class)[0];
+            sr.color = new Color(255, 255, 255, 255);
+        }
     }
 
     @Override
