@@ -36,9 +36,11 @@ public class GameController extends Component {
 
     private MyButton goButton;
     private Label timeLabel, turnTimeLabel, enemyTurnTimeLabel;
+    private Label thisNickLabel, enemyNickLabel;
 
     private float thisTimer = 15;
     private float enemyTimer = 15;
+    private float time;
 
     public Ship[] ships = new Ship[10];
     public Ship selectedShip;
@@ -50,6 +52,7 @@ public class GameController extends Component {
         current = this;
         Client.current.setTurn = this::setTurn;
         Client.current.win = this::end;
+        Client.current.gameStart = this::gameStart;
 
         GameObject seaBG_1 = new GameObject();
         GameObject seaBG_2 = new GameObject();
@@ -121,7 +124,29 @@ public class GameController extends Component {
         goButton.fontColor = new Color(0, 0, 0, 0);
         goButton.color = new Color(255, 255, 255, 0);
 
+        turnTimeLabel = new Label();
+        turnTimeLabel.alignType = Align.LEFT_TOP;
+        turnTimeLabel.getTransform().setScale(new Vector3(1.5f, 1.5f));
+        turnTimeLabel.font = FontLoader.getFont("default");
+        turnTimeLabel.sprite = Resources.getSprite("loginPanel");
+        turnTimeLabel.setTextOffset(new Vector3(100, 50));
+        turnTimeLabel.fontScale = new Vector3(0.6f, 0.6f);
+        turnTimeLabel.left = 100;
+        turnTimeLabel.top = 20;
+
+        enemyTurnTimeLabel = new Label();
+        enemyTurnTimeLabel.alignType = Align.RIGHT_TOP;
+        enemyTurnTimeLabel.getTransform().setScale(new Vector3(1.5f, 1.5f));
+        enemyTurnTimeLabel.font = FontLoader.getFont("default");
+        enemyTurnTimeLabel.sprite = Resources.getSprite("loginPanel");
+        enemyTurnTimeLabel.setTextOffset(new Vector3(100, 50));
+        enemyTurnTimeLabel.fontScale = new Vector3(0.6f, 0.6f);
+        enemyTurnTimeLabel.right = 100;
+        enemyTurnTimeLabel.top = 20;
+
         addGUI(goButton);
+        addGUI(turnTimeLabel);
+        addGUI(enemyTurnTimeLabel);
 
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
@@ -157,6 +182,10 @@ public class GameController extends Component {
         }
     }
 
+    public void gameStart() {
+        isReady = true;
+    }
+
     protected void ready() {
         goButton.fontColor = new Color(0, 0, 0, 0);
         goButton.color = new Color(0, 0, 0, 0);
@@ -174,6 +203,9 @@ public class GameController extends Component {
 
     @Override
     protected void update() {
+        turnTimeLabel.setText(thisTimer + "");
+        enemyTurnTimeLabel.setText(enemyTimer + "");
+
         if (isGameEnd)
             return;
 
@@ -213,6 +245,8 @@ public class GameController extends Component {
 
     public void next() {
         turn = false;
+        thisTimer = 15;
+        enemyTimer = 15;
         Client.current.sendMessage("next;" + Client.current.loggedAs);
     }
 

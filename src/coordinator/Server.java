@@ -211,6 +211,8 @@ public class Server {
                     print(args[1] + " loaded");
                     if (g.playerOne.isLoaded && g.playerTwo.isLoaded) {
                         int i = (int)Math.round(Math.random());
+                        sendMessage(g.playerOne, "gameStart");
+                        sendMessage(g.playerTwo, "gameStart");
                         if (i == 0)
                             sendMessage(g.playerOne, "turn");
                         else
@@ -288,6 +290,16 @@ public class Server {
                     }
                     else if (user.nickname.equals(g.playerTwo.nickname)) {
                         g.fieldTwo = field;
+                    }
+                }
+
+                if (args[0].equals("next")) {
+                    Game g = getGame(user.nickname);
+                    if (user.nickname.equals(g.playerOne.nickname)) {
+                        sendMessage(g.playerTwo, "turn");
+                    }
+                    else if (user.nickname.equals(g.playerTwo.nickname)) {
+                        sendMessage(g.playerOne, "turn");
                     }
                 }
             }
