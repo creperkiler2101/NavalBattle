@@ -12,11 +12,14 @@ import engine.core.font.FontLoader;
 import engine.ui.Align;
 import engine.ui.Label;
 import game.connection.Client;
+import game.database.Database;
+import game.database.models.Rank;
 import game.objects.FieldElement;
 import game.objects.Game;
 import game.objects.Ship;
 import game.objects.ui.MyButton;
 
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -37,6 +40,10 @@ public class GameController extends Component {
     private MyButton goButton;
     private Label timeLabel, turnTimeLabel, enemyTurnTimeLabel;
     private Label thisNickLabel, enemyNickLabel;
+    private Label winnerLabel;
+
+    //248 248
+    private Label myRankFrame, myRankImage;
 
     private float thisTimer = 15;
     private float enemyTimer = 15;
@@ -44,6 +51,8 @@ public class GameController extends Component {
 
     public Ship[] ships = new Ship[10];
     public Ship selectedShip;
+
+    SpriteRenderer sr_1, sr_2;
 
     public boolean isAllShipsReady = false;
 
@@ -117,10 +126,10 @@ public class GameController extends Component {
         sr_1 = seaBorder_1.addComponent(SpriteRenderer.class);
         sr_1.sprite = Resources.getSprite("fieldBorder");
         //Дальше все есть
-        sr_1 = seaBorder_2.addComponent(SpriteRenderer.class);
-        sr_1.sprite = Resources.getSprite("fieldBorder");
-        sr_2 = seaBorder_3.addComponent(SpriteRenderer.class);
-        sr_2.sprite = Resources.getSprite("fieldBorder");
+        this.sr_1 = seaBorder_2.addComponent(SpriteRenderer.class);
+        this.sr_1.sprite = Resources.getSprite("fieldBorder");
+        this.sr_2 = seaBorder_3.addComponent(SpriteRenderer.class);
+        this.sr_2.sprite = Resources.getSprite("fieldBorder");
 
         goButton = new MyButton() {
             @Override
@@ -159,33 +168,68 @@ public class GameController extends Component {
         enemyTurnTimeLabel.right = 100;
         enemyTurnTimeLabel.top = 10;
 
+        winnerLabel = new Label();
+        winnerLabel.alignType = Align.CENTER;
+        winnerLabel.getTransform().setScale(new Vector3(1.5f, 1.5f));
+        winnerLabel.font = FontLoader.getFont("default");
+        winnerLabel.sprite = Resources.getSprite("loginPanel");
+        winnerLabel.setTextOffset(new Vector3(100, 50));
+        winnerLabel.fontScale = new Vector3(0.6f, 0.6f);
+        winnerLabel.color = new Color(255, 255, 255, 0);
+
         thisNickLabel = new Label();
         thisNickLabel.alignType = Align.LEFT_TOP;
-        thisNickLabel.getTransform().setScale(new Vector3(0.8f, 0.8f));
+        thisNickLabel.getTransform().setScale(new Vector3(1.137f, 1.2f));
         thisNickLabel.font = FontLoader.getFont("default");
-        thisNickLabel.sprite = Resources.getSprite("loginPanel");
-        thisNickLabel.setTextOffset(new Vector3(100, 50));
-        thisNickLabel.fontScale = new Vector3(0.6f, 0.6f);
-        thisNickLabel.left = 54;
-        thisNickLabel.top = 50;
+        thisNickLabel.sprite = Resources.getSprite("EXPpanel");
+        thisNickLabel.setTextOffset(new Vector3(145, 115));
+        thisNickLabel.fontScale = new Vector3(0.5f, 0.5f);
+        thisNickLabel.left = 90;
+        thisNickLabel.top = 40;
         thisNickLabel.setText(Client.current.loggedAs);
 
         enemyNickLabel = new Label();
         enemyNickLabel.alignType = Align.RIGHT_TOP;
-        enemyNickLabel.getTransform().setScale(new Vector3(0.8f, 0.8f));
+        enemyNickLabel.getTransform().setScale(new Vector3(1.137f, 1.2f));
         enemyNickLabel.font = FontLoader.getFont("default");
-        enemyNickLabel.sprite = Resources.getSprite("loginPanel");
-        enemyNickLabel.setTextOffset(new Vector3(100, 50));
-        enemyNickLabel.fontScale = new Vector3(0.6f, 0.6f);
-        enemyNickLabel.right = 54;
-        enemyNickLabel.top = 50;
+        enemyNickLabel.sprite = Resources.getSprite("EXPpanel");
+        enemyNickLabel.setTextOffset(new Vector3(145, 115));
+        enemyNickLabel.fontScale = new Vector3(0.5f, 0.5f);
+        enemyNickLabel.right = 90;
+        enemyNickLabel.top = 40;
         enemyNickLabel.setText(Game.current.opponent);
+
+        Rank myRank = Database.getRank(Database.getPlayer(Client.current.loggedAs));
+
+        myRankFrame = new Label();
+        myRankFrame.sprite = Resources.getSprite("rangFrame");
+        myRankFrame.alignType = Align.LEFT_TOP;
+        myRankFrame.left = 110;
+        myRankFrame.top = 65;
+        myRankFrame.getTransform().setScale(new Vector3(0.5f, 0.5f));
+
+        myRankImage = new Label();
+        myRankImage.sprite = Resources.getSprite(myRank.getImage());
+        myRankImage.setText(myRank.getRangname());
+        myRankImage.alignType = Align.LEFT_TOP;
+        myRankImage.left = 110;
+        myRankImage.top = 69;
+        myRankImage.getTransform().setScale(new Vector3(0.5f, 0.5f));
+        myRankImage.setTextOffset(new Vector3(145, 80));
+        myRankImage.fontScale = new Vector3(0.3f, 0.3f);
+
+        System.out.println(myRank.getRangname());
 
         addGUI(goButton);
         addGUI(turnTimeLabel);
         addGUI(enemyTurnTimeLabel);
         addGUI(thisNickLabel);
         addGUI(enemyNickLabel);
+
+        addGUI(myRankFrame);
+        addGUI(myRankImage);
+
+        addGUI(winnerLabel);
 
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
@@ -242,8 +286,8 @@ public class GameController extends Component {
 
     @Override
     protected void update() {
-        turnTimeLabel.setText(thisTimer + "");
-        enemyTurnTimeLabel.setText(enemyTimer + "");
+        turnTimeLabel.setText(Math.floor(thisTimer) + "");
+        enemyTurnTimeLabel.setText(Math.floor(enemyTimer) + "");
 
         if (isGameEnd)
             return;
@@ -271,9 +315,13 @@ public class GameController extends Component {
             return;
 
         if (turn) {
+            sr_2.color = new Color(150, 255, 150, 255);
+            sr_1.color = new Color(255, 255, 255, 255);
             thisTimer -= 1 * Time.getDeltaTime();
         }
         else {
+            sr_2.color = new Color(255, 255, 255, 255);
+            sr_1.color = new Color(150, 255, 150, 255);
             enemyTimer -= 1 * Time.getDeltaTime();
         }
 
@@ -301,6 +349,8 @@ public class GameController extends Component {
 
     public void end() {
         isGameEnd = true;
+        winnerLabel.color = new Color(255, 255, 255, 255);
+        winnerLabel.setText(winner + " win!");
     }
 
     private void send(String msg) {

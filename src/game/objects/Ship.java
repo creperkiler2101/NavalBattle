@@ -23,8 +23,11 @@ public class Ship extends Component {
 
     @Override
     public void update() {
-        if (isSetup)
+        if (isSetup) {
+            SpriteRenderer sr = getGameObject().getComponents(SpriteRenderer.class)[0];
+            sr.color = new Color(255, 255, 255, 255);
             return;
+        }
 
         if (GameController.current.selectedShip != this && startPos != null) {
             getGameObject().getTransform().setPosition(startPos);
@@ -41,10 +44,6 @@ public class Ship extends Component {
             else {
                 getGameObject().getTransform().setRotation(new Vector3(-90, 0, 0));
             }
-        }
-        else {
-            SpriteRenderer sr = getGameObject().getComponents(SpriteRenderer.class)[0];
-            sr.color = new Color(255, 255, 255, 255);
         }
     }
 

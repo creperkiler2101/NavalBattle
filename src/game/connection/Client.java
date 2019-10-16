@@ -118,7 +118,7 @@ public class Client {
                     Application.getCurrent().setScene(MainScene.class);
                 }
 
-                if (args[0].equals("win")) {
+                if (args[0].equals("end")) {
                     if (win != null) {
                         GameController.current.winner = args[1];
                         win.run();

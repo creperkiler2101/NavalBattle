@@ -15,5 +15,6 @@
         <property name="hbm2ddl.auto">update</property>
 
         <mapping class="game.database.models.Player"/>
+        <mapping class="game.database.models.Rank"/>
     </session-factory>
 </hibernate-configuration>
