@@ -42,8 +42,8 @@ public class GameController extends Component {
     private Label thisNickLabel, enemyNickLabel;
     private Label winnerLabel;
 
-    //248 248
     private Label myRankFrame, myRankImage;
+    private Label enemyRankFrame, enemyRankImage;
 
     private float thisTimer = 15;
     private float enemyTimer = 15;
@@ -150,23 +150,23 @@ public class GameController extends Component {
 
         turnTimeLabel = new Label();
         turnTimeLabel.alignType = Align.LEFT_TOP;
-        turnTimeLabel.getTransform().setScale(new Vector3(0.8f, 0.8f));
+        turnTimeLabel.getTransform().setScale(new Vector3(0.3f, 0.3f));
         turnTimeLabel.font = FontLoader.getFont("default");
         turnTimeLabel.sprite = Resources.getSprite("loginPanel");
-        turnTimeLabel.setTextOffset(new Vector3(100, 50));
-        turnTimeLabel.fontScale = new Vector3(0.6f, 0.6f);
-        turnTimeLabel.left = 100;
-        turnTimeLabel.top = 10;
+        turnTimeLabel.setTextOffset(new Vector3(38, 23));
+        turnTimeLabel.fontScale = new Vector3(0.4f, 0.4f);
+        turnTimeLabel.left = 750;
+        turnTimeLabel.top = 150;
 
         enemyTurnTimeLabel = new Label();
         enemyTurnTimeLabel.alignType = Align.RIGHT_TOP;
-        enemyTurnTimeLabel.getTransform().setScale(new Vector3(0.8f, 0.8f));
+        enemyTurnTimeLabel.getTransform().setScale(new Vector3(0.3f, 0.3f));
         enemyTurnTimeLabel.font = FontLoader.getFont("default");
         enemyTurnTimeLabel.sprite = Resources.getSprite("loginPanel");
-        enemyTurnTimeLabel.setTextOffset(new Vector3(100, 50));
-        enemyTurnTimeLabel.fontScale = new Vector3(0.6f, 0.6f);
-        enemyTurnTimeLabel.right = 100;
-        enemyTurnTimeLabel.top = 10;
+        enemyTurnTimeLabel.setTextOffset(new Vector3(38, 23));
+        enemyTurnTimeLabel.fontScale = new Vector3(0.4f, 0.4f);
+        enemyTurnTimeLabel.right = 750;
+        enemyTurnTimeLabel.top = 150;
 
         winnerLabel = new Label();
         winnerLabel.alignType = Align.CENTER;
@@ -204,21 +204,40 @@ public class GameController extends Component {
         myRankFrame = new Label();
         myRankFrame.sprite = Resources.getSprite("rangFrame");
         myRankFrame.alignType = Align.LEFT_TOP;
-        myRankFrame.left = 110;
-        myRankFrame.top = 65;
-        myRankFrame.getTransform().setScale(new Vector3(0.5f, 0.5f));
+        myRankFrame.left = 99;
+        myRankFrame.top = 59;
+        myRankFrame.font = FontLoader.getFont("default");
+        myRankFrame.getTransform().setScale(new Vector3(0.54f, 0.54f, 1f));
+        myRankFrame.setText(myRank.getRangname());
+        myRankFrame.setTextOffset(new Vector3(136, 60));
+        myRankFrame.fontScale = new Vector3(0.3f, 0.3f, 0.3f);
 
         myRankImage = new Label();
         myRankImage.sprite = Resources.getSprite(myRank.getImage());
-        myRankImage.setText(myRank.getRangname());
         myRankImage.alignType = Align.LEFT_TOP;
-        myRankImage.left = 110;
-        myRankImage.top = 69;
-        myRankImage.getTransform().setScale(new Vector3(0.5f, 0.5f));
-        myRankImage.setTextOffset(new Vector3(145, 80));
-        myRankImage.fontScale = new Vector3(0.3f, 0.3f);
+        myRankImage.left = 99;
+        myRankImage.top = 63;
+        myRankImage.getTransform().setScale(new Vector3(0.54f, 0.545f, 1f));
 
-        System.out.println(myRank.getRangname());
+        Rank enemyRank = Database.getRank(Database.getPlayer(Game.current.opponent));
+
+        enemyRankFrame = new Label();
+        enemyRankFrame.sprite = Resources.getSprite("rangFrame");
+        enemyRankFrame.alignType = Align.RIGHT_TOP;
+        enemyRankFrame.right = 90 + 516;
+        enemyRankFrame.top = 59;
+        enemyRankFrame.font = FontLoader.getFont("default");
+        enemyRankFrame.getTransform().setScale(new Vector3(0.54f, 0.54f, 1f));
+        enemyRankFrame.setText(enemyRank.getRangname());
+        enemyRankFrame.setTextOffset(new Vector3(136, 60));
+        enemyRankFrame.fontScale = new Vector3(0.3f, 0.3f, 0.3f);
+
+        enemyRankImage = new Label();
+        enemyRankImage.sprite = Resources.getSprite(enemyRank.getImage());
+        enemyRankImage.alignType = Align.RIGHT_TOP;
+        enemyRankImage.right = 90 + 516;
+        enemyRankImage.top = 63;
+        enemyRankImage.getTransform().setScale(new Vector3(0.54f, 0.545f, 1f));
 
         addGUI(goButton);
         addGUI(turnTimeLabel);
@@ -228,6 +247,9 @@ public class GameController extends Component {
 
         addGUI(myRankFrame);
         addGUI(myRankImage);
+
+        addGUI(enemyRankFrame);
+        addGUI(enemyRankImage);
 
         addGUI(winnerLabel);
 
@@ -286,8 +308,8 @@ public class GameController extends Component {
 
     @Override
     protected void update() {
-        turnTimeLabel.setText(Math.floor(thisTimer) + "");
-        enemyTurnTimeLabel.setText(Math.floor(enemyTimer) + "");
+        turnTimeLabel.setText((int)Math.floor(thisTimer) + "");
+        enemyTurnTimeLabel.setText((int)Math.floor(enemyTimer) + "");
 
         if (isGameEnd)
             return;

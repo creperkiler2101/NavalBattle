@@ -188,7 +188,7 @@ public class FieldElement extends Component {
             }
 
             for (int x_ = 0; x_ < right; x_++) {
-                if (x + x_ >= 10)
+                if (x + x_ - ship.xOffset >= 10)
                     continue;
 
                 ArrayList<FieldElement> nearby = getNearby(x + x_ - ship.xOffset, y - ship.yOffset);
@@ -201,7 +201,7 @@ public class FieldElement extends Component {
                 }
             }
             for (int y_ = 0; y_ < down; y_++) {
-                if (y + y_ >= 10)
+                if (y + y_ - ship.yOffset >= 10)
                     continue;
 
                 ArrayList<FieldElement> nearby = getNearby(x - ship.xOffset, y + y_ - ship.yOffset);
@@ -215,23 +215,50 @@ public class FieldElement extends Component {
             }
 
             if (canSetup) {
-                this.state = 3;
+                ship.x = x;
+                ship.y = y;
+
+                Vector3 pos = getGameObject().getTransform().getPosition();
+                Vector3 placeOffset = new Vector3();
+
+                for (int i = 0; i < ship.x; i++)
+                    placeOffset.x += 64;
+                for (int i = 0; i < ship.y; i++)
+                    placeOffset.y += 64;
+
+                if (ship.rot == 1)
+                    ship.getGameObject().getTransform().setPosition(new Vector3(pos.x - ((ship.size * 64 - 64) / 2f) - placeOffset.x, pos.y - ((ship.size * 64) / 2f - 32) + placeOffset.y, pos.z));
+                else
+                    ship.getGameObject().getTransform().setPosition(new Vector3(pos.x - placeOffset.x, pos.y + placeOffset.y));
 
                 if (ship.rot == 0) {
                     for (int x = ship.x - ship.xOffset; x < ship.x - ship.xOffset + ship.size; x++) {
                         if (x < 10)
                             game.thisField[x][y].state = 3;
+                        else
+                            return;
                     }
                 }
                 if (ship.rot == 1) {
                     for (int y = ship.y - ship.yOffset; y < ship.y - ship.yOffset + ship.size; y++) {
                         if (y < 10)
                             game.thisField[x][y].state = 3;
+                        else
+                            return;
                     }
                 }
 
                 ship.isSetup = true;
                 GameController.current.selectedShip = null;
+
+                String fieldS = "";
+                for (int y = 0; y < 10; y++) {
+                    for (int x = 0; x < 10; x++) {
+                        fieldS += GameController.current.thisField[x][y].state;
+                    }
+                    fieldS += "\n";
+                }
+                System.out.println(fieldS);
             }
         }
     }
