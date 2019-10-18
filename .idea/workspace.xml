@@ -5,6 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/connection/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/connection/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/Database.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/models/Rank.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/models/Rank.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/Ship.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/Ship.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController.class" afterDir="false" />
@@ -12,6 +14,7 @@
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/largestShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/largestShip.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/mediumShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/mediumShip.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/smallShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/smallShip.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/hibernate.cfg.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ship's/Ship1.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ship's/Ship3.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ship's/ship4.png" beforeDir="false" />
