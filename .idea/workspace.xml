@@ -4,31 +4,11 @@
     <list default="true" id="44843f42-e70e-484b-925b-9658016d5200" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/connection/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/connection/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/Database.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/models/Rank.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/models/Rank.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/Ship.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/Ship.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/META-INF/GameEngineV2.0.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/FieldElement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/FieldElement.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/largeShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/largeShip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/largestShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/largestShip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/mediumShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/mediumShip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/smallShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/smallShip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ship's/Ship1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ship's/Ship3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ship's/ship4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ship's/ship5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/connection/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/connection/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/database/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/database/models/Rank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/database/models/Rank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/objects/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/Ship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/objects/FieldElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/FieldElement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/objects/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/controllers/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/resources/largeShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/resources/largeShip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/resources/largestShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/resources/largestShip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/resources/mediumShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/resources/mediumShip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/resources/smallShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/resources/smallShip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +61,6 @@
   <component name="RunManager" selected="Compound.Test">
     <configuration name="Game_1" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="11" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="game.Main" />
       <module name="GameEngineV2.0" />
       <method v="2">
@@ -90,7 +69,6 @@
     </configuration>
     <configuration name="Game_2" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="11" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="game.Main" />
       <module name="GameEngineV2.0" />
       <method v="2">
@@ -99,7 +77,6 @@
     </configuration>
     <configuration name="Server" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="11" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="coordinator.Main" />
       <module name="GameEngineV2.0" />
       <method v="2">
@@ -160,5 +137,6 @@
     <SUITE FILE_PATH="coverage/GameEngineV2_0$Server.ic" NAME="Server Coverage Results" MODIFIED="1571005334096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/GameEngineV2_0$Game_1.ic" NAME="Game_1 Coverage Results" MODIFIED="1571005320654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/GameEngineV2_0$Game_2.ic" NAME="Game_2 Coverage Results" MODIFIED="1571005314979" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj$Game_2.ic" NAME="Game_2 Coverage Results" MODIFIED="1571388110958" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
