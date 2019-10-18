@@ -22,7 +22,7 @@ public class Client {
 
     public static Client current;
 
-    public Runnable gameFounded, gameStart, gameNotStarted, setTurn, win;
+    public Runnable gameFounded, gameStart, gameNotStarted, setTurn, win, updTime;
 
     public Client(InetAddress ip, int port) {
         this.ip = ip;
@@ -111,6 +111,9 @@ public class Client {
                     else {
                         GameController.current.thisField[x][y].state = state;
                     }
+
+                    if (updTime != null)
+                        updTime.run();
                 }
 
                 if (args[0].equals("playerLeave")) {

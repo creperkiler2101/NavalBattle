@@ -62,6 +62,7 @@ public class GameController extends Component {
         Client.current.setTurn = this::setTurn;
         Client.current.win = this::end;
         Client.current.gameStart = this::gameStart;
+        Client.current.updTime = this::resetTimer;
 
         GameObject seaBG_1 = new GameObject();
         GameObject seaBG_2 = new GameObject();
@@ -153,7 +154,7 @@ public class GameController extends Component {
         turnTimeLabel.getTransform().setScale(new Vector3(0.3f, 0.3f));
         turnTimeLabel.font = FontLoader.getFont("default");
         turnTimeLabel.sprite = Resources.getSprite("loginPanel");
-        turnTimeLabel.setTextOffset(new Vector3(38, 23));
+        turnTimeLabel.setTextOffset(new Vector3(45, 23));
         turnTimeLabel.fontScale = new Vector3(0.4f, 0.4f);
         turnTimeLabel.left = 750;
         turnTimeLabel.top = 150;
@@ -163,7 +164,7 @@ public class GameController extends Component {
         enemyTurnTimeLabel.getTransform().setScale(new Vector3(0.3f, 0.3f));
         enemyTurnTimeLabel.font = FontLoader.getFont("default");
         enemyTurnTimeLabel.sprite = Resources.getSprite("loginPanel");
-        enemyTurnTimeLabel.setTextOffset(new Vector3(38, 23));
+        enemyTurnTimeLabel.setTextOffset(new Vector3(45, 23));
         enemyTurnTimeLabel.fontScale = new Vector3(0.4f, 0.4f);
         enemyTurnTimeLabel.right = 750;
         enemyTurnTimeLabel.top = 150;
@@ -239,6 +240,16 @@ public class GameController extends Component {
         enemyRankImage.top = 63;
         enemyRankImage.getTransform().setScale(new Vector3(0.54f, 0.545f, 1f));
 
+        timeLabel = new Label();
+        timeLabel.sprite = Resources.getSprite("loginPanel");
+        timeLabel.alignType = Align.TOP;
+        timeLabel.top = -20;
+        timeLabel.font = FontLoader.getFont("default");
+        timeLabel.getTransform().setScale(new Vector3(0.8f, 0.8f, 1f));
+        timeLabel.setText("00:00");
+        timeLabel.setTextOffset(new Vector3(65, 72));
+        timeLabel.fontScale = new Vector3(0.8f, 0.8f, 0.8f);
+
         addGUI(goButton);
         addGUI(turnTimeLabel);
         addGUI(enemyTurnTimeLabel);
@@ -250,6 +261,8 @@ public class GameController extends Component {
 
         addGUI(enemyRankFrame);
         addGUI(enemyRankImage);
+
+        addGUI(timeLabel);
 
         addGUI(winnerLabel);
 
@@ -306,6 +319,23 @@ public class GameController extends Component {
         send("go;" + Client.current.loggedAs);
     }
 
+    private String toTimeString(int seconds) {
+        String minutes_str = "";
+        String seconds_str = "";
+
+        int minutes = (int)Math.floor(seconds / 60f);
+        if (minutes < 10)
+            minutes_str += "0";
+        minutes_str += minutes;
+
+        seconds -= minutes * 60;
+        if (seconds < 10)
+            seconds_str += "0";
+        seconds_str += seconds;
+
+        return minutes_str + ":" + seconds_str;
+    }
+
     @Override
     protected void update() {
         turnTimeLabel.setText((int)Math.floor(thisTimer) + "");
@@ -350,6 +380,9 @@ public class GameController extends Component {
         if (thisTimer < 0) {
             next();
         }
+
+        time += 1 * Time.getDeltaTime();
+        timeLabel.setText(toTimeString((int)Math.floor(time)));
     }
 
     public void next() {
@@ -373,6 +406,11 @@ public class GameController extends Component {
         isGameEnd = true;
         winnerLabel.color = new Color(255, 255, 255, 255);
         winnerLabel.setText(winner + " win!");
+    }
+
+    public void resetTimer() {
+        thisTimer = 15;
+        enemyTimer = 15;
     }
 
     private void send(String msg) {
