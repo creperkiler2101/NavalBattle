@@ -1,35 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="44843f42-e70e-484b-925b-9658016d5200" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/connection/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/connection/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/Database.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/models/Rank.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/database/models/Rank.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/Ship.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/Ship.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/objects/controllers/GameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/largeShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/largeShip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/largestShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/largestShip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/mediumShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/mediumShip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/smallShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/game/resources/smallShip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameEngineV2.0/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameEngineV2.0/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ship's/Ship1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ship's/Ship3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ship's/ship4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ship's/ship5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/connection/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/connection/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/database/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/database/models/Rank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/database/models/Rank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/objects/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/Ship.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/objects/controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/objects/controllers/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/resources/largeShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/resources/largeShip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/resources/largestShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/resources/largestShip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/resources/mediumShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/resources/mediumShip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/game/resources/smallShip.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/resources/smallShip.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/hibernate.cfg.xml" afterDir="false" />
-    </list>
+    <list default="true" id="44843f42-e70e-484b-925b-9658016d5200" name="Default Changelist" comment="Р" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
