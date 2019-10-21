@@ -1,6 +1,8 @@
 package coordinator;
 
 import engine.base.Vector3;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 
@@ -16,7 +18,8 @@ public class Game {
     public int[][] fieldOne;
     public int[][] fieldTwo;
 
-    public ArrayList<Vector3> turns;
+    public ArrayList<Turn> turns;
+    public int time;
 
     public Game(User _1, User _2) {
         turns = new ArrayList<>();
@@ -50,5 +53,25 @@ public class Game {
         }
 
         return count == 20;
+    }
+
+    public void saveToDatabase() {
+        String json = "";
+        JSONArray turnArray = new JSONArray();
+
+        for (int i = 0; i < turns.size(); i++) {
+            Turn turn = turns.get(i);
+
+            JSONObject obj = new JSONObject();
+            obj.put("nickname", turn.nickname);
+            obj.put("x", turn.x);
+            obj.put("y", turn.y);
+            obj.put("state", turn.state);
+            obj.put("delay", turn.delay);
+
+            turnArray.add(obj);
+        }
+
+        json = turnArray.toJSONString();
     }
 }

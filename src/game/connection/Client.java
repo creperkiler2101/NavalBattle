@@ -127,6 +127,10 @@ public class Client {
                         win.run();
                     }
                 }
+
+                if (args[0].equals("getTime")) {
+                    sendMessage("time;" + loggedAs + ";" + (int)Math.floor(GameController.current.time));
+                }
             }
             catch (Exception ex) {
                 System.out.println("Error on listening >>>");

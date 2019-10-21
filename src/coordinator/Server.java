@@ -172,6 +172,9 @@ public class Server {
 
                 if (args[0].equals("search")) {
                     user.isInSearch = true;
+                    user.isReady = false;
+                    user.isInGame = false;
+                    user.isLoaded = false;
                     print(user.nickname + " start search");
                 }
 
@@ -248,6 +251,15 @@ public class Server {
                             sendMessage(g.playerOne, "turn");
                     }
                     //print(Integer.toString(state));
+
+                    Turn turn = new Turn();
+                    turn.delay = Float.parseFloat(args[4]);
+                    turn.state = state;
+                    turn.x = x;
+                    turn.y = y;
+                    turn.nickname = user.nickname;
+                    g.turns.add(turn);
+
                     if (state == 3)
                         state = 2;
                     else
@@ -257,11 +269,13 @@ public class Server {
                     {
                         sendMessage(g.playerOne, "end;" + g.playerTwo.nickname);
                         sendMessage(g.playerTwo, "end;" + g.playerTwo.nickname);
+                        sendMessage(g.playerTwo, "getTime");
                     }
                     else if (g.isAllDestroyed(g.playerTwo.nickname))
                     {
                         sendMessage(g.playerOne, "end;" + g.playerOne.nickname);
                         sendMessage(g.playerTwo, "end;" + g.playerOne.nickname);
+                        sendMessage(g.playerOne, "getTime");
                     }
 
                     sendMessage(g.playerOne, "result;" + x + ";" + y + ";" + state + ";" + user.nickname);
@@ -295,12 +309,38 @@ public class Server {
 
                 if (args[0].equals("next")) {
                     Game g = getGame(user.nickname);
+                    Turn turn = new Turn();
+                    turn.delay = 15;
+                    turn.state = -1;
+                    turn.x = -1;
+                    turn.y = -1;
+                    turn.nickname = user.nickname;
+                    g.turns.add(turn);
+
                     if (user.nickname.equals(g.playerOne.nickname)) {
                         sendMessage(g.playerTwo, "turn");
                     }
                     else if (user.nickname.equals(g.playerTwo.nickname)) {
                         sendMessage(g.playerOne, "turn");
                     }
+                }
+
+                if (args[0].equals("time")) {
+                    Game g = getGame(args[1]);
+                    if (g == null)
+                        continue;
+                    g.time = Integer.parseInt(args[2]);
+                    games.remove(g);
+
+                    g.playerOne.isLoaded = false;
+                    g.playerOne.isInGame = false;
+                    g.playerOne.isReady = false;
+
+                    g.playerTwo.isLoaded = false;
+                    g.playerTwo.isInGame = false;
+                    g.playerTwo.isReady = false;
+
+                    g.saveToDatabase();
                 }
             }
             catch (Exception ex) {

@@ -5,6 +5,7 @@ import engine.base.Component;
 import engine.base.GameObject;
 import engine.base.Vector3;
 import engine.base.components.SpriteRenderer;
+import engine.core.Application;
 import engine.core.Input;
 import engine.core.Resources;
 import engine.core.Time;
@@ -18,6 +19,7 @@ import game.objects.FieldElement;
 import game.objects.Game;
 import game.objects.Ship;
 import game.objects.ui.MyButton;
+import game.scenes.MainScene;
 
 import javax.xml.crypto.Data;
 import java.awt.*;
@@ -37,7 +39,7 @@ public class GameController extends Component {
 
     private Texture square = Resources.getSprite("white");
 
-    private MyButton goButton;
+    private MyButton goButton, exitButton;
     private Label timeLabel, turnTimeLabel, enemyTurnTimeLabel;
     private Label thisNickLabel, enemyNickLabel;
     private Label winnerLabel;
@@ -45,9 +47,9 @@ public class GameController extends Component {
     private Label myRankFrame, myRankImage;
     private Label enemyRankFrame, enemyRankImage;
 
-    private float thisTimer = 15;
-    private float enemyTimer = 15;
-    private float time;
+    public float thisTimer = 15;
+    public float enemyTimer = 15;
+    public float time;
 
     public Ship[] ships = new Ship[10];
     public Ship selectedShip;
@@ -63,6 +65,10 @@ public class GameController extends Component {
         Client.current.win = this::end;
         Client.current.gameStart = this::gameStart;
         Client.current.updTime = this::resetTimer;
+
+        SpriteRenderer sr_ = getGameObject().addComponent(SpriteRenderer.class);
+        sr_.sprite = Resources.getSprite("seaBackground1");
+        getGameObject().getTransform().setScale(new Vector3(2.6f,2.6f));
 
         GameObject seaBG_1 = new GameObject();
         GameObject seaBG_2 = new GameObject();
@@ -135,12 +141,13 @@ public class GameController extends Component {
         goButton = new MyButton() {
             @Override
             public void mouseUp(int button) {
-                if (button == 1) {
+                if (button == 1 && isActive) {
                     ready();
                 }
             }
         };
         goButton.alignType = Align.CENTER;
+        goButton.isActive = false;
         goButton.getTransform().setScale(new Vector3(1.5f, 1.5f));
         goButton.setText("go!");
         goButton.font = FontLoader.getFont("default");
@@ -148,6 +155,24 @@ public class GameController extends Component {
         goButton.fontScale = new Vector3(0.6f, 0.6f);
         goButton.fontColor = new Color(0, 0, 0, 0);
         goButton.color = new Color(255, 255, 255, 0);
+
+        exitButton = new MyButton() {
+            @Override
+            public void mouseUp(int button) {
+                if (button == 1 && isActive) {
+                    exitGame();
+                }
+            }
+        };
+        exitButton.alignType = Align.CENTER;
+        exitButton.getTransform().setScale(new Vector3(1.2f, 1.2f));
+        exitButton.setText("exit");
+        exitButton.font = FontLoader.getFont("default");
+        exitButton.setTextOffset(new Vector3(100, 20));
+        exitButton.fontScale = new Vector3(0.6f, 0.6f);
+        exitButton.fontColor = new Color(0, 0, 0, 0);
+        exitButton.color = new Color(255, 255, 255, 0);
+        exitButton.isActive = false;
 
         turnTimeLabel = new Label();
         turnTimeLabel.alignType = Align.LEFT_TOP;
@@ -265,6 +290,7 @@ public class GameController extends Component {
         addGUI(timeLabel);
 
         addGUI(winnerLabel);
+        addGUI(exitButton);
 
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
@@ -359,6 +385,7 @@ public class GameController extends Component {
         }
 
         if (allReady && !isPressReady) {
+            goButton.isActive = true;
             goButton.fontColor = new Color(0, 0, 0, 255);
             goButton.color = new Color(255, 255, 255, 255);
         }
@@ -366,6 +393,7 @@ public class GameController extends Component {
         if (!isReady)
             return;
 
+        goButton.isActive = false;
         if (turn) {
             sr_2.color = new Color(150, 255, 150, 255);
             sr_1.color = new Color(255, 255, 255, 255);
@@ -404,6 +432,9 @@ public class GameController extends Component {
 
     public void end() {
         isGameEnd = true;
+        exitButton.isActive = true;
+        exitButton.color = new Color(255, 255, 255, 255);
+        exitButton.fontColor = new Color(0,0, 0, 255);
         winnerLabel.color = new Color(255, 255, 255, 255);
         winnerLabel.setText(winner + " win!");
     }
@@ -411,6 +442,12 @@ public class GameController extends Component {
     public void resetTimer() {
         thisTimer = 15;
         enemyTimer = 15;
+    }
+
+    public void exitGame() {
+        Game.current = null;
+        GameController.current = null;
+        Application.getCurrent().setScene(MainScene.class);
     }
 
     private void send(String msg) {

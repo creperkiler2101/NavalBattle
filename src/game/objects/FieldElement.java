@@ -173,7 +173,8 @@ public class FieldElement extends Component {
             state = 1;
             //Send server about shot
             game.turn = false;
-            Client.current.sendMessage("shot;" + Client.current.loggedAs + ";" + x + ";" + y);
+            float timer = 15 - game.thisTimer;
+            Client.current.sendMessage("shot;" + Client.current.loggedAs + ";" + x + ";" + y + ";" + timer);
         }
         else if (state == 0 && button == 1 && isCurrent && !game.isAllShipsReady && ship != null) {
             boolean canSetup = true;
