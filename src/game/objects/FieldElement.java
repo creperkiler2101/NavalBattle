@@ -51,7 +51,7 @@ public class FieldElement extends Component {
         Vector3 placeOffset = new Vector3();
         int xOffset = 0;
         int yOffset = 0;
-        boolean canSetup = true;
+
         if (ship.rot == 0) {
             for (int i = 0; i < ship.size; i++) {
                 if (x + i >= 10)
@@ -71,17 +71,15 @@ public class FieldElement extends Component {
             }
         }
 
-        if (canSetup) {
-            Vector3 pos = getGameObject().getTransform().getPosition();
-            ship.xOffset = xOffset;
-            ship.yOffset = yOffset;
-            ship.x = x;
-            ship.y = y;
-            if (ship.rot == 1)
-                ship.getGameObject().getTransform().setPosition(new Vector3(pos.x - ((ship.size * 64 - 64) / 2f) - placeOffset.x, pos.y - ((ship.size * 64) / 2f - 32) + placeOffset.y, pos.z));
-            else
-                ship.getGameObject().getTransform().setPosition(new Vector3(pos.x - placeOffset.x, pos.y + placeOffset.y));
-        }
+        Vector3 pos = getGameObject().getTransform().getPosition();
+        ship.xOffset = xOffset;
+        ship.yOffset = yOffset;
+        ship.x = x;
+        ship.y = y;
+        if (ship.rot == 1)
+            ship.getGameObject().getTransform().setPosition(new Vector3(pos.x - ((ship.size * 64 - 64) / 2f) - placeOffset.x, pos.y - ((ship.size * 64) / 2f - 32) + placeOffset.y, pos.z));
+        else
+            ship.getGameObject().getTransform().setPosition(new Vector3(pos.x - placeOffset.x, pos.y + placeOffset.y));
     }
 
     public Ship ship;

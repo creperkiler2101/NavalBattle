@@ -47,7 +47,7 @@ public class Rank {
 
     @Override
     public String toString() {
-        return "player{" +
+        return "rang{" +
                 "id=" + id +
                 ", rangname='" + rangname + '\'' +
                 ", image='" + image + '\'' +

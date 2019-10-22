@@ -378,10 +378,12 @@ public class GameController extends Component {
         }
 
         boolean allReady = true;
-        for (int i = 0; i < ships.length; i++) {
-            Ship ship = ships[i];
-            if (!ship.isSetup)
-                allReady = false;
+        if (!isReady) {
+            for (int i = 0; i < ships.length; i++) {
+                Ship ship = ships[i];
+                if (!ship.isSetup)
+                    allReady = false;
+            }
         }
 
         if (allReady && !isPressReady) {

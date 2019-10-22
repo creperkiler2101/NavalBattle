@@ -1,9 +1,13 @@
 package coordinator;
 
 import engine.base.Vector3;
+import game.database.Database;
+import game.database.models.Player;
+import org.hibernate.Session;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
 public class Game {
@@ -14,6 +18,7 @@ public class Game {
 
     public User playerOne;
     public User playerTwo;
+    public User winner;
 
     public int[][] fieldOne;
     public int[][] fieldTwo;
@@ -73,5 +78,49 @@ public class Game {
         }
 
         json = turnArray.toJSONString();
+
+        try (Session session = Database.getSession()) {
+            session.beginTransaction();
+
+            game.database.models.Game game = new game.database.models.Game();
+            game.setGameLength(time);
+            game.setPlayerOne(playerOne.nickname);
+            game.setPlayerTwo(playerTwo.nickname);
+            game.setWinner(winner.nickname);
+            game.setJsonTurns(json);
+
+            session.save(game);
+
+            User loser = null;
+            if (winner.nickname.equals(playerOne.nickname))
+                loser = playerTwo;
+            else
+                loser = playerOne;
+
+            Player winnerP = Database.getPlayer(winner.nickname);
+            Player loserP = Database.getPlayer(loser.nickname);
+
+            winnerP.setExperience(winnerP.getExperience() + 100);
+
+            int exp = loserP.getExperience();
+            exp -= 100;
+            if (exp < 0)
+                exp = 0;
+            loserP.setExperience(exp);
+
+            loserP.setLoses(loserP.getLoses() + 1);
+            loserP.setGameCount(loserP.getGameCount() + 1);
+
+            winnerP.setWins(winnerP.getWins() + 1);
+            winnerP.setGameCount(winnerP.getGameCount() + 1);
+
+            session.update(loserP);
+            session.update(winnerP);
+
+            session.getTransaction().commit();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

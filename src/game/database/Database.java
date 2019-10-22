@@ -79,7 +79,7 @@ public class Database {
             Rank r = list.get(0);
             for (int i = 1; i < list.size(); i++) {
                 Rank rank = list.get(i);
-                if (p.getExperience() > rank.getExperience())
+                if (p.getExperience() >= rank.getExperience())
                     r = rank;
             }
             return r;

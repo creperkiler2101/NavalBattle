@@ -19,7 +19,8 @@ import java.net.InetAddress;
 
 public class Main {
     public static void main(String[] args) {
-        Database.getSession();
+        Session s = Database.getSession();
+        s.close();
 
         Application app = new Application() {
             @Override
