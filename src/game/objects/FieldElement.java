@@ -86,6 +86,9 @@ public class FieldElement extends Component {
 
     @Override
     protected void mouseEnter() {
+        if (game == null)
+            return;
+
         overlaySprite.color = new Color(255, 255, 255, 150);
         if (game.selectedShip != null) {
             this.ship = game.selectedShip;
@@ -167,6 +170,9 @@ public class FieldElement extends Component {
 
     @Override
     protected void mouseUp(int button) {
+        if (game == null)
+            return;
+
         if (state == 0 && button == 1 && !isCurrent && game.turn && !game.isGameEnd) {
             state = 1;
             //Send server about shot
