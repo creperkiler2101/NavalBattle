@@ -267,12 +267,14 @@ public class Server {
 
                     if (g.isAllDestroyed(g.playerOne.nickname))
                     {
+                        g.winner = g.playerTwo;
                         sendMessage(g.playerOne, "end;" + g.playerTwo.nickname);
                         sendMessage(g.playerTwo, "end;" + g.playerTwo.nickname);
                         sendMessage(g.playerTwo, "getTime");
                     }
                     else if (g.isAllDestroyed(g.playerTwo.nickname))
                     {
+                        g.winner = g.playerOne;
                         sendMessage(g.playerOne, "end;" + g.playerOne.nickname);
                         sendMessage(g.playerTwo, "end;" + g.playerOne.nickname);
                         sendMessage(g.playerOne, "getTime");

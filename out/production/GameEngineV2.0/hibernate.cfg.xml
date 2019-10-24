@@ -16,5 +16,6 @@
 
         <mapping class="game.database.models.Player"/>
         <mapping class="game.database.models.Rank"/>
+        <mapping class="game.database.models.Game"/>
     </session-factory>
 </hibernate-configuration>

@@ -21,25 +21,23 @@ import game.objects.Ship;
 import game.objects.ui.MyButton;
 import game.scenes.MainScene;
 
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class GameController extends Component {
+public class ReplayController extends Component {
     public FieldElement[][] thisField = new FieldElement[10][10];
     public FieldElement[][] opponentField = new FieldElement[10][10];
     public boolean turn = false;
     public boolean isReady = false;
-    public boolean isPressReady = false;
     public boolean isGameEnd = false;
 
     public String winner = null;
 
-    public static GameController current;
+    public static ReplayController current;
 
     private Texture square = Resources.getSprite("white");
 
-    private MyButton goButton, exitButton;
+    private MyButton exitButton;
     private Label timeLabel, turnTimeLabel, enemyTurnTimeLabel;
     private Label thisNickLabel, enemyNickLabel;
     private Label winnerLabel;
@@ -51,12 +49,7 @@ public class GameController extends Component {
     public float enemyTimer = 15;
     public float time;
 
-    public Ship[] ships = new Ship[10];
-    public Ship selectedShip;
-
     SpriteRenderer sr_1, sr_2;
-
-    public boolean isAllShipsReady = false;
 
     @Override
     protected void start() {
@@ -74,48 +67,6 @@ public class GameController extends Component {
         GameObject seaBG_2 = new GameObject();
         instantiate(seaBG_1, new Vector3(100, 1080 - 250 - 640));
         instantiate(seaBG_2, new Vector3(1920 - 100 - 640, 1080 - 250 - 640));
-
-        for (int i = 0; i < 4; i++) {
-            GameObject ship = new GameObject();
-            instantiate(ship, new Vector3(10 + 74 * i, 10));
-            SpriteRenderer sr = ship.addComponent(SpriteRenderer.class);
-            sr.sprite = Resources.getSprite("smallShip");
-            Ship comp = ship.addComponent(Ship.class);
-            comp.size = 1;
-            comp.startPos =  new Vector3(10 + 74 * i, 10);
-            ships[i] = comp;
-        }
-
-        for (int i = 0; i < 3; i++) {
-            GameObject ship = new GameObject();
-            instantiate(ship, new Vector3(10 + 138 * i, 20 + 64));
-            SpriteRenderer sr = ship.addComponent(SpriteRenderer.class);
-            sr.sprite = Resources.getSprite("mediumShip");
-            Ship comp = ship.addComponent(Ship.class);
-            comp.size = 2;
-            comp.startPos = new Vector3(10 + 138 * i, 20 + 64);
-            ships[i + 4] = comp;
-        }
-
-        for (int i = 0; i < 2; i++) {
-            GameObject ship = new GameObject();
-            instantiate(ship, new Vector3(400 + 202 * i, 20 + 64));
-            SpriteRenderer sr = ship.addComponent(SpriteRenderer.class);
-            sr.sprite = Resources.getSprite("largeShip");
-            Ship comp = ship.addComponent(Ship.class);
-            comp.size = 3;
-            comp.startPos = new Vector3(400 + 202 * i, 20 + 64);
-            ships[i + 7] = comp;
-        }
-
-        GameObject ship = new GameObject();
-        instantiate(ship, new Vector3(400, 10));
-        SpriteRenderer sr = ship.addComponent(SpriteRenderer.class);
-        sr.sprite = Resources.getSprite("largestShip");
-        Ship comp = ship.addComponent(Ship.class);
-        comp.size = 4;
-        comp.startPos = new Vector3(400, 10);
-        ships[9] = comp;
 
         SpriteRenderer sr_1 = seaBG_1.addComponent(SpriteRenderer.class);
         sr_1.sprite = Resources.getSprite("sea");
@@ -138,24 +89,6 @@ public class GameController extends Component {
         this.sr_2 = seaBorder_3.addComponent(SpriteRenderer.class);
         this.sr_2.sprite = Resources.getSprite("fieldBorder");
 
-        goButton = new MyButton() {
-            @Override
-            public void mouseUp(int button) {
-                if (button == 1 && isActive) {
-                    ready();
-                }
-            }
-        };
-        goButton.alignType = Align.CENTER;
-        goButton.isActive = false;
-        goButton.getTransform().setScale(new Vector3(1.5f, 1.5f));
-        goButton.setText("go!");
-        goButton.font = FontLoader.getFont("default");
-        goButton.setTextOffset(new Vector3(100, 20));
-        goButton.fontScale = new Vector3(0.6f, 0.6f);
-        goButton.fontColor = new Color(0, 0, 0, 0);
-        goButton.color = new Color(255, 255, 255, 0);
-
         exitButton = new MyButton() {
             @Override
             public void mouseUp(int button) {
@@ -170,8 +103,6 @@ public class GameController extends Component {
         exitButton.font = FontLoader.getFont("default");
         exitButton.setTextOffset(new Vector3(100, 20));
         exitButton.fontScale = new Vector3(0.6f, 0.6f);
-        exitButton.fontColor = new Color(0, 0, 0, 0);
-        exitButton.color = new Color(255, 255, 255, 0);
         exitButton.isActive = false;
 
         turnTimeLabel = new Label();
@@ -275,7 +206,6 @@ public class GameController extends Component {
         timeLabel.setTextOffset(new Vector3(65, 72));
         timeLabel.fontScale = new Vector3(0.8f, 0.8f, 0.8f);
 
-        addGUI(goButton);
         addGUI(turnTimeLabel);
         addGUI(enemyTurnTimeLabel);
         addGUI(thisNickLabel);
@@ -300,7 +230,6 @@ public class GameController extends Component {
                 instantiate(gm, offset);
 
                 FieldElement element = gm.addComponent(FieldElement.class);
-                element.game = this;
                 element.x = x;
                 element.y = y;
                 element.isCurrent = true;
@@ -316,7 +245,6 @@ public class GameController extends Component {
                 instantiate(gm, offset);
 
                 FieldElement element = gm.addComponent(FieldElement.class);
-                element.game = this;
                 element.x = x;
                 element.y = y;
                 element.isCurrent = false;
@@ -328,21 +256,6 @@ public class GameController extends Component {
 
     public void gameStart() {
         isReady = true;
-    }
-
-    protected void ready() {
-        goButton.fontColor = new Color(0, 0, 0, 0);
-        goButton.color = new Color(0, 0, 0, 0);
-        isPressReady = true;
-        String fieldString = "";
-        for (int y = 0; y < 10; y++) {
-            for (int x = 0; x < 10; x++) {
-                fieldString += thisField[x][y].state + ";";
-            }
-        }
-
-        send("field;" + Client.current.loggedAs + ";" + fieldString);
-        send("go;" + Client.current.loggedAs);
     }
 
     private String toTimeString(int seconds) {
@@ -370,32 +283,9 @@ public class GameController extends Component {
         if (isGameEnd)
             return;
 
-        if (selectedShip != null && !isReady && Input.isKeyDown(KeyEvent.VK_R)) {
-            if (selectedShip.rot == 0)
-                selectedShip.rot = 1;
-            else
-                selectedShip.rot = 0;
-        }
-
-        boolean allReady = true;
-        if (!isReady) {
-            for (int i = 0; i < ships.length; i++) {
-                Ship ship = ships[i];
-                if (!ship.isSetup)
-                    allReady = false;
-            }
-        }
-
-        if (allReady && !isPressReady) {
-            goButton.isActive = true;
-            goButton.fontColor = new Color(0, 0, 0, 255);
-            goButton.color = new Color(255, 255, 255, 255);
-        }
-
         if (!isReady)
             return;
 
-        goButton.isActive = false;
         if (turn) {
             sr_2.color = new Color(150, 255, 150, 255);
             sr_1.color = new Color(255, 255, 255, 255);
@@ -422,10 +312,6 @@ public class GameController extends Component {
         Client.current.sendMessage("next;" + Client.current.loggedAs);
     }
 
-    public void setupShips() {
-        isGameEnd = true;
-    }
-
     public void setTurn() {
         turn = true;
         thisTimer = 15;
@@ -448,7 +334,7 @@ public class GameController extends Component {
 
     public void exitGame() {
         Game.current = null;
-        GameController.current = null;
+        ReplayController.current = null;
         Application.getCurrent().setScene(MainScene.class);
     }
 

@@ -171,6 +171,7 @@ public class MainController extends Component {
 
     @Override
     protected void update() {
+        System.out.println(Time.getFps());
         if (isInSearch) {
             searchTime += 1 * Time.getDeltaTime();
             searchTimeLabel.setText(toTimeString((int) Math.floor(searchTime)));

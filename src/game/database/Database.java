@@ -31,13 +31,14 @@ public class Database {
     }
 
     public static boolean isPlayerExists(String nickname) {
+        Player p = null;
+
         try (Session session = getSession()) {
             session.beginTransaction();
 
             Query query = session.createQuery("FROM player");
             List<Player> list = (List<Player>)query.list();
 
-            Player p = null;
             for (int i = 0; i < list.size(); i++) {
                 Player p_ = list.get(i);
                 if (p_.getNickname().equals(nickname)) {
@@ -45,18 +46,20 @@ public class Database {
                     break;
                 }
             }
-            return p != null;
         }
+
+        return p != null;
     }
 
     public static Player getPlayer(String nickname) {
+        Player p = null;
         try (Session session = getSession()) {
             session.beginTransaction();
 
             Query query = session.createQuery("FROM player");
             List<Player> list = (List<Player>)query.list();
 
-            Player p = null;
+
             for (int i = 0; i < list.size(); i++) {
                 Player p_ = list.get(i);
                 if (p_.getNickname().equals(nickname)) {
@@ -64,36 +67,39 @@ public class Database {
                     break;
                 }
             }
-
-            return p;
         }
+
+        return p;
     }
 
     public static Rank getRank(Player p) {
+        Rank r = null;
+
         try (Session session = getSession()) {
             session.beginTransaction();
 
             Query query = session.createQuery("FROM rang");
             List<Rank> list = (List<Rank>)query.list();
 
-            Rank r = list.get(0);
+            r = list.get(0);
             for (int i = 1; i < list.size(); i++) {
                 Rank rank = list.get(i);
-                if (p.getExperience() > rank.getExperience())
+                if (p.getExperience() >= rank.getExperience())
                     r = rank;
             }
-            return r;
         }
+
+        return r;
     }
 
     public static boolean logIn(String nickname, String password) {
+        Player p = null;
         try (Session session = getSession()) {
             session.beginTransaction();
 
             Query query = session.createQuery("FROM player");
             List<Player> list = (List<Player>)query.list();
 
-            Player p = null;
             for (int i = 0; i < list.size(); i++) {
                 Player p_ = list.get(i);
                 if (p_.getNickname().equals(nickname)) {
@@ -103,8 +109,8 @@ public class Database {
                     }
                 }
             }
-
-            return p != null;
         }
+
+        return p != null;
     }
 }
