@@ -11,6 +11,9 @@ import engine.ui.Align;
 import engine.ui.Button;
 import engine.ui.Label;
 import game.connection.Client;
+import game.database.Database;
+import game.database.models.Player;
+import game.database.models.Rank;
 import game.objects.Game;
 import game.objects.ui.MyButton;
 import game.scenes.GameScene;
@@ -19,11 +22,15 @@ import game.scenes.LoginScene;
 import java.awt.*;
 
 public class MainController extends Component {
-    private Label mainPanel, profilePanel, profileFrame, profileImage, expBar, expBarFill, searchTimeLabel;
+    private Label mainPanel, searchTimeLabel;
     private MyButton searchButton, exitButton, exitToWindowsButton;
 
     private Label readyPanel;
     private MyButton acceptButton, declineButton;
+
+    private Label thisNickLabel;
+    private Label myRankFrame, myRankImage;
+    private Label expFrame, expBar, expBg;
 
     public float searchTime;
     public boolean isInSearch;
@@ -154,6 +161,69 @@ public class MainController extends Component {
         readyPanel.setText("game ready!");
         readyPanel.getTransform().setScale(new Vector3(1.5f, 1.5f));
         hideReady();
+
+        thisNickLabel = new Label();
+        thisNickLabel.alignType = Align.LEFT_TOP;
+        thisNickLabel.getTransform().setScale(new Vector3(1.137f, 1.2f));
+        thisNickLabel.font = FontLoader.getFont("default");
+        thisNickLabel.sprite = Resources.getSprite("EXPpanel");
+        thisNickLabel.setTextOffset(new Vector3(145, 115));
+        thisNickLabel.fontScale = new Vector3(0.5f, 0.5f);
+        thisNickLabel.left = 90 + 1000;
+        thisNickLabel.top = 40 + 100;
+        thisNickLabel.setText(Client.current.loggedAs);
+
+        Rank myRank = Database.getRank(Database.getPlayer(Client.current.loggedAs));
+
+        myRankFrame = new Label();
+        myRankFrame.sprite = Resources.getSprite("rangFrame");
+        myRankFrame.alignType = Align.LEFT_TOP;
+        myRankFrame.left = 99 + 1000;
+        myRankFrame.top = 59 + 100;
+        myRankFrame.font = FontLoader.getFont("default");
+        myRankFrame.getTransform().setScale(new Vector3(0.54f, 0.54f, 1f));
+        myRankFrame.setText(myRank.getRangname());
+        myRankFrame.setTextOffset(new Vector3(136, 60));
+        myRankFrame.fontScale = new Vector3(0.3f, 0.3f, 0.3f);
+
+        myRankImage = new Label();
+        myRankImage.sprite = Resources.getSprite(myRank.getImage());
+        myRankImage.alignType = Align.LEFT_TOP;
+        myRankImage.left = 99 + 1000;
+        myRankImage.top = 63 + 100;
+        myRankImage.getTransform().setScale(new Vector3(0.54f, 0.545f, 1f));
+
+        Player p = Database.getPlayer(Client.current.loggedAs);
+        Rank next = Database.getNextRank(p);
+
+        expBar = new Label();
+        expBar.sprite = Resources.getSprite("expbar");
+        expBar.alignType = Align.LEFT_TOP;
+        expBar.left = 209 + 1000 + 30;
+        expBar.top = 54 + 100 + 110;
+        expBar.getTransform().setScale(new Vector3(1f, 1f, 1f));
+        expBar.font = FontLoader.getFont("default");
+        expBar.setText((p.getExperience() - myRank.getExperience()) + " / " + (next.getExperience() - myRank.getExperience()));
+        expBar.fontScale = new Vector3(0.3f, 0.3f, 0.3f);
+        expBar.setTextOffset(new Vector3(40, 3));
+        expBar.fontColor = new Color(255, 255, 255);
+
+        expBg = new Label();
+        expBg.sprite = Resources.getSprite("expbarbg");
+        expBg.alignType = Align.LEFT_TOP;
+        expBg.left = 200 + 1000 + 30;
+        expBg.top = 50 + 100 + 110;
+        expBg.getTransform().setScale(new Vector3(1f, 1f, 1f));
+
+        float scale = 1f * (((float)p.getExperience() - myRank.getExperience()) / ((float)next.getExperience() - myRank.getExperience()));
+        expBar.getTransform().setScale(new Vector3(scale, 1f, 1f));
+
+        addGUI(thisNickLabel);
+        addGUI(myRankImage);
+        addGUI(myRankFrame);
+
+        addGUI(expBg);
+        addGUI(expBar);
 
         addGUI(mainPanel);
         addGUI(exitButton);

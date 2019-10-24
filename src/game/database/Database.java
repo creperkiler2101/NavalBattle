@@ -92,6 +92,30 @@ public class Database {
         return r;
     }
 
+    public static Rank getNextRank(Player p) {
+        Rank r = null;
+
+        try (Session session = getSession()) {
+            session.beginTransaction();
+
+            Query query = session.createQuery("FROM rang");
+            List<Rank> list = (List<Rank>)query.list();
+
+            r = list.get(0);
+            for (int i = 1; i < list.size(); i++) {
+                Rank rank = list.get(i);
+                if (p.getExperience() >= rank.getExperience()) {
+                    if (i != list.size() - 1)
+                        r = list.get(i + 1);
+                    else
+                        r = rank;
+                }
+            }
+        }
+
+        return r;
+    }
+
     public static boolean logIn(String nickname, String password) {
         Player p = null;
         try (Session session = getSession()) {
