@@ -1,6 +1,7 @@
 package game.database;
 
 import com.fasterxml.classmate.AnnotationConfiguration;
+import game.database.models.Game;
 import game.database.models.Player;
 import game.database.models.Rank;
 import org.hibernate.*;
@@ -9,6 +10,7 @@ import org.hibernate.query.Query;
 
 import javax.xml.crypto.Data;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
@@ -49,6 +51,63 @@ public class Database {
         }
 
         return p != null;
+    }
+
+    public static Game getGame(int id) {
+        Game p = null;
+        try (Session session = getSession()) {
+            session.beginTransaction();
+
+            Query query = session.createQuery("FROM game");
+            List<Game> list = (List<Game>)query.list();
+
+
+            for (int i = 0; i < list.size(); i++) {
+                Game p_ = list.get(i);
+                if (p_.getId() == id) {
+                    p = p_;
+                    break;
+                }
+            }
+        }
+
+        return p;
+    }
+
+    public static ArrayList<Game> getGames() {
+        ArrayList<Game> games = new ArrayList<>();
+        try (Session session = getSession()) {
+            session.beginTransaction();
+
+            Query query = session.createQuery("FROM game");
+            List<Game> list = (List<Game>)query.list();
+
+            for (int i = 0; i < list.size(); i++) {
+                Game p_ = list.get(i);
+                games.add(p_);
+            }
+        }
+
+        return games;
+    }
+
+    public static ArrayList<Game> getGames(String nickname) {
+        ArrayList<Game> games = new ArrayList<>();
+        try (Session session = getSession()) {
+            session.beginTransaction();
+
+            Query query = session.createQuery("FROM game");
+            List<Game> list = (List<Game>)query.list();
+
+            for (int i = 0; i < list.size(); i++) {
+                Game p_ = list.get(i);
+                if (p_.getPlayerOne().equals(nickname) || p_.getPlayerTwo().equals(nickname)) {
+                    games.add(p_);
+                }
+            }
+        }
+
+        return games;
     }
 
     public static Player getPlayer(String nickname) {

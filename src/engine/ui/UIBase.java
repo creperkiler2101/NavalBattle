@@ -80,54 +80,54 @@ public class UIBase {
 
         switch(alignType) {
             case CENTER:
-                position.x = winWidth / 2;
-                position.y = winHeight / 2;
+                position.x += winWidth / 2;
+                position.y += winHeight / 2;
                 position.x += left - sWidth * scale.x / 2;
                 position.y += bottom - sHeight * scale.y / 2;
                 break;
             case LEFT:
-                position.y = winHeight / 2 - sHeight * scale.y / 2;
-                position.x = left;
+                position.y += winHeight / 2 - sHeight * scale.y / 2;
+                position.x += left;
                 position.y += bottom;
                 break;
             case LEFT_BOTTOM:
-                position.x = 0;
-                position.y = 0;
+                position.x += 0;
+                position.y += 0;
                 position.x += left;
                 position.y += bottom;
                 break;
             case LEFT_TOP:
-                position.x = 0;
-                position.y = winHeight;
+                position.x += 0;
+                position.y += winHeight;
                 position.x += left;
                 position.y -= top + sHeight * scale.y;
                 break;
             case RIGHT:
-                position.y = winHeight / 2 - sHeight * scale.y / 2;
-                position.x = winWidth - right - sWidth * scale.x;
+                position.y += winHeight / 2 - sHeight * scale.y / 2;
+                position.x += winWidth - right - sWidth * scale.x;
                 position.y += bottom;
                 break;
             case RIGHT_BOTTOM:
-                position.x = winWidth - sWidth * scale.x;
-                position.y = 0;
+                position.x += winWidth - sWidth * scale.x;
+                position.y += 0;
                 position.x -= right;
                 position.y += bottom;
                 break;
             case RIGHT_TOP:
-                position.x = winWidth - sWidth * scale.x;
-                position.y = winHeight;
+                position.x += winWidth - sWidth * scale.x;
+                position.y += winHeight;
                 position.x -= right;
                 position.y -= top + sHeight * scale.y;
                 break;
             case TOP:
-                position.x = winWidth / 2;
-                position.y = winHeight;
+                position.x += winWidth / 2;
+                position.y += winHeight;
                 position.x += left - sWidth * scale.x / 2;
                 position.y -= top + sHeight * scale.y;
                 break;
             case BOTTOM:
-                position.x = winWidth / 2;
-                position.y = 0;
+                position.x += winWidth / 2;
+                position.y += 0;
                 position.x += left - sWidth * scale.x / 2;
                 position.y -= bottom;
                 break;

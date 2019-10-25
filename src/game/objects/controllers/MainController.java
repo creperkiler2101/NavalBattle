@@ -15,15 +15,19 @@ import game.database.Database;
 import game.database.models.Player;
 import game.database.models.Rank;
 import game.objects.Game;
+import game.objects.ReplayGame;
 import game.objects.ui.MyButton;
 import game.scenes.GameScene;
 import game.scenes.LoginScene;
+import game.scenes.ReplayListScene;
+import game.scenes.ReplayScene;
 
+import javax.xml.crypto.Data;
 import java.awt.*;
 
 public class MainController extends Component {
     private Label mainPanel, searchTimeLabel;
-    private MyButton searchButton, exitButton, exitToWindowsButton;
+    private MyButton searchButton, exitButton, exitToWindowsButton, replayButton;
 
     private Label readyPanel;
     private MyButton acceptButton, declineButton;
@@ -87,6 +91,26 @@ public class MainController extends Component {
         searchButton.font = FontLoader.getFont("default");
         searchButton.setTextOffset(new Vector3(58, 54));
         searchButton.fontScale = new Vector3(0.6f, 0.6f);
+
+
+        replayButton = new MyButton() {
+            @Override
+            public void mouseUp(int button) {
+                super.mouseUp(button);
+                if (button == 1 && isActive) {
+                    endSearch();
+                    Application.getCurrent().setScene(ReplayListScene.class);
+                }
+            }
+        };
+        replayButton.alignType = Align.LEFT;
+        replayButton.bottom = 20;
+        replayButton.left = 140;
+        replayButton.getTransform().setScale(new Vector3(2.4f, 2.4f));
+        replayButton.setText("Replays");
+        replayButton.font = FontLoader.getFont("default");
+        replayButton.setTextOffset(new Vector3(58, 54));
+        replayButton.fontScale = new Vector3(0.6f, 0.6f);
 
         exitToWindowsButton = new MyButton() {
             @Override
@@ -229,6 +253,7 @@ public class MainController extends Component {
         addGUI(exitButton);
         addGUI(exitToWindowsButton);
         addGUI(searchButton);
+        addGUI(replayButton);
         addGUI(searchTimeLabel);
         addGUI(readyPanel);
         addGUI(acceptButton);
@@ -237,6 +262,9 @@ public class MainController extends Component {
         SpriteRenderer sr = getGameObject().addComponent(SpriteRenderer.class);
         sr.sprite = Resources.getSprite("seaBackground1");
         getGameObject().getTransform().setScale(new Vector3(2.6f,2.6f));
+
+        //ReplayGame g = new ReplayGame(Database.getGame(6));
+        //Application.getCurrent().setScene(ReplayScene.class);
     }
 
     @Override

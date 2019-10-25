@@ -1,6 +1,7 @@
 package game.objects.controllers;
 
 import com.jogamp.opengl.util.texture.Texture;
+import coordinator.Turn;
 import engine.base.Component;
 import engine.base.GameObject;
 import engine.base.Vector3;
@@ -17,6 +18,7 @@ import game.database.Database;
 import game.database.models.Rank;
 import game.objects.FieldElement;
 import game.objects.Game;
+import game.objects.ReplayGame;
 import game.objects.Ship;
 import game.objects.ui.MyButton;
 import game.scenes.MainScene;
@@ -103,7 +105,6 @@ public class ReplayController extends Component {
         exitButton.font = FontLoader.getFont("default");
         exitButton.setTextOffset(new Vector3(100, 20));
         exitButton.fontScale = new Vector3(0.6f, 0.6f);
-        exitButton.isActive = false;
 
         turnTimeLabel = new Label();
         turnTimeLabel.alignType = Align.LEFT_TOP;
@@ -143,7 +144,7 @@ public class ReplayController extends Component {
         thisNickLabel.fontScale = new Vector3(0.5f, 0.5f);
         thisNickLabel.left = 90;
         thisNickLabel.top = 40;
-        thisNickLabel.setText(Client.current.loggedAs);
+        thisNickLabel.setText(ReplayGame.current.playerOne);
 
         enemyNickLabel = new Label();
         enemyNickLabel.alignType = Align.RIGHT_TOP;
@@ -154,9 +155,9 @@ public class ReplayController extends Component {
         enemyNickLabel.fontScale = new Vector3(0.5f, 0.5f);
         enemyNickLabel.right = 90;
         enemyNickLabel.top = 40;
-        enemyNickLabel.setText(Game.current.opponent);
+        enemyNickLabel.setText(ReplayGame.current.playerTwo);
 
-        Rank myRank = Database.getRank(Database.getPlayer(Client.current.loggedAs));
+        Rank myRank = Database.getRank(Database.getPlayer(ReplayGame.current.playerOne));
 
         myRankFrame = new Label();
         myRankFrame.sprite = Resources.getSprite("rangFrame");
@@ -176,7 +177,7 @@ public class ReplayController extends Component {
         myRankImage.top = 63;
         myRankImage.getTransform().setScale(new Vector3(0.54f, 0.545f, 1f));
 
-        Rank enemyRank = Database.getRank(Database.getPlayer(Game.current.opponent));
+        Rank enemyRank = Database.getRank(Database.getPlayer(ReplayGame.current.playerTwo));
 
         enemyRankFrame = new Label();
         enemyRankFrame.sprite = Resources.getSprite("rangFrame");
@@ -275,15 +276,18 @@ public class ReplayController extends Component {
         return minutes_str + ":" + seconds_str;
     }
 
+    private Turn currentTurn;
+    private float delay;
+
     @Override
     protected void update() {
+        if (currentTurn == null && !isGameEnd)
+            goNext();
+
         turnTimeLabel.setText((int)Math.floor(thisTimer) + "");
         enemyTurnTimeLabel.setText((int)Math.floor(enemyTimer) + "");
 
         if (isGameEnd)
-            return;
-
-        if (!isReady)
             return;
 
         if (turn) {
@@ -297,19 +301,63 @@ public class ReplayController extends Component {
             enemyTimer -= 1 * Time.getDeltaTime();
         }
 
-        if (thisTimer < 0) {
-            next();
-        }
-
         time += 1 * Time.getDeltaTime();
         timeLabel.setText(toTimeString((int)Math.floor(time)));
+
+        delay += 1f * Time.getDeltaTime();
+        if (delay >= currentTurn.delay) {
+            int state = currentTurn.state;
+            if (state == 0)
+                state = 1;
+            else if (state == 3)
+                state = 2;
+
+            if (currentTurn.nickname.equals(ReplayGame.current.playerOne)) {
+                opponentField[currentTurn.x][currentTurn.y].state = state;
+            }
+            else {
+                thisField[currentTurn.x][currentTurn.y].state = state;
+            }
+
+            int count = 0;
+            for (int y = 0; y < 10; y++) {
+                for (int x = 0; x < 10; x++) {
+                    if (opponentField[x][y].state == 2)
+                        count++;
+                }
+            }
+
+            if (count == 20)
+            {
+                winner = ReplayGame.current.winner;
+                end();
+            }
+
+            count = 0;
+            for (int y = 0; y < 10; y++) {
+                for (int x = 0; x < 10; x++) {
+                    if (thisField[x][y].state == 2)
+                        count++;
+                }
+            }
+
+            if (count == 20)
+            {
+                winner = ReplayGame.current.winner;
+                end();
+            }
+
+            delay = 0;
+            currentTurn = null;
+        }
     }
 
-    public void next() {
-        turn = false;
+    public void goNext() {
+        currentTurn = ReplayGame.current.getNext();
+
         thisTimer = 15;
         enemyTimer = 15;
-        Client.current.sendMessage("next;" + Client.current.loggedAs);
+        turn = ReplayGame.current.playerOne.equals(currentTurn.nickname);
     }
 
     public void setTurn() {
@@ -335,6 +383,7 @@ public class ReplayController extends Component {
     public void exitGame() {
         Game.current = null;
         ReplayController.current = null;
+        ReplayGame.current = null;
         Application.getCurrent().setScene(MainScene.class);
     }
 
