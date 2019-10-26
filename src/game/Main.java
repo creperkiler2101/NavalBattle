@@ -18,6 +18,8 @@ import javax.xml.crypto.Data;
 import java.net.InetAddress;
 
 public class Main {
+    public static boolean isRelease = false;
+
     public static void main(String[] args) {
         Session s = Database.getSession();
         s.close();
@@ -30,8 +32,15 @@ public class Main {
 
             @Override
             public void resourceLoad() {
-                this.loadResources(Main.class.getResource("resources").toString());
-                FontLoader.LoadFont(Main.class.getResource("Font.png").toString().replace("%20", " ").replace("/", "\\").substring(6), "default");
+                if (!isRelease) {
+                    this.loadResources(Main.class.getResource("resources").toString(), true);
+                    FontLoader.LoadFont(Main.class.getResource("Font.png").toString().replace("%20", " ").replace("/", "\\").substring(6), "default");
+                }
+                else {
+                    this.loadResources(System.getProperty("user.dir") + "\\resources", false);
+                    FontLoader.LoadFont(System.getProperty("user.dir") + "\\resources\\font.png", "default");
+                }
+
             }
 
             @Override

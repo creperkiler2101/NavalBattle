@@ -1,9 +1,9 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="GameEngineV2.0:jar">
-    <output-path>$PROJECT_DIR$/../executable</output-path>
+    <output-path>$USER_HOME$/Desktop/NavalBattle</output-path>
     <root id="archive" name="GameEngineV2.0.jar">
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/../executable/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$USER_HOME$/Desktop/NavalBattle/META-INF/MANIFEST.MF" />
       </element>
       <element id="module-output" name="GameEngineV2.0" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/json-simple-1.1.1.jar" path-in-jar="/" />

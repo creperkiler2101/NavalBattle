@@ -103,7 +103,7 @@ public class ReplayController extends Component {
         exitButton.getTransform().setScale(new Vector3(1.2f, 1.2f));
         exitButton.setText("exit");
         exitButton.font = FontLoader.getFont("default");
-        exitButton.setTextOffset(new Vector3(100, 20));
+        exitButton.setTextOffset(new Vector3(70, 20));
         exitButton.fontScale = new Vector3(0.6f, 0.6f);
 
         turnTimeLabel = new Label();
@@ -128,10 +128,10 @@ public class ReplayController extends Component {
 
         winnerLabel = new Label();
         winnerLabel.alignType = Align.CENTER;
-        winnerLabel.getTransform().setScale(new Vector3(1.5f, 1.5f));
+        winnerLabel.getTransform().setScale(new Vector3(2.5f, 2.5f));
         winnerLabel.font = FontLoader.getFont("default");
         winnerLabel.sprite = Resources.getSprite("loginPanel");
-        winnerLabel.setTextOffset(new Vector3(100, 50));
+        winnerLabel.setTextOffset(new Vector3(225, 300));
         winnerLabel.fontScale = new Vector3(0.6f, 0.6f);
         winnerLabel.color = new Color(255, 255, 255, 0);
 

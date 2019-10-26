@@ -163,11 +163,13 @@ public class Server {
                 if (args[0].equals("disconnect")) {
                     connections.remove(user);
                     Game g = getGame(user.nickname);
-                    if (!user.nickname.equals(g.playerOne.nickname))
-                        sendMessage(g.playerOne, "playerLeave");
-                    else
-                        sendMessage(g.playerTwo, "playerLeave");
-                    games.remove(g);
+                    if (g != null) {
+                        if (!user.nickname.equals(g.playerOne.nickname))
+                            sendMessage(g.playerOne, "playerLeave");
+                        else
+                            sendMessage(g.playerTwo, "playerLeave");
+                        games.remove(g);
+                    }
                     print(user.nickname + " disconnected");
                 }
 

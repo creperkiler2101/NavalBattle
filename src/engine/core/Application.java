@@ -96,8 +96,8 @@ public class Application {
         }
     }
 
-    public void loadResources(String path) {
-        Resources.load(path);
+    public void loadResources(String path, boolean useUrl) {
+        Resources.load(path, useUrl);
     }
 
     public void onGLInitialized() { }

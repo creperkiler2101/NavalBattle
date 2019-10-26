@@ -21,20 +21,28 @@ public final class Resources {
                 expr.equals("bmp");
     }
 
-    protected static void load(String path) {
+    protected static void load(String path, boolean useUrl) {
         System.out.println("Loading resources");
         resources.clear();
         GL2 gl2 = Application.getCurrent().getGL2();
 
         File folder = null;
         try {
-            URL url = new URL(path);
-            folder = new File(url.getFile().substring(1).replace("%20", " "));
+            if (useUrl) {
+                URL url = new URL(path);
+                folder = new File(url.getFile().substring(1).replace("%20", " "));
+            }
+            else
+                folder = new File(path);
         }
         catch (Exception ex) {
             System.out.println("Folder not found");
+            ex.printStackTrace();
             return;
         }
+
+        System.out.println(folder.getPath());
+        System.out.println(path);
 
         for (final File file : folder.listFiles()) {
             String fileName = file.getName();
