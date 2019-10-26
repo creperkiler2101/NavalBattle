@@ -148,7 +148,8 @@ public class Server {
 
                 if (args[0].equals("connect")) {
                     if (isInOnline(args[1])) {
-                        sendMessage(user, "decline");
+                        User user_ = new User(senderIp, senderPort);
+                        sendMessage(user_, "decline");
                         continue;
                     }
                     user = new User(senderIp, senderPort);

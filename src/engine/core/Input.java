@@ -20,7 +20,11 @@ public final class Input {
     public static Vector3 getMousePosition() {
         Vector3 mousePosScreen = new Vector3();
         mousePosScreen.x = (mousePosition.x / ((Application.getCurrent().getWindowWidth() - 17) / 1920));
-        mousePosScreen.y = -((mousePosition.y - Application.getCurrent().getWindowHeight()) + 40) / ((Application.getCurrent().getWindowHeight() - 40) / 1080);
+
+        if (!Application.getCurrent().isFullscreen)
+            mousePosScreen.y = -((mousePosition.y - Application.getCurrent().getWindowHeight()) + 40) / ((Application.getCurrent().getWindowHeight() - 40) / 1080);
+        else
+            mousePosScreen.y = -((mousePosition.y - Application.getCurrent().getWindowHeight())) / ((Application.getCurrent().getWindowHeight()) / 1080);
 
         return new Vector3(mousePosScreen.x + Camera.getActiveCamera().getTransform().getPosition().x * 5, mousePosScreen.y + Camera.getActiveCamera().getTransform().getPosition().y * 5);
     }

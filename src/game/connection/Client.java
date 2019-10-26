@@ -22,7 +22,7 @@ public class Client {
 
     public static Client current;
 
-    public Runnable gameFounded, gameStart, gameNotStarted, setTurn, win, updTime;
+    public Runnable gameFounded, gameStart, gameNotStarted, setTurn, win, updTime, declined;
 
     public Client(InetAddress ip, int port) {
         this.ip = ip;
@@ -61,7 +61,7 @@ public class Client {
                 String msg = new String(packet.getData(), packet.getOffset(), packet.getLength());
                 String[] args = msg.split(";");
 
-                System.out.println(msg);
+                //System.out.println(msg);
 
                 if (args[0].equals("connected")) {
                     isConnected = true;
@@ -70,6 +70,8 @@ public class Client {
 
                 if (args[0].equals("decline")) {
                     isConnected = false;
+                    if (declined != null)
+                        declined.run();
                     onNotConnected();
                 }
 

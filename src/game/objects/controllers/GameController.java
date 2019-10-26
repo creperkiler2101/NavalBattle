@@ -148,10 +148,10 @@ public class GameController extends Component {
         };
         goButton.alignType = Align.CENTER;
         goButton.isActive = false;
-        goButton.getTransform().setScale(new Vector3(1.5f, 1.5f));
+        goButton.getTransform().setScale(new Vector3(2f, 2f));
         goButton.setText("go!");
         goButton.font = FontLoader.getFont("default");
-        goButton.setTextOffset(new Vector3(100, 20));
+        goButton.setTextOffset(new Vector3(120, 30));
         goButton.fontScale = new Vector3(0.6f, 0.6f);
         goButton.fontColor = new Color(0, 0, 0, 0);
         goButton.color = new Color(255, 255, 255, 0);
@@ -168,11 +168,12 @@ public class GameController extends Component {
         exitButton.getTransform().setScale(new Vector3(1.2f, 1.2f));
         exitButton.setText("exit");
         exitButton.font = FontLoader.getFont("default");
-        exitButton.setTextOffset(new Vector3(100, 20));
+        exitButton.setTextOffset(new Vector3(70, 20));
         exitButton.fontScale = new Vector3(0.6f, 0.6f);
         exitButton.fontColor = new Color(0, 0, 0, 0);
         exitButton.color = new Color(255, 255, 255, 0);
         exitButton.isActive = false;
+        exitButton.bottom = -70;
 
         turnTimeLabel = new Label();
         turnTimeLabel.alignType = Align.LEFT_TOP;
@@ -196,10 +197,10 @@ public class GameController extends Component {
 
         winnerLabel = new Label();
         winnerLabel.alignType = Align.CENTER;
-        winnerLabel.getTransform().setScale(new Vector3(1.5f, 1.5f));
+        winnerLabel.getTransform().setScale(new Vector3(2.5f, 2.5f));
         winnerLabel.font = FontLoader.getFont("default");
         winnerLabel.sprite = Resources.getSprite("loginPanel");
-        winnerLabel.setTextOffset(new Vector3(100, 50));
+        winnerLabel.setTextOffset(new Vector3(225, 300));
         winnerLabel.fontScale = new Vector3(0.6f, 0.6f);
         winnerLabel.color = new Color(255, 255, 255, 0);
 

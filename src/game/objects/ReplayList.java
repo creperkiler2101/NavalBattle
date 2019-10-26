@@ -36,15 +36,27 @@ public class ReplayList extends Component {
 
             Label panel = new Label();
             panel.alignType = Align.LEFT_TOP;
-            panel.getTransform().setScale(new Vector3(1.137f, 1.2f));
+            panel.getTransform().setScale(new Vector3(1.4f, 1.5f));
             panel.font = FontLoader.getFont("default");
             panel.sprite = Resources.getSprite("EXPpanel");
-            panel.setTextOffset(new Vector3(50, 115));
+            panel.setTextOffset(new Vector3(50, 145));
             panel.fontScale = new Vector3(0.5f, 0.5f);
             panel.left = 100;
             panel.top = 40 + size * i + distance * i;
             panel.setText(game.getPlayerOne() + " vs " + game.getPlayerTwo());
             panel.getTransform().parent = getGameObject();
+
+            Label timeText = new Label();
+            timeText.alignType = Align.TOP;
+            timeText.getTransform().setScale(new Vector3(1, 1));
+            timeText.font = FontLoader.getFont("default");
+            timeText.sprite = Resources.getSprite("loginPanel");
+            timeText.setTextOffset(new Vector3(100, 100));
+            timeText.fontScale = new Vector3(0.7f, 0.7f);
+            timeText.top = 40 + size * i + distance * i;
+            timeText.left = 125;
+            timeText.setText(toTimeString(game.getGameLength()));
+            timeText.getTransform().parent = getGameObject();
 
             MyButton seeButton = new MyButton() {
                 @Override
@@ -58,16 +70,34 @@ public class ReplayList extends Component {
             };
             seeButton.alignType = Align.LEFT_TOP;
             seeButton.top = 40 + size * i + distance * i + 100;
-            seeButton.left = 250;
+            seeButton.left = 200;
             seeButton.getTransform().setScale(new Vector3(1.5f, 1.5f));
             seeButton.setText("play");
             seeButton.font = FontLoader.getFont("default");
-            seeButton.setTextOffset(new Vector3(30, 20));
+            seeButton.setTextOffset(new Vector3(93, 26));
             seeButton.fontScale = new Vector3(0.6f, 0.6f);
             seeButton.getTransform().parent = getGameObject();
 
             addGUI(panel);
             addGUI(seeButton);
+            addGUI(timeText);
         }
+    }
+
+    private String toTimeString(int seconds) {
+        String minutes_str = "";
+        String seconds_str = "";
+
+        int minutes = (int)Math.floor(seconds / 60f);
+        if (minutes < 10)
+            minutes_str += "0";
+        minutes_str += minutes;
+
+        seconds -= minutes * 60;
+        if (seconds < 10)
+            seconds_str += "0";
+        seconds_str += seconds;
+
+        return minutes_str + ":" + seconds_str;
     }
 }

@@ -161,7 +161,7 @@ public class Database {
             List<Rank> list = (List<Rank>)query.list();
 
             r = list.get(0);
-            for (int i = 1; i < list.size(); i++) {
+            for (int i = 0; i < list.size(); i++) {
                 Rank rank = list.get(i);
                 if (p.getExperience() >= rank.getExperience()) {
                     if (i != list.size() - 1)

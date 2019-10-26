@@ -176,7 +176,7 @@ public class LoginController extends Component {
             Client client = new Client(InetAddress.getByName(ip), port) {
                 @Override
                 public void onNotConnected() {
-                    showMessage("Error!", new Vector3(130, 160), new Vector3(0.6f, 0.6f), false);
+                    showMessage("Error!", new Vector3(200, 160), new Vector3(0.8f, 0.8f), false);
                 }
 
                 @Override

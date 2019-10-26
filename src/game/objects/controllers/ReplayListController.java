@@ -41,7 +41,7 @@ public class ReplayListController extends Component {
         exitButton.getTransform().setScale(new Vector3(1.2f, 1.2f));
         exitButton.setText("exit");
         exitButton.font = FontLoader.getFont("default");
-        exitButton.setTextOffset(new Vector3(80, 20));
+        exitButton.setTextOffset(new Vector3(70, 20));
         exitButton.fontScale = new Vector3(0.6f, 0.6f);
         exitButton.right = 100;
 
@@ -64,7 +64,7 @@ public class ReplayListController extends Component {
 
         if (listScroll > 40 + replayList.games.size() * 200 + replayList.games.size() * 50 - 1080)
             listScroll = 40 + replayList.games.size() * 200 + replayList.games.size() * 50 - 1080;
-        else if (listScroll < 0)
+        if (listScroll < 0)
             listScroll = 0;
 
         replayList.getGameObject().getTransform().setPosition(new Vector3(0, listScroll));

@@ -107,9 +107,9 @@ public class MainController extends Component {
         replayButton.bottom = 20;
         replayButton.left = 140;
         replayButton.getTransform().setScale(new Vector3(2.4f, 2.4f));
-        replayButton.setText("Replays");
+        replayButton.setText("replays");
         replayButton.font = FontLoader.getFont("default");
-        replayButton.setTextOffset(new Vector3(58, 54));
+        replayButton.setTextOffset(new Vector3(125, 54));
         replayButton.fontScale = new Vector3(0.6f, 0.6f);
 
         exitToWindowsButton = new MyButton() {
@@ -151,12 +151,12 @@ public class MainController extends Component {
             }
         };
         acceptButton.alignType = Align.CENTER;
-        acceptButton.bottom -= 100;
-        acceptButton.left = 200;
+        acceptButton.bottom -= 80;
+        acceptButton.left = 175;
         acceptButton.getTransform().setScale(new Vector3(1.5f,1.5f));
         acceptButton.setText("accept");
         acceptButton.font = FontLoader.getFont("default");
-        acceptButton.setTextOffset(new Vector3(30, 20));
+        acceptButton.setTextOffset(new Vector3(58, 28));
         acceptButton.fontScale = new Vector3(0.6f, 0.6f);
 
         declineButton = new MyButton() {
@@ -169,21 +169,21 @@ public class MainController extends Component {
             }
         };
         declineButton.alignType = Align.CENTER;
-        declineButton.bottom -= 100;
-        declineButton.left = -200;
+        declineButton.bottom -= 80;
+        declineButton.left = -175;
         declineButton.getTransform().setScale(new Vector3(1.5f, 1.5f));
         declineButton.setText("decline");
         declineButton.font = FontLoader.getFont("default");
-        declineButton.setTextOffset(new Vector3(30, 20));
+        declineButton.setTextOffset(new Vector3(55, 28));
         declineButton.fontScale = new Vector3(0.6f, 0.6f);
 
         readyPanel = new Label();
         readyPanel.sprite = Resources.getSprite("loginPanel");
         readyPanel.alignType = Align.CENTER;
-        readyPanel.getTransform().setScale(new Vector3(1f, 1f));
         readyPanel.font = FontLoader.getFont("default");
         readyPanel.setText("game ready!");
-        readyPanel.getTransform().setScale(new Vector3(1.5f, 1.5f));
+        readyPanel.getTransform().setScale(new Vector3(2.5f, 2.5f));
+        readyPanel.setTextOffset(new Vector3(240, 350));
         hideReady();
 
         thisNickLabel = new Label();
@@ -302,12 +302,14 @@ public class MainController extends Component {
         exitToWindowsButton.isActive = true;
         exitButton.isActive = true;
         searchButton.isActive = true;
+        replayButton.isActive = true;
     }
 
     private void setNotActive() {
         exitToWindowsButton.isActive = false;
         exitButton.isActive = false;
         searchButton.isActive = false;
+        replayButton.isActive = false;
     }
 
     public void gameReady() {
