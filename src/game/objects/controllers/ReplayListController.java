@@ -11,18 +11,20 @@ import engine.core.Resources;
 import engine.core.Time;
 import engine.core.font.FontLoader;
 import engine.ui.Align;
+import engine.ui.Label;
 import game.connection.Client;
 import game.database.Database;
 import game.objects.ReplayList;
 import game.objects.ui.MyButton;
 import game.scenes.MainScene;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class ReplayListController extends Component {
     public float listScroll = 0;
     public ReplayList replayList;
+
+    private Label sKeyL, wKeyL;
 
     @Override
     protected void start() {
@@ -45,7 +47,39 @@ public class ReplayListController extends Component {
         exitButton.fontScale = new Vector3(0.6f, 0.6f);
         exitButton.right = 100;
 
+        sKeyL = new Label();
+        sKeyL.font = FontLoader.getFont("default");
+        sKeyL.sprite = Resources.getSprite("SKey");
+        sKeyL.setText(" - scroll down");
+        sKeyL.alignType = Align.RIGHT_BOTTOM;
+        sKeyL.setTextOffset(new Vector3(60, 16));
+        sKeyL.right = 500;
+        sKeyL.bottom = -50 + 150;
+        sKeyL.fontScale = new Vector3(0.4f, 0.4f);
+        sKeyL.getTransform().setScale(new Vector3(1.8f, 1.8f));
+
+        wKeyL = new Label();
+        wKeyL.font = FontLoader.getFont("default");
+        wKeyL.sprite = Resources.getSprite("WKey");
+        wKeyL.setText(" - scroll up");
+        wKeyL.alignType = Align.RIGHT_BOTTOM;
+        wKeyL.setTextOffset(new Vector3(60, 16));
+        wKeyL.right = 500;
+        wKeyL.bottom = 50 + 150;
+        wKeyL.fontScale = new Vector3(0.4f, 0.4f);
+        wKeyL.getTransform().setScale(new Vector3(1.8f, 1.8f));
+
+        Label frame = new Label();
+        frame.getTransform().setScale(new Vector3(2f, 2));
+        frame.alignType = Align.RIGHT_BOTTOM;
+        frame.right = -60;
+        frame.bottom = -60;
+        frame.sprite = Resources.getSprite("loginPanel");
+
+        addGUI(frame);
         addGUI(exitButton);
+        addGUI(sKeyL);
+        addGUI(wKeyL);
 
         GameObject gm = new GameObject();
         instantiate(gm);
@@ -68,6 +102,6 @@ public class ReplayListController extends Component {
             listScroll = 0;
 
         replayList.getGameObject().getTransform().setPosition(new Vector3(0, listScroll));
-        System.out.println(listScroll + " " + (40 + 200 + replayList.games.size() * 200 + replayList.games.size() * 50));
+        //System.out.println(listScroll + " " + (40 + 200 + replayList.games.size() * 200 + replayList.games.size() * 50));
     }
 }

@@ -89,8 +89,6 @@ public class Game {
             game.setWinner(winner.nickname);
             game.setJsonTurns(json);
 
-            session.save(game);
-
             User loser = null;
             if (winner.nickname.equals(playerOne.nickname))
                 loser = playerTwo;
@@ -114,6 +112,7 @@ public class Game {
             winnerP.setWins(winnerP.getWins() + 1);
             winnerP.setGameCount(winnerP.getGameCount() + 1);
 
+            session.save(game);
             session.update(loserP);
             session.update(winnerP);
 

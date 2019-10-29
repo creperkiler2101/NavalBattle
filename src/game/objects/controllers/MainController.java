@@ -35,6 +35,7 @@ public class MainController extends Component {
     private Label thisNickLabel;
     private Label myRankFrame, myRankImage;
     private Label expFrame, expBar, expBg;
+    private Label rKeyL, returnKeyL, LMB;
 
     public float searchTime;
     public boolean isInSearch;
@@ -241,6 +242,51 @@ public class MainController extends Component {
 
         float scale = 1f * (((float)p.getExperience() - myRank.getExperience()) / ((float)next.getExperience() - myRank.getExperience()));
         expBar.getTransform().setScale(new Vector3(scale, 1f, 1f));
+
+        rKeyL = new Label();
+        rKeyL.font = FontLoader.getFont("default");
+        rKeyL.sprite = Resources.getSprite("RKey");
+        rKeyL.setText(" - rotate ship");
+        rKeyL.alignType = Align.RIGHT_BOTTOM;
+        rKeyL.setTextOffset(new Vector3(60, 16));
+        rKeyL.right = 500;
+        rKeyL.bottom = 100 + 265;
+        rKeyL.fontScale = new Vector3(0.4f, 0.4f);
+        rKeyL.getTransform().setScale(new Vector3(1.8f, 1.8f));
+
+        returnKeyL = new Label();
+        returnKeyL.font = FontLoader.getFont("default");
+        returnKeyL.sprite = Resources.getSprite("ReturnKey");
+        returnKeyL.setText(" - toggle fullscreen");
+        returnKeyL.alignType = Align.RIGHT_BOTTOM;
+        returnKeyL.setTextOffset(new Vector3(60, 16));
+        returnKeyL.right = 500;
+        returnKeyL.bottom = 0 + 265;
+        returnKeyL.fontScale = new Vector3(0.4f, 0.4f);
+        returnKeyL.getTransform().setScale(new Vector3(1.8f, 1.8f));
+
+        LMB = new Label();
+        LMB.font = FontLoader.getFont("default");
+        LMB.sprite = Resources.getSprite("LMB");
+        LMB.setText(" - select/set ship");
+        LMB.alignType = Align.RIGHT_BOTTOM;
+        LMB.setTextOffset(new Vector3(60, 16));
+        LMB.right = 500;
+        LMB.bottom = -100 + 265;
+        LMB.fontScale = new Vector3(0.4f, 0.4f);
+        LMB.getTransform().setScale(new Vector3(1.8f, 1.8f));
+
+        Label frame = new Label();
+        frame.getTransform().setScale(new Vector3(2f, 3));
+        frame.alignType = Align.RIGHT_BOTTOM;
+        frame.right = -60;
+        frame.bottom = -100;
+        frame.sprite = Resources.getSprite("loginPanel");
+
+        addGUI(frame);
+        addGUI(rKeyL);
+        addGUI(returnKeyL);
+        addGUI(LMB);
 
         addGUI(thisNickLabel);
         addGUI(myRankImage);
