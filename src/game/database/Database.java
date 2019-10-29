@@ -36,7 +36,7 @@ public class Database {
         Player p = null;
 
         try (Session session = getSession()) {
-            session.beginTransaction();
+            //session.beginTransaction();
 
             Query query = session.createQuery("FROM player");
             List<Player> list = (List<Player>)query.list();
@@ -56,7 +56,7 @@ public class Database {
     public static Game getGame(int id) {
         Game p = null;
         try (Session session = getSession()) {
-            session.beginTransaction();
+            //session.beginTransaction();
 
             Query query = session.createQuery("FROM game");
             List<Game> list = (List<Game>)query.list();
@@ -77,7 +77,7 @@ public class Database {
     public static ArrayList<Game> getGames() {
         ArrayList<Game> games = new ArrayList<>();
         try (Session session = getSession()) {
-            session.beginTransaction();
+            //session.beginTransaction();
 
             Query query = session.createQuery("FROM game");
             List<Game> list = (List<Game>)query.list();
@@ -94,7 +94,7 @@ public class Database {
     public static ArrayList<Game> getGames(String nickname) {
         ArrayList<Game> games = new ArrayList<>();
         try (Session session = getSession()) {
-            session.beginTransaction();
+            //session.beginTransaction();
 
             Query query = session.createQuery("FROM game");
             List<Game> list = (List<Game>)query.list();
@@ -113,7 +113,7 @@ public class Database {
     public static Player getPlayer(String nickname) {
         Player p = null;
         try (Session session = getSession()) {
-            session.beginTransaction();
+            //session.beginTransaction();
 
             Query query = session.createQuery("FROM player");
             List<Player> list = (List<Player>)query.list();
@@ -135,7 +135,7 @@ public class Database {
         Rank r = null;
 
         try (Session session = getSession()) {
-            session.beginTransaction();
+            //session.beginTransaction();
 
             Query query = session.createQuery("FROM rang");
             List<Rank> list = (List<Rank>)query.list();
@@ -155,7 +155,7 @@ public class Database {
         Rank r = null;
 
         try (Session session = getSession()) {
-            session.beginTransaction();
+            //session.beginTransaction();
 
             Query query = session.createQuery("FROM rang");
             List<Rank> list = (List<Rank>)query.list();
@@ -178,7 +178,7 @@ public class Database {
     public static boolean logIn(String nickname, String password) {
         Player p = null;
         try (Session session = getSession()) {
-            session.beginTransaction();
+            //session.beginTransaction();
 
             Query query = session.createQuery("FROM player");
             List<Player> list = (List<Player>)query.list();
