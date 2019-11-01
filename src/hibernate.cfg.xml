@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration.dtd">
 <hibernate-configuration xmlns="http://www.hibernate.org/xsd/orm/cfg">
     <session-factory>
-        <property name="connection.url">jdbc:mysql://85.253.128.24:3306/navalbattle?serverTimezone=UTC</property>
+        <property name="connection.url">jdbc:mysql://82.131.30.160:3306/navalbattle?serverTimezone=UTC</property>
         <property name="connection.username">admin</property>
         <property name="connection.password">PassWord12332138</property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>

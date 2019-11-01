@@ -10,6 +10,7 @@ import engine.core.Resources;
 import engine.core.font.FontLoader;
 import game.connection.Client;
 import game.database.Database;
+import game.database.models.Player;
 import game.scenes.LoginScene;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -18,12 +19,9 @@ import javax.xml.crypto.Data;
 import java.net.InetAddress;
 
 public class Main {
-    public static boolean isRelease = false;
+    public static boolean isRelease = true;
 
     public static void main(String[] args) {
-        Session s = Database.getSession();
-        s.close();
-
         Application app = new Application() {
             @Override
             public void onGLInitialized() {

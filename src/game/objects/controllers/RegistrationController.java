@@ -170,23 +170,16 @@ public class RegistrationController extends Component {
             return;
         }
 
-        try (Session session = Database.getSession()) {
-            session.beginTransaction();
 
-            Player p = new Player();
-            p.setNickname(nickname);
-            p.setPassword(password);
-            p.setGameCount(0);
-            p.setWins(0);
-            p.setLoses(0);
-            p.setExperience(0);
+        Player p = new Player();
+        p.setNickname(nickname);
+        p.setPassword(password);
+        p.setGameCount(0);
+        p.setWins(0);
+        p.setLoses(0);
+        p.setExperience(0);
 
-            session.save(p);
-            session.getTransaction().commit();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        Database.insert(p);
 
         showMessage("Success!", new Vector3(130, 160), new Vector3(0.8f, 0.8f));
     }
