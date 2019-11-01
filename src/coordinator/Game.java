@@ -79,47 +79,38 @@ public class Game {
 
         json = turnArray.toJSONString();
 
-        try (Session session = Database.getSession()) {
-            session.beginTransaction();
+        game.database.models.Game game = new game.database.models.Game();
+        game.setGameLength(time);
+        game.setPlayerOne(playerOne.nickname);
+        game.setPlayerTwo(playerTwo.nickname);
+        game.setWinner(winner.nickname);
+        game.setJsonTurns(json);
 
-            game.database.models.Game game = new game.database.models.Game();
-            game.setGameLength(time);
-            game.setPlayerOne(playerOne.nickname);
-            game.setPlayerTwo(playerTwo.nickname);
-            game.setWinner(winner.nickname);
-            game.setJsonTurns(json);
+        User loser = null;
+        if (winner.nickname.equals(playerOne.nickname))
+            loser = playerTwo;
+        else
+            loser = playerOne;
 
-            User loser = null;
-            if (winner.nickname.equals(playerOne.nickname))
-                loser = playerTwo;
-            else
-                loser = playerOne;
+        Player winnerP = Database.getPlayer(winner.nickname);
+        Player loserP = Database.getPlayer(loser.nickname);
 
-            Player winnerP = Database.getPlayer(winner.nickname);
-            Player loserP = Database.getPlayer(loser.nickname);
+        winnerP.setExperience(winnerP.getExperience() + 100);
 
-            winnerP.setExperience(winnerP.getExperience() + 100);
+        int exp = loserP.getExperience();
+        exp -= 100;
+        if (exp < 0)
+            exp = 0;
+        loserP.setExperience(exp);
 
-            int exp = loserP.getExperience();
-            exp -= 100;
-            if (exp < 0)
-                exp = 0;
-            loserP.setExperience(exp);
+        loserP.setLoses(loserP.getLoses() + 1);
+        loserP.setGameCount(loserP.getGameCount() + 1);
 
-            loserP.setLoses(loserP.getLoses() + 1);
-            loserP.setGameCount(loserP.getGameCount() + 1);
+        winnerP.setWins(winnerP.getWins() + 1);
+        winnerP.setGameCount(winnerP.getGameCount() + 1);
 
-            winnerP.setWins(winnerP.getWins() + 1);
-            winnerP.setGameCount(winnerP.getGameCount() + 1);
-
-            session.save(game);
-            session.update(loserP);
-            session.update(winnerP);
-
-            session.getTransaction().commit();
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        Database.insert(game);
+        Database.update(winnerP);
+        Database.update(loserP);
     }
 }
