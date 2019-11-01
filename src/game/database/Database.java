@@ -237,7 +237,7 @@ public class Database {
     }
 
     public static void insert(Game game) {
-        String sql = "INSERT INTO game(playerOne, playerTwo, jsonTurns, winner, gameLength) values ('{PO}', '{PT}', '{JT}', {W}, {GL})";
+        String sql = "INSERT INTO game(playerOne, playerTwo, jsonTurns, winner, gameLength) values ('{PO}', '{PT}', '{JT}', '{W}', {GL})";
         sql = sql.replace("{PO}", game.getPlayerOne()).replace("{PT}", game.getPlayerTwo())
                 .replace("{JT}", game.getJsonTurns()).replace("{W}", game.getWinner())
                 .replace("{GL}", Integer.toString(game.getGameLength()));
