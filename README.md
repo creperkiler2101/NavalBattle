@@ -11,6 +11,8 @@
 * Прокачивать свое звание, побеждая в играх
 * Терять свое звание, проигрывая в играх
 ## База данных
+База данных используется для хранения информации об аккаунтах, званиях и играх.
+![UML Schema](https://github.com/creperkiler2101/NavalBattle/blob/master/UMLSchema.png)
 
 В игре мультиплеер на 2-их игроков.
 <br>
@@ -50,7 +52,3 @@
 <br>
 Рандом выбирает, кто первый будет ходить.
 <br>
-
-## UML Схема проекта
-
- ![UML Schema](https://github.com/creperkiler2101/NavalBattle/blob/master/UMLSchema.png)
