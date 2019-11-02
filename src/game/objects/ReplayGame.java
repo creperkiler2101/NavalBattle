@@ -1,6 +1,7 @@
 package game.objects;
 
 import coordinator.Turn;
+import engine.base.GameObject;
 import game.database.Database;
 import game.objects.controllers.ReplayController;
 import org.json.simple.JSONArray;
@@ -13,6 +14,10 @@ public class ReplayGame {
     public static ReplayGame current;
 
     public ArrayList<Turn> turns;
+
+    public coordinator.Ship[] playerOneShips = new coordinator.Ship[10];
+    public coordinator.Ship[] playerTwoShips = new coordinator.Ship[10];
+
     public int turnOffset;
 
     public String playerOne, playerTwo, winner;
@@ -44,11 +49,45 @@ public class ReplayGame {
 
                 turns.add(turn);
             }
+
+            JSONArray pOneShipsArray = (JSONArray) p.parse(game.getJsonFieldOne());
+            JSONArray pTwoShipsArray = (JSONArray) p.parse(game.getJsonFieldTwo());
+
+            for (int i = 0; i < 10; i++) {
+                JSONObject oneObj = (JSONObject)pOneShipsArray.get(i);
+                JSONObject twoObj = (JSONObject)pTwoShipsArray.get(i);
+
+                playerOneShips[i] = loadShip(oneObj);
+                playerTwoShips[i] = loadShip(twoObj);
+            }
         }
         catch (Exception ex) {
             System.out.println("Error loading replay");
             ex.printStackTrace();
         }
+    }
+
+    private coordinator.Ship loadShip(JSONObject obj) {
+        coordinator.Ship ship = new coordinator.Ship();
+        ship.x = (int)(long)obj.get("x");
+        ship.y = (int)(long)obj.get("y");
+        ship.size = (int)(long)obj.get("size");
+        ship.rotation = (int)(long)obj.get("rotation");
+
+        if (ship.size == 1) {
+            ship.sprite = "smallShip";
+        }
+        else if (ship.size == 2) {
+            ship.sprite = "mediumShip";
+        }
+        else if (ship.size == 3) {
+            ship.sprite = "largeShip";
+        }
+        else if (ship.size == 4) {
+            ship.sprite = "largestShip";
+        }
+
+        return ship;
     }
 
     public Turn getNext() {

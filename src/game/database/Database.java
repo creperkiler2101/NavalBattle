@@ -65,6 +65,8 @@ public class Database {
                 game.setJsonTurns((String)obj.get("jsonTurns"));
                 game.setPlayerOne((String)obj.get("playerOne"));
                 game.setPlayerTwo((String)obj.get("playerTwo"));
+                game.setJsonFieldOne((String)obj.get("oneField"));
+                game.setJsonFieldTwo((String)obj.get("twoField"));
 
                 result.add(game);
             }
@@ -237,18 +239,20 @@ public class Database {
     }
 
     public static void insert(Game game) {
-        String sql = "INSERT INTO game(playerOne, playerTwo, jsonTurns, winner, gameLength) values ('{PO}', '{PT}', '{JT}', '{W}', {GL})";
+        String sql = "INSERT INTO game(playerOne, playerTwo, jsonTurns, oneField, twoField, winner, gameLength) values ('{PO}', '{PT}', '{JT}', '{OF}', '{TF}', '{W}', {GL})";
         sql = sql.replace("{PO}", game.getPlayerOne()).replace("{PT}", game.getPlayerTwo())
                 .replace("{JT}", game.getJsonTurns()).replace("{W}", game.getWinner())
-                .replace("{GL}", Integer.toString(game.getGameLength()));
+                .replace("{GL}", Integer.toString(game.getGameLength()))
+                        .replace("{OF}", game.getJsonFieldOne()).replace("{TF}", game.getJsonFieldTwo());
         request(sql, "game");
     }
 
     public static void update(Game game) {
-        String sql = "UPDATE game SET playerOne='{PO}', playerTwo='{PT}', jsonTurns='{JT}', winner='{W}', gameLength={GL} WHERE id={ID}";
+        String sql = "UPDATE game SET playerOne='{PO}', playerTwo='{PT}', jsonTurns='{JT}', oneField='{OF}', twoField='{TF}', winner='{W}', gameLength={GL} WHERE id={ID}";
         sql = sql.replace("{PO}", game.getPlayerOne()).replace("{PT}", game.getPlayerTwo())
                 .replace("{JT}", game.getJsonTurns()).replace("{W}", game.getWinner())
-                .replace("{GL}", Integer.toString(game.getGameLength())).replace("{ID}", Integer.toString(game.getId()));
+                .replace("{GL}", Integer.toString(game.getGameLength())).replace("{ID}", Integer.toString(game.getId()))
+                        .replace("{OF}", game.getJsonFieldOne()).replace("{TF}", game.getJsonFieldTwo());
         request(sql, "game");
     }
 

@@ -143,7 +143,7 @@ public class Font {
 
             GL2 gl2 = Application.getCurrent().getGL2();
 
-            gl2.glDisable(GL2.GL_LIGHTING);
+            /*gl2.glDisable(GL2.GL_LIGHTING);
             gl2.glEnable(GL2.GL_TEXTURE_2D);
             gl2.glEnable(GL2.GL_POINT_SMOOTH);
             gl2.glEnable(GL2.GL_COLOR_MATERIAL);
@@ -151,7 +151,7 @@ public class Font {
             gl2.glDepthMask(false);
             gl2.glEnable(GL2.GL_BLEND);
             gl2.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
-
+*/
             texture.enable(gl2);
             texture.bind(gl2);
 
@@ -162,7 +162,7 @@ public class Font {
             gl2.glMatrixMode(GL2.GL_MODELVIEW);
             gl2.glPushMatrix();
 
-            gl2.glTranslatef(position.x + xOffset, position.y, position.z);
+            gl2.glTranslatef(position.x + xOffset, position.y, position.z + 0.1f);
             gl2.glScalef(scale.x, scale.y, scale.z);
 
             gl2.glColor4f(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, color.getAlpha() / 255f);
@@ -184,10 +184,10 @@ public class Font {
             gl2.glEnd();
 
             gl2.glPopMatrix();
-            gl2.glFlush();
+            //gl2.glFlush();
 
-            gl2.glDepthMask(true);
-            gl2.glDisable(GL2.GL_BLEND);
+            //gl2.glDepthMask(true);
+            //gl2.glDisable(GL2.GL_BLEND);
 
             texture.disable(gl2);
 

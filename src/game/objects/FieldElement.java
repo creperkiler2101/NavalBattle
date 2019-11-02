@@ -77,7 +77,7 @@ public class FieldElement extends Component {
         ship.x = x;
         ship.y = y;
         if (ship.rot == 1)
-            ship.getGameObject().getTransform().setPosition(new Vector3(pos.x - ((ship.size * 64 - 64) / 2f) - placeOffset.x, pos.y - ((ship.size * 64) / 2f - 32) + placeOffset.y, pos.z));
+            ship.getGameObject().getTransform().setPosition(new Vector3(pos.x - ((ship.size * 64 - 64) / 2f) - placeOffset.x, pos.y - ((ship.size * 64) / 2f - 32) + placeOffset.y));
         else
             ship.getGameObject().getTransform().setPosition(new Vector3(pos.x - placeOffset.x, pos.y + placeOffset.y));
     }
@@ -255,15 +255,6 @@ public class FieldElement extends Component {
 
                 ship.isSetup = true;
                 GameController.current.selectedShip = null;
-
-                String fieldS = "";
-                for (int y = 0; y < 10; y++) {
-                    for (int x = 0; x < 10; x++) {
-                        fieldS += GameController.current.thisField[x][y].state;
-                    }
-                    fieldS += "\n";
-                }
-                System.out.println(fieldS);
             }
         }
     }

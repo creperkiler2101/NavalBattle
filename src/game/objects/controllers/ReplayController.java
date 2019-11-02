@@ -16,19 +16,21 @@ import engine.ui.Label;
 import game.connection.Client;
 import game.database.Database;
 import game.database.models.Rank;
-import game.objects.FieldElement;
-import game.objects.Game;
-import game.objects.ReplayGame;
-import game.objects.Ship;
+import game.objects.*;
 import game.objects.ui.MyButton;
 import game.scenes.MainScene;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class ReplayController extends Component {
     public FieldElement[][] thisField = new FieldElement[10][10];
     public FieldElement[][] opponentField = new FieldElement[10][10];
+
+    public Ship[] ships = new Ship[10];
+    public Ship[] enemyShips = new Ship[10];
+
     public boolean turn = false;
     public boolean isReady = false;
     public boolean isGameEnd = false;
@@ -91,6 +93,59 @@ public class ReplayController extends Component {
         this.sr_2 = seaBorder_3.addComponent(SpriteRenderer.class);
         this.sr_2.sprite = Resources.getSprite("fieldBorder");
 
+        for (int i = 0; i < 10; i++) {
+            coordinator.Ship s1 = ReplayGame.current.playerOneShips[i];
+            coordinator.Ship s2 = ReplayGame.current.playerTwoShips[i];
+
+            GameObject gm = new GameObject();
+            instantiate(gm);
+
+            SpriteRenderer sr = gm.addComponent(SpriteRenderer.class);
+            sr.sprite = Resources.getSprite(s1.sprite);
+
+            Ship ship = gm.addComponent(Ship.class);
+            ship.x = s1.x;
+            ship.y = s1.y;
+            ship.size = s1.size;
+            ship.rot = s1.rotation;
+            ship.isSetup = true;
+
+            if (ship.size == 1) {
+                gm.getTransform().setPosition(new Vector3(10000, 10000));
+
+                gm = new GameObject();
+                instantiate(gm);
+
+                sr = gm.addComponent(SpriteRenderer.class);
+                sr.sprite = Resources.getSprite(s1.sprite);
+
+                ship = gm.addComponent(Ship.class);
+                ship.x = s1.x;
+                ship.y = s1.y;
+                ship.size = s1.size;
+                ship.rot = s1.rotation;
+                ship.isSetup = true;
+            }
+
+            ships[i] = ship;
+
+            //////////////////////
+            gm = new GameObject();
+            instantiate(gm);
+
+            sr = gm.addComponent(SpriteRenderer.class);
+            sr.sprite = Resources.getSprite(s2.sprite);
+
+            ship = gm.addComponent(Ship.class);
+            ship.x = s2.x;
+            ship.y = s2.y;
+            ship.size = s2.size;
+            ship.rot = s2.rotation;
+            ship.isSetup = true;
+
+            enemyShips[i] = ship;
+        }
+
         exitButton = new MyButton() {
             @Override
             public void mouseUp(int button) {
@@ -105,6 +160,7 @@ public class ReplayController extends Component {
         exitButton.font = FontLoader.getFont("default");
         exitButton.setTextOffset(new Vector3(70, 20));
         exitButton.fontScale = new Vector3(0.6f, 0.6f);
+        exitButton.bottom = -100;
 
         turnTimeLabel = new Label();
         turnTimeLabel.alignType = Align.LEFT_TOP;
@@ -253,6 +309,26 @@ public class ReplayController extends Component {
                 opponentField[x][y] = element;
             }
         }
+
+        for (int i = 0; i < 10; i++) {
+            Ship ship = enemyShips[i];
+            FieldElement elem = opponentField[ship.x][ship.y];
+            Vector3 pos = elem.getGameObject().getTransform().getPosition();
+
+            if (ship.rot == 1)
+                ship.getGameObject().getTransform().setPosition(new Vector3(pos.x - ((ship.size * 64 - 64) / 2f), pos.y - ((ship.size * 64) / 2f - 32), 0.5f));
+            else
+                ship.getGameObject().getTransform().setPosition(new Vector3(pos.x, pos.y, 0.5f));
+
+            ship = ships[i];
+            elem = thisField[ship.x][ship.y];
+            pos = elem.getGameObject().getTransform().getPosition();
+
+            if (ship.rot == 1)
+                ship.getGameObject().getTransform().setPosition(new Vector3(pos.x - ((ship.size * 64 - 64) / 2f), pos.y - ((ship.size * 64) / 2f - 32), 0.5f));
+            else
+                ship.getGameObject().getTransform().setPosition(new Vector3(pos.x, pos.y, 0.5f));
+        }
     }
 
     public void gameStart() {
@@ -317,6 +393,32 @@ public class ReplayController extends Component {
             }
             else {
                 thisField[currentTurn.x][currentTurn.y].state = state;
+            }
+
+            try {
+                for (int i = 0; i < 10; i++) {
+                    coordinator.Ship s1 = ReplayGame.current.playerOneShips[i];
+                    coordinator.Ship s2 = ReplayGame.current.playerTwoShips[i];
+
+                    if (s1.isDestroyed(thisField)) {
+                        ArrayList<Vector3> nearby = s1.getNearby();
+                        for (int j = 0; j < nearby.size(); j++) {
+                            Vector3 n = nearby.get(j);
+                            thisField[(int) n.x][(int) n.y].state = 1;
+                        }
+                    }
+
+                    if (s2.isDestroyed(opponentField)) {
+                        ArrayList<Vector3> nearby = s2.getNearby();
+                        for (int j = 0; j < nearby.size(); j++) {
+                            Vector3 n = nearby.get(j);
+                            opponentField[(int) n.x][(int) n.y].state = 1;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
             }
 
             int count = 0;

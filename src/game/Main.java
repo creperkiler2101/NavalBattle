@@ -19,7 +19,7 @@ import javax.xml.crypto.Data;
 import java.net.InetAddress;
 
 public class Main {
-    public static boolean isRelease = true;
+    public static boolean isRelease = false;
 
     public static void main(String[] args) {
         Application app = new Application() {

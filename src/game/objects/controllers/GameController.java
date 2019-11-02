@@ -20,10 +20,12 @@ import game.objects.Game;
 import game.objects.Ship;
 import game.objects.ui.MyButton;
 import game.scenes.MainScene;
+import org.json.simple.JSONArray;
 
 import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.Field;
 
 public class GameController extends Component {
     public FieldElement[][] thisField = new FieldElement[10][10];
@@ -39,7 +41,7 @@ public class GameController extends Component {
 
     private Texture square = Resources.getSprite("white");
 
-    private MyButton goButton, exitButton;
+    private MyButton goButton, exitButton, toggleShipsButton;
     private Label timeLabel, turnTimeLabel, enemyTurnTimeLabel;
     private Label thisNickLabel, enemyNickLabel;
     private Label winnerLabel;
@@ -52,6 +54,7 @@ public class GameController extends Component {
     public float time;
 
     public Ship[] ships = new Ship[10];
+    public Ship[] enemyShips = new Ship[10];
     public Ship selectedShip;
 
     SpriteRenderer sr_1, sr_2;
@@ -72,8 +75,8 @@ public class GameController extends Component {
 
         GameObject seaBG_1 = new GameObject();
         GameObject seaBG_2 = new GameObject();
-        instantiate(seaBG_1, new Vector3(100, 1080 - 250 - 640));
-        instantiate(seaBG_2, new Vector3(1920 - 100 - 640, 1080 - 250 - 640));
+        instantiate(seaBG_1, new Vector3(100, 1080 - 250 - 640, 0));
+        instantiate(seaBG_2, new Vector3(1920 - 100 - 640, 1080 - 250 - 640, 0));
 
         for (int i = 0; i < 4; i++) {
             GameObject ship = new GameObject();
@@ -84,6 +87,16 @@ public class GameController extends Component {
             comp.size = 1;
             comp.startPos =  new Vector3(10 + 74 * i, 10);
             ships[i] = comp;
+
+            ship = new GameObject();
+            instantiate(ship, new Vector3(10 + 74 * i, 10));
+            sr = ship.addComponent(SpriteRenderer.class);
+            sr.sprite = Resources.getSprite("smallShip");
+            sr.color = new Color(255, 255, 255, 0);
+            comp = ship.addComponent(Ship.class);
+            comp.size = 1;
+            ship.getTransform().setPosition(new Vector3(10000, 10000));
+            enemyShips[i] = comp;
         }
 
         for (int i = 0; i < 3; i++) {
@@ -95,6 +108,16 @@ public class GameController extends Component {
             comp.size = 2;
             comp.startPos = new Vector3(10 + 138 * i, 20 + 64);
             ships[i + 4] = comp;
+
+            ship = new GameObject();
+            instantiate(ship, new Vector3(10 + 74 * i, 10));
+            sr = ship.addComponent(SpriteRenderer.class);
+            sr.sprite = Resources.getSprite("mediumShip");
+            sr.color = new Color(255, 255, 255, 0);
+            comp = ship.addComponent(Ship.class);
+            comp.size = 2;
+            ship.getTransform().setPosition(new Vector3(10000, 10000));
+            enemyShips[i + 4] = comp;
         }
 
         for (int i = 0; i < 2; i++) {
@@ -106,6 +129,16 @@ public class GameController extends Component {
             comp.size = 3;
             comp.startPos = new Vector3(400 + 202 * i, 20 + 64);
             ships[i + 7] = comp;
+
+            ship = new GameObject();
+            instantiate(ship, new Vector3(10 + 74 * i, 10));
+            sr = ship.addComponent(SpriteRenderer.class);
+            sr.sprite = Resources.getSprite("largeShip");
+            sr.color = new Color(255, 255, 255, 0);
+            comp = ship.addComponent(Ship.class);
+            comp.size = 3;
+            ship.getTransform().setPosition(new Vector3(10000, 10000));
+            enemyShips[i + 7] = comp;
         }
 
         GameObject ship = new GameObject();
@@ -117,6 +150,16 @@ public class GameController extends Component {
         comp.startPos = new Vector3(400, 10);
         ships[9] = comp;
 
+        ship = new GameObject();
+        instantiate(ship);
+        sr = ship.addComponent(SpriteRenderer.class);
+        sr.sprite = Resources.getSprite("largestShip");
+        sr.color = new Color(255, 255, 255, 0);
+        comp = ship.addComponent(Ship.class);
+        comp.size = 4;
+        ship.getTransform().setPosition(new Vector3(10000, 10000));
+        enemyShips[9] = comp;
+
         SpriteRenderer sr_1 = seaBG_1.addComponent(SpriteRenderer.class);
         sr_1.sprite = Resources.getSprite("sea");
         SpriteRenderer sr_2 = seaBG_2.addComponent(SpriteRenderer.class);
@@ -126,8 +169,8 @@ public class GameController extends Component {
         GameObject seaBorder_2 = new GameObject();
         GameObject seaBorder_3 = new GameObject();
         instantiate(seaBorder_1, new Vector3(-10000, -10000));
-        instantiate(seaBorder_3, new Vector3(100 - 8, 1080 - 250 - 640 - 8, 1));
-        instantiate(seaBorder_2, new Vector3(1920 - 100 - 640 - 8, 1080 - 250 - 640 - 8, 1));
+        instantiate(seaBorder_3, new Vector3(100 - 8, 1080 - 250 - 640 - 8, -0.1f));
+        instantiate(seaBorder_2, new Vector3(1920 - 100 - 640 - 8, 1080 - 250 - 640 - 8, -0.1f));
 
         //Не читать тут ничего нет вобще да вам кажется да нет да
         sr_1 = seaBorder_1.addComponent(SpriteRenderer.class);
@@ -276,6 +319,22 @@ public class GameController extends Component {
         timeLabel.setTextOffset(new Vector3(65, 72));
         timeLabel.fontScale = new Vector3(0.8f, 0.8f, 0.8f);
 
+        toggleShipsButton = new MyButton() {
+            @Override
+            public void mouseUp(int button) {
+                if (button == 1 && isActive) {
+                    toggleShips();
+                }
+            }
+        };
+        toggleShipsButton.alignType = Align.CENTER;
+        toggleShipsButton.getTransform().setScale(new Vector3(1.2f, 1.2f));
+        toggleShipsButton.setText("hide");
+        toggleShipsButton.font = FontLoader.getFont("default");
+        toggleShipsButton.setTextOffset(new Vector3(70, 20));
+        toggleShipsButton.fontScale = new Vector3(0.6f, 0.6f);
+        toggleShipsButton.bottom = -300;
+
         addGUI(goButton);
         addGUI(turnTimeLabel);
         addGUI(enemyTurnTimeLabel);
@@ -293,6 +352,8 @@ public class GameController extends Component {
         addGUI(winnerLabel);
         addGUI(exitButton);
 
+        addGUI(toggleShipsButton);
+
         for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
                 Vector3 offset = new Vector3(100 + square.getImageWidth() * x, 1080 - 250 - 64 - square.getImageHeight() * y);
@@ -305,6 +366,7 @@ public class GameController extends Component {
                 element.x = x;
                 element.y = y;
                 element.isCurrent = true;
+                element.getGameObject().getTransform().getLocalPosition().z = 0f;
 
                 thisField[x][y] = element;
             }
@@ -321,6 +383,7 @@ public class GameController extends Component {
                 element.x = x;
                 element.y = y;
                 element.isCurrent = false;
+                element.getGameObject().getTransform().getLocalPosition().z = 0f;
 
                 opponentField[x][y] = element;
             }
@@ -342,7 +405,15 @@ public class GameController extends Component {
             }
         }
 
-        send("field;" + Client.current.loggedAs + ";" + fieldString);
+        String shipsJSON = "";
+        JSONArray array = new JSONArray();
+
+        for (int i = 0; i < 10; i++) {
+            array.add(ships[i].toJson());
+        }
+        shipsJSON = array.toString();
+
+        send("field;" + Client.current.loggedAs + ";" + fieldString + shipsJSON);
         send("go;" + Client.current.loggedAs);
     }
 
@@ -367,6 +438,23 @@ public class GameController extends Component {
     protected void update() {
         turnTimeLabel.setText((int)Math.floor(thisTimer) + "");
         enemyTurnTimeLabel.setText((int)Math.floor(enemyTimer) + "");
+
+        for (int i = 0; i < 10; i++) {
+            Ship ship = ships[i];
+            SpriteRenderer sr = ship.getGameObject().getComponents(SpriteRenderer.class)[0];
+            if (!ship.isSetup) {
+                //sr.color = new Color(255, 255, 255, 255);
+                continue;
+            }
+
+            if (isHidden)
+                sr.color = new Color(255, 255, 255, 0);
+            else
+                sr.color = new Color(255, 255, 255, 255);
+
+            if (ship.isDestroyed(thisField))
+                sr.color = new Color(255, 255, 255, 255);
+        }
 
         if (isGameEnd)
             return;
@@ -451,6 +539,49 @@ public class GameController extends Component {
         Game.current = null;
         GameController.current = null;
         Application.getCurrent().setScene(MainScene.class);
+    }
+
+    public void showShip(int x, int y, int size, int rotation) {
+        Ship ship = null;
+
+        for (int i = 0; i < enemyShips.length; i++) {
+            Ship _ship = enemyShips[i];
+            if (!_ship.isSetup && _ship.size == size) {
+                ship = _ship;
+                break;
+            }
+        }
+
+        if (ship == null)
+            return;
+
+        ship.x = x;
+        ship.y = y;
+        ship.size = size;
+        ship.rot = rotation;
+
+        SpriteRenderer sr = ship.getGameObject().getComponents(SpriteRenderer.class)[0];
+        sr.color = new Color(255, 255, 255, 255);
+
+        ship.isSetup = true;
+        ship.getGameObject().getTransform().setPosition(new Vector3());
+
+        FieldElement elem = opponentField[x][y];
+        Vector3 pos = elem.getGameObject().getTransform().getPosition();
+
+        if (rotation == 1)
+            ship.getGameObject().getTransform().setPosition(new Vector3(pos.x - ((ship.size * 64 - 64) / 2f), pos.y - ((ship.size * 64) / 2f - 32), 0.5f));
+        else
+            ship.getGameObject().getTransform().setPosition(new Vector3(pos.x, pos.y, 0.5f));
+    }
+
+    private boolean isHidden = false;
+    private void toggleShips() {
+        isHidden = !isHidden;
+        if (isHidden)
+            toggleShipsButton.setText("show");
+        else
+            toggleShipsButton.setText("hide");
     }
 
     private void send(String msg) {

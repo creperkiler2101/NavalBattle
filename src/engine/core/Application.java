@@ -51,12 +51,7 @@ public class Application {
 
     protected void update(GLAutoDrawable glad) {
         this.gl2 = glad.getGL().getGL2();
-
-        gl2.glEnable(GL2.GL_BLEND);
-        gl2.glEnable(GL2.GL_TEXTURE_2D);
-        gl2.glEnable(GL2.GL_DEPTH_TEST);
-        gl2.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
-        gl2.glClear (GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT );
+        gl2.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
 
         frames++;
         Calendar currentCal = Calendar.getInstance();
@@ -75,6 +70,7 @@ public class Application {
 
         Input.update();
 
+        gl2.glFlush();
         glad.swapBuffers();
     }
 

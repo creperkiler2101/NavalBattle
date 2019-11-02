@@ -14,6 +14,8 @@ public final class EngineInitializer {
         GLProfile glProfile = GLProfile.getDefault();
         GLCapabilities glCapabilities = new GLCapabilities(glProfile);
 
+        glCapabilities.setDepthBits(16);
+
         return new GLContext(glCapabilities);
     }
 }

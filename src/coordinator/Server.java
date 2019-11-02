@@ -1,5 +1,7 @@
 package coordinator;
 
+import engine.base.Vector3;
+
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -235,9 +237,25 @@ public class Server {
                     int state = -1;
                     if (user.nickname.equals(g.playerOne.nickname)) {
                         state = g.fieldTwo[x][y];
-                        //print(Integer.toString(g.fieldTwo[x][y]));
                         if (state == 3) {
                             g.fieldTwo[x][y] = 6;
+
+                            Ship ship = g.getShip(g.playerTwo.nickname, x, y);
+                            if (ship != null && ship.isDestroyed(g.fieldTwo)) {
+                                ArrayList<Vector3> nearby = ship.getNearby();
+
+                                for (int i = 0; i < nearby.size(); i++) {
+                                    Vector3 cell = nearby.get(i);
+                                    int state_ = g.fieldTwo[(int)cell.x][(int)cell.y];
+                                    if (state_ == 0) {
+                                        sendMessage(g.playerOne, "result;" + (int)cell.x + ";" + (int)cell.y + ";" + 1 + ";" + user.nickname);
+                                        sendMessage(g.playerTwo, "result;" + (int)cell.x + ";" + (int)cell.y + ";" + 1 + ";" + user.nickname);
+                                    }
+                                }
+
+                                sendMessage(g.playerOne, "showShip;" + ship.x + ";" + ship.y + ";" + ship.size + ";" + ship.rotation);
+                            }
+
                             sendMessage(g.playerOne, "turn");
                         }
                         else
@@ -245,15 +263,29 @@ public class Server {
                     }
                     else {
                         state = g.fieldOne[x][y];
-                        //print(Integer.toString(g.fieldOne[x][y]));
                         if (state == 3) {
                             g.fieldOne[x][y] = 6;
+                            Ship ship = g.getShip(g.playerOne.nickname, x, y);
+                            if (ship != null && ship.isDestroyed(g.fieldOne)) {
+                                ArrayList<Vector3> nearby = ship.getNearby();
+
+                                for (int i = 0; i < nearby.size(); i++) {
+                                    Vector3 cell = nearby.get(i);
+                                    int state_ = g.fieldOne[(int)cell.x][(int)cell.y];
+                                    if (state_ == 0) {
+                                        sendMessage(g.playerOne, "result;" + (int)cell.x + ";" + (int)cell.y + ";" + 1 + ";" + user.nickname);
+                                        sendMessage(g.playerTwo, "result;" + (int)cell.x + ";" + (int)cell.y + ";" + 1 + ";" + user.nickname);
+                                    }
+                                }
+
+                                sendMessage(g.playerTwo, "showShip;" + ship.x + ";" + ship.y + ";" + ship.size + ";" + ship.rotation);
+                            }
+
                             sendMessage(g.playerTwo, "turn");
                         }
                         else
                             sendMessage(g.playerOne, "turn");
                     }
-                    //print(Integer.toString(state));
 
                     Turn turn = new Turn();
                     turn.delay = Float.parseFloat(args[4]);
@@ -270,6 +302,14 @@ public class Server {
 
                     if (g.isAllDestroyed(g.playerOne.nickname))
                     {
+                        for (int i = 0; i < 10; i++) {
+                            Ship ship = g.playerOneShips[i];
+                            sendMessage(g.playerTwo, "showShip;" + ship.x + ";" + ship.y + ";" + ship.size + ";" + ship.rotation);
+
+                            ship = g.playerTwoShips[i];
+                            sendMessage(g.playerOne, "showShip;" + ship.x + ";" + ship.y + ";" + ship.size + ";" + ship.rotation);
+                        }
+
                         g.winner = g.playerTwo;
                         sendMessage(g.playerOne, "end;" + g.playerTwo.nickname);
                         sendMessage(g.playerTwo, "end;" + g.playerTwo.nickname);
@@ -277,6 +317,14 @@ public class Server {
                     }
                     else if (g.isAllDestroyed(g.playerTwo.nickname))
                     {
+                        for (int i = 0; i < 10; i++) {
+                            Ship ship = g.playerOneShips[i];
+                            sendMessage(g.playerTwo, "showShip;" + ship.x + ";" + ship.y + ";" + ship.size + ";" + ship.rotation);
+
+                            ship = g.playerTwoShips[i];
+                            sendMessage(g.playerOne, "showShip;" + ship.x + ";" + ship.y + ";" + ship.size + ";" + ship.rotation);
+                        }
+
                         g.winner = g.playerOne;
                         sendMessage(g.playerOne, "end;" + g.playerOne.nickname);
                         sendMessage(g.playerTwo, "end;" + g.playerOne.nickname);
@@ -302,7 +350,8 @@ public class Server {
                         }
                         fieldS += "\n";
                     }
-                    print(fieldS);
+
+                    g.loadShips(user.nickname, args[offset + 99 + 1]);
 
                     if (user.nickname.equals(g.playerOne.nickname)) {
                         g.fieldOne = field;

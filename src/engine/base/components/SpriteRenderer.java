@@ -27,15 +27,6 @@ public class SpriteRenderer extends Component {
 
         GL2 gl2 = Application.getCurrent().getGL2();
 
-        gl2.glDisable(GL2.GL_LIGHTING);
-        gl2.glEnable(GL2.GL_TEXTURE_2D);
-        gl2.glEnable(GL2.GL_POINT_SMOOTH);
-        gl2.glEnable(GL2.GL_COLOR_MATERIAL);
-
-        gl2.glDepthMask(false);
-        gl2.glEnable(GL2.GL_BLEND);
-        gl2.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
-
         sprite.enable(gl2);
         sprite.bind(gl2);
 
@@ -81,10 +72,7 @@ public class SpriteRenderer extends Component {
         gl2.glEnd();
 
         gl2.glPopMatrix();
-        gl2.glFlush();
-
-        gl2.glDepthMask(true);
-        gl2.glDisable(GL2.GL_BLEND);
+        //gl2.glFlush();
 
         sprite.disable(gl2);
     }

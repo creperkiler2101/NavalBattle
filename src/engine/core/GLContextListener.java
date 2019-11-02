@@ -18,7 +18,20 @@ class GLContextListener implements GLEventListener {
         GL2 gl2 = glAutoDrawable.getGL().getGL2();
         Application.current.gl2 = glAutoDrawable.getGL().getGL2();
 
+
+        gl2.glDisable(GL2.GL_LIGHTING);
+        gl2.glEnable(GL2.GL_TEXTURE_2D);
+        gl2.glEnable(GL2.GL_POINT_SMOOTH);
+        gl2.glEnable(GL2.GL_COLOR_MATERIAL);
+
+        gl2.glDepthMask(false);
         gl2.glEnable(GL2.GL_BLEND);
+        gl2.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
+
+        //gl2.glEnable(GL2.GL_DEPTH_TEST);
+        //gl2.glDepthFunc(GL2.GL_LEQUAL);
+        //gl2.glEnable(GL2.GL_DEPTH_TEST);
+
         gl2.glClearColor(69f / 255f,138f / 255f, 247f / 255f, 255f / 255f);
 
         System.out.println("OK");
@@ -57,7 +70,7 @@ class GLContextListener implements GLEventListener {
 
         // coordinate system origin at lower left with width and height same as the window
         GLU glu = new GLU();
-        glu.gluOrtho2D( 0.0f, 1920, 0.0f, 1080 );
+        glu.gluOrtho2D( 0.0f, 1920f, 0.0f, 1080f);
 
         gl2.glMatrixMode( GL2.GL_MODELVIEW );
         gl2.glLoadIdentity();

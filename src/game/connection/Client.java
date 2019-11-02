@@ -133,6 +133,15 @@ public class Client {
                 if (args[0].equals("getTime")) {
                     sendMessage("time;" + loggedAs + ";" + (int)Math.floor(GameController.current.time));
                 }
+
+                if (args[0].equals("showShip")) {
+                    int x = Integer.parseInt(args[1]);
+                    int y = Integer.parseInt(args[2]);
+                    int size = Integer.parseInt(args[3]);
+                    int rotation = Integer.parseInt(args[4]);
+
+                    GameController.current.showShip(x, y, size, rotation);
+                }
             }
             catch (Exception ex) {
                 System.out.println("Error on listening >>>");

@@ -6,22 +6,21 @@ import game.database.models.Player;
 import org.hibernate.Session;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
 public class Game {
-    public final int smallShip = 1;
-    public final int mediumShip = 2;
-    public final int largeShip = 3;
-    public final int largestShip = 4;
-
     public User playerOne;
     public User playerTwo;
     public User winner;
 
     public int[][] fieldOne;
     public int[][] fieldTwo;
+
+    public Ship[] playerOneShips = new Ship[10];
+    public Ship[] playerTwoShips = new Ship[10];
 
     public ArrayList<Turn> turns;
     public int time;
@@ -86,6 +85,34 @@ public class Game {
         game.setWinner(winner.nickname);
         game.setJsonTurns(json);
 
+        JSONArray fieldArray = new JSONArray();
+        for (int i = 0; i < playerOneShips.length; i++) {
+            JSONObject obj = new JSONObject();
+
+            Ship ship = playerOneShips[i];
+            obj.put("x", ship.x);
+            obj.put("y", ship.y);
+            obj.put("size", ship.size);
+            obj.put("rotation", ship.rotation);
+
+            fieldArray.add(obj);
+        }
+        game.setJsonFieldOne(fieldArray.toJSONString());
+
+        fieldArray = new JSONArray();
+        for (int i = 0; i < playerTwoShips.length; i++) {
+            JSONObject obj = new JSONObject();
+
+            Ship ship = playerTwoShips[i];
+            obj.put("x", ship.x);
+            obj.put("y", ship.y);
+            obj.put("size", ship.size);
+            obj.put("rotation", ship.rotation);
+
+            fieldArray.add(obj);
+        }
+        game.setJsonFieldTwo(fieldArray.toJSONString());
+
         User loser = null;
         if (winner.nickname.equals(playerOne.nickname))
             loser = playerTwo;
@@ -112,5 +139,63 @@ public class Game {
         Database.insert(game);
         Database.update(winnerP);
         Database.update(loserP);
+    }
+
+    public Ship getShip(String nickname, int x, int y) {
+        for (int i = 0; i < 10; i++) {
+            Ship ship = null;
+            if (nickname.equals(playerOne.nickname))
+                ship = playerOneShips[i];
+            else
+                ship = playerTwoShips[i];
+
+            for (int offset = 0; offset < ship.size; offset++) {
+                if (ship.rotation == 0) {
+                    if (x == ship.x + offset && y == ship.y)
+                        return ship;
+                }
+                else if (ship.rotation == 1) {
+                    if (x == ship.x && y == ship.y + offset)
+                        return ship;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public void loadShips(String nickname, String jsonShips) {
+        Ship[] ships = new Ship[10];
+
+        try {
+            JSONParser parser = new JSONParser();
+            JSONArray array = (JSONArray) parser.parse(jsonShips);
+
+            for (int i = 0; i < array.size(); i++) {
+                JSONObject obj = (JSONObject)array.get(i);
+
+                Ship ship = new Ship();
+                ship.x = (int)(long)obj.get("x");
+                ship.y = (int)(long)obj.get("y");
+                ship.rotation = (int)(long)obj.get("rot");
+                ship.size = (int)(long)obj.get("size");
+
+                ships[i] = ship;
+            }
+
+            if (nickname.equals(playerOne.nickname)) {
+                playerOneShips = ships;
+
+                System.out.println("Player one ships: " + jsonShips);
+            }
+            else {
+                playerTwoShips = ships;
+
+                System.out.println("Player two ships: " + jsonShips);
+            }
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

@@ -6,18 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name = "game")
-@Table(name = "game")
 public class Game {
     private int id;
     private String playerOne;
     private String playerTwo;
     private String winner;
-    private String jsonTurns;
+    private String jsonTurns, jsonFieldOne, jsonFieldTwo;
     private int gameLength;
 
-    @Id
-    @GenericGenerator(name="hilogen", strategy="increment")
     public int getId() {
         return id;
     }
@@ -53,24 +49,24 @@ public class Game {
         this.jsonTurns = jsonTurns;
     }
 
+    public String getJsonFieldTwo() {
+        return jsonFieldTwo;
+    }
+    public void setJsonFieldTwo(String jsonFieldTwo) {
+        this.jsonFieldTwo = jsonFieldTwo;
+    }
+
+    public String getJsonFieldOne() {
+        return jsonFieldOne;
+    }
+    public void setJsonFieldOne(String jsonFieldOne) {
+        this.jsonFieldOne = jsonFieldOne;
+    }
+
     public int getGameLength() {
         return gameLength;
     }
     public void setGameLength(int gameLength) {
         this.gameLength = gameLength;
-    }
-
-    @Override
-    public String toString() {
-        return
-                "game{" +
-                        "id=" + id + "," +
-                        "playerOne='" + playerOne + "'," +
-                        "playerTwo='" + playerTwo + "'," +
-                        "winner='" + winner + "'," +
-                        "jsonTurns='" + jsonTurns + "'," +
-                        "gameLength=" + gameLength + "" +
-                        "}"
-                ;
     }
 }

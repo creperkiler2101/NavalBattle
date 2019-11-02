@@ -19,7 +19,7 @@ import java.awt.*;
 import java.net.InetAddress;
 
 public class LoginController extends Component {
-    private static final String ip = "10.10.12.207"; //85.253.128.24
+    private static final String ip = "localhost"; //85.253.128.24
     private static final int port = 25566;
 
     private Label loginPanel, messagePanel;
@@ -75,7 +75,7 @@ public class LoginController extends Component {
         loginButton.alignType = Align.CENTER;
         loginButton.bottom -= 50;
         loginButton.getTransform().setScale(new Vector3(2, 2));
-        loginButton.getTransform().getLocalPosition().z++;
+        loginButton.getTransform().getLocalPosition().z += 0.1f;
         loginButton.setText("log in");
         loginButton.font = FontLoader.getFont("default");
         loginButton.setTextOffset(new Vector3(116, 38));
@@ -123,6 +123,7 @@ public class LoginController extends Component {
         messagePanel.fontColor = new Color(0, 0, 0, 0);
         messagePanel.color = new Color(0,0,0,0);
         messagePanel.getTransform().setScale(new Vector3(1.5f, 1.5f));
+        messagePanel.getTransform().getLocalPosition().z = 0.5f;
 
         SpriteRenderer sr = getGameObject().addComponent(SpriteRenderer.class);
         sr.sprite = Resources.getSprite("seaBackground1");
