@@ -19,7 +19,7 @@
 
 ## База данных
 База данных используется для хранения информации об аккаунтах, званиях и играх.
-![UML Schema](https://github.com/creperkiler2101/NavalBattle/blob/master/UMLSchema.png)
+![UML Schema](https://github.com/creperkiler2101/NavalBattle/blob/master/UML Schema.png)
 
 ## Игровой процесс
 Как только вам нашло игру, вы можете выбрать - принять ее или отклонить.
