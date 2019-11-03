@@ -383,70 +383,69 @@ public class ReplayController extends Component {
         delay += 1f * Time.getDeltaTime();
         if (delay >= currentTurn.delay) {
             int state = currentTurn.state;
-            if (state == 0)
-                state = 1;
-            else if (state == 3)
-                state = 2;
+            if (state != -1) {
 
-            if (currentTurn.nickname.equals(ReplayGame.current.playerOne)) {
-                opponentField[currentTurn.x][currentTurn.y].state = state;
-            }
-            else {
-                thisField[currentTurn.x][currentTurn.y].state = state;
-            }
+                if (state == 0)
+                    state = 1;
+                else if (state == 3)
+                    state = 2;
 
-            try {
-                for (int i = 0; i < 10; i++) {
-                    coordinator.Ship s1 = ReplayGame.current.playerOneShips[i];
-                    coordinator.Ship s2 = ReplayGame.current.playerTwoShips[i];
+                if (currentTurn.nickname.equals(ReplayGame.current.playerOne)) {
+                    opponentField[currentTurn.x][currentTurn.y].state = state;
+                } else {
+                    thisField[currentTurn.x][currentTurn.y].state = state;
+                }
 
-                    if (s1.isDestroyed(thisField)) {
-                        ArrayList<Vector3> nearby = s1.getNearby();
-                        for (int j = 0; j < nearby.size(); j++) {
-                            Vector3 n = nearby.get(j);
-                            thisField[(int) n.x][(int) n.y].state = 1;
+                try {
+                    for (int i = 0; i < 10; i++) {
+                        coordinator.Ship s1 = ReplayGame.current.playerOneShips[i];
+                        coordinator.Ship s2 = ReplayGame.current.playerTwoShips[i];
+
+                        if (s1.isDestroyed(thisField)) {
+                            ArrayList<Vector3> nearby = s1.getNearby();
+                            for (int j = 0; j < nearby.size(); j++) {
+                                Vector3 n = nearby.get(j);
+                                thisField[(int) n.x][(int) n.y].state = 1;
+                            }
+                        }
+
+                        if (s2.isDestroyed(opponentField)) {
+                            ArrayList<Vector3> nearby = s2.getNearby();
+                            for (int j = 0; j < nearby.size(); j++) {
+                                Vector3 n = nearby.get(j);
+                                opponentField[(int) n.x][(int) n.y].state = 1;
+                            }
                         }
                     }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
 
-                    if (s2.isDestroyed(opponentField)) {
-                        ArrayList<Vector3> nearby = s2.getNearby();
-                        for (int j = 0; j < nearby.size(); j++) {
-                            Vector3 n = nearby.get(j);
-                            opponentField[(int) n.x][(int) n.y].state = 1;
-                        }
+                int count = 0;
+                for (int y = 0; y < 10; y++) {
+                    for (int x = 0; x < 10; x++) {
+                        if (opponentField[x][y].state == 2)
+                            count++;
                     }
                 }
-            }
-            catch (Exception ex) {
-                ex.printStackTrace();
-            }
 
-            int count = 0;
-            for (int y = 0; y < 10; y++) {
-                for (int x = 0; x < 10; x++) {
-                    if (opponentField[x][y].state == 2)
-                        count++;
+                if (count == 20) {
+                    winner = ReplayGame.current.winner;
+                    end();
                 }
-            }
 
-            if (count == 20)
-            {
-                winner = ReplayGame.current.winner;
-                end();
-            }
-
-            count = 0;
-            for (int y = 0; y < 10; y++) {
-                for (int x = 0; x < 10; x++) {
-                    if (thisField[x][y].state == 2)
-                        count++;
+                count = 0;
+                for (int y = 0; y < 10; y++) {
+                    for (int x = 0; x < 10; x++) {
+                        if (thisField[x][y].state == 2)
+                            count++;
+                    }
                 }
-            }
 
-            if (count == 20)
-            {
-                winner = ReplayGame.current.winner;
-                end();
+                if (count == 20) {
+                    winner = ReplayGame.current.winner;
+                    end();
+                }
             }
 
             delay = 0;

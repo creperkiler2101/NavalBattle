@@ -1,7 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="GameEngineV2.0:jar2">
-    <output-path>$USER_HOME$/Desktop/Release/Server</output-path>
+  <artifact type="jar" name="Game.jar">
+    <output-path>$USER_HOME$/Desktop/Release/Game</output-path>
     <root id="archive" name="GameEngineV2.0.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$USER_HOME$/Desktop/Release/Game/META-INF/MANIFEST.MF" />
+      </element>
       <element id="module-output" name="GameEngineV2.0" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/FastInfoset-1.2.15.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/antlr-2.7.7.jar" path-in-jar="/" />
